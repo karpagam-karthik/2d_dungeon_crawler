@@ -13,14 +13,13 @@
         android:theme="@style/Theme.CS2340C_Team8"
         tools:targetApi="31">
         <activity
-            android:name="com.example.cs2340c_team8.DungeonActivity"
+            android:name="com.example.cs2340c_team8.StartScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
