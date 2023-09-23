@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CS2340C_Team8</string>
+    <string name="app_name">Super Mario Dungeons</string>
     <string name="button_start_game">Start Game</string>
     <string name="button_exit_game">Exit Game</string>
 </resources>
