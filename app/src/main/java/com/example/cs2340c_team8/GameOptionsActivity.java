@@ -1,4 +1,4 @@
-package com.example.demo_2340;
+package com.example.cs2340c_team8;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,41 +10,35 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class startGameActivity extends AppCompatActivity {
-    private EditText etName;
+public class GameOptionsActivity extends AppCompatActivity {
+    private EditText usernameInput;
     private RadioGroup rgDifficulty, rgSprite;
-    private Button btnContinue;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
-        etName = findViewById(R.id.etName);
-        rgDifficulty = findViewById(R.id.rgDifficulty);
-        rgSprite = findViewById(R.id.rgSprite);
-        btnContinue = findViewById(R.id.btnContinue);
+        usernameInput = findViewById(R.id.usernameInput);
+        rgDifficulty = findViewById(R.id.radioGroupDifficulty);
+        rgSprite = findViewById(R.id.radioGroupSprite);
+        continueButton = findViewById(R.id.continueButton);
 
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startGame();
-            }
-        });
+        continueButton.setOnClickListener(view -> startGame());
     }
 
     private void startGame() {
         // Validate name
-        String name = etName.getText().toString().trim();
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
+        String username = usernameInput.getText().toString().trim();
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(this, "Enter a Username", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Get selected difficulty
         int selectedDifficultyId = rgDifficulty.getCheckedRadioButtonId();
         RadioButton selectedDifficulty = findViewById(selectedDifficultyId);
-        double difficulty = getDifficultyValue(selectedDifficulty.getText().toString());
+        int difficulty = getDifficultyValue(selectedDifficulty.getText().toString());
 
         // Get selected sprite
         int selectedSpriteId = rgSprite.getCheckedRadioButtonId();
@@ -52,25 +46,26 @@ public class startGameActivity extends AppCompatActivity {
         String sprite = selectedSprite.getText().toString();
 
         // Start the game activity with the selected options
-        Intent gameIntent = new Intent(this, GameActivity.class);
-        gameIntent.putExtra("name", name);
+        Intent gameIntent = new Intent(this, DungeonActivity.class);
+        gameIntent.putExtra("username", username);
         gameIntent.putExtra("difficulty", difficulty);
         gameIntent.putExtra("sprite", sprite);
         startActivity(gameIntent);
+        finish();
     }
 
-    private double getDifficultyValue(String difficultyText) {
+    private int getDifficultyValue(String difficultyText) {
         // Implement logic to map difficulty text to a numeric value
-        double difficulty = 1.0; // Default value
+        int difficulty = 0; // Default value
         switch (difficultyText) {
-            case "Easy":
-                difficulty = 0.5;
+            case "Beginner":
+                difficulty = 0;
                 break;
-            case "Medium":
-                difficulty = 0.75;
+            case "Intermediate":
+                difficulty = 1;
                 break;
-            case "Hard":
-                difficulty = 1.0;
+            case "Expert":
+                difficulty = 2;
                 break;
         }
         return difficulty;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,8 +23,14 @@ import java.util.TimerTask;
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
     private TextView timeElapsedTextView;
-    private TextView difficultyTextView;
+    private String username;
+    private TextView usernameTextView;
     private Difficulty difficulty;
+    private TextView difficultyTextView;
+    private TextView healthTextView;
+    private String sprite;
+    private TextView spriteTextView;
+    private ImageView spriteImageView;
     private Map<Wall, WallView> wallViewMap = new HashMap<>();
     private List<Wall> wallList = new ArrayList<>();
     private ConstraintLayout dungeonLayout;
@@ -36,6 +43,11 @@ public class DungeonActivity extends AppCompatActivity {
 
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         difficultyTextView = findViewById(R.id.difficulty_indicator);
+        healthTextView = findViewById(R.id.health_count);
+        usernameTextView = findViewById(R.id.username_display);
+        spriteTextView = findViewById(R.id.spriteTextView);
+        spriteImageView = findViewById(R.id.spriteImageView);
+
         startTime = currentTimeMillis();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -47,32 +59,60 @@ public class DungeonActivity extends AppCompatActivity {
             }
         }, 0, 500);
 
-//        difficulty = Difficulty.values()[getIntent().getIntExtra("difficulty", 1)];
-//        setDifficulty();
 
-        Button button = findViewById(R.id.end_game_button);
+        username = getIntent().getStringExtra("username");
+        difficulty = Difficulty.values()[getIntent().getIntExtra("difficulty", 1)];
+        sprite = getIntent().getStringExtra("sprite");
+
+        usernameTextView.setText(username);
+        setDifficultyAndHealth();
+        setSprite();
+
+        Button button = findViewById(R.id.end_level_button);
         button.setOnClickListener(v -> {
-//            Intent end = new Intent(DungeonActivity.this, EndGameActivity.class);
-//            end.putExtra("success", false);
-//            startActivity(end);
+            Intent end = new Intent(DungeonActivity.this, LevelScoreActivity.class);
+            end.putExtra("score", 8265);
+            end.putExtra("time", timeElapsedTextView.getText());
+            end.putExtra("keys", "2 of 3");
+            end.putExtra("success", true);
+            startActivity(end);
+            finish();
         });
 
         drawDungeon();
     }
 
-    private void setDifficulty() {
+    private void setDifficultyAndHealth() {
         switch (difficulty) {
             case BEGINNER:
                 difficultyTextView.setText("Beginner");
+                healthTextView.setText(String.format("Health: %d", 200));
                 break;
             case INTERMEDIATE:
                 difficultyTextView.setText("Intermediate");
+                healthTextView.setText(String.format("Health: %d", 150));
                 break;
             case EXPERT:
                 difficultyTextView.setText("Expert");
+                healthTextView.setText(String.format("Health: %d", 100));
                 break;
             default:
                 difficultyTextView.setText("N/A");
+                break;
+        }
+    }
+
+    private void setSprite() {
+        spriteTextView.setText(sprite);
+        switch (sprite) {
+            case "Wizard":
+                spriteImageView.setImageResource(R.drawable.wizard_sprite);
+                break;
+            case "Elf":
+                spriteImageView.setImageResource(R.drawable.elf_sprite);
+                break;
+            case "Knight":
+                spriteImageView.setImageResource(R.drawable.knight_sprite);
                 break;
         }
     }
@@ -124,7 +164,7 @@ public class DungeonActivity extends AppCompatActivity {
                 {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1}
         };
 
-        int[] layoutCoordinates = {30, 360};
+        int[] layoutCoordinates = {30, 390};
         int size = 36;
         for (int i = 0; i < dungeonMap.length; i++) {
             for (int j = 0; j < dungeonMap[i].length; j++) {
@@ -132,12 +172,6 @@ public class DungeonActivity extends AppCompatActivity {
                     Wall wall = new Wall(layoutCoordinates[0] + (j * (size + 5)),
                             layoutCoordinates[1] + (i * (size + 5)), size, size, null);
                     WallView wallView = new WallView(this, wall);
-//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-//                        ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT
-//                );
-//                params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-//                params.leftMargin = 900;
 
                     dungeonLayout.addView(wallView);
                     wallViewMap.put(wall, wallView);
