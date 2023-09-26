@@ -4,10 +4,8 @@ import static java.lang.System.currentTimeMillis;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,36 +82,39 @@ public class DungeonActivity extends AppCompatActivity {
 
     private void setDifficultyAndHealth() {
         switch (difficulty) {
-            case BEGINNER:
-                difficultyTextView.setText("Beginner");
-                healthTextView.setText(String.format("Health: %d", 200));
-                break;
-            case INTERMEDIATE:
-                difficultyTextView.setText("Intermediate");
-                healthTextView.setText(String.format("Health: %d", 150));
-                break;
-            case EXPERT:
-                difficultyTextView.setText("Expert");
-                healthTextView.setText(String.format("Health: %d", 100));
-                break;
-            default:
-                difficultyTextView.setText("N/A");
-                break;
+        case BEGINNER:
+            difficultyTextView.setText("Beginner");
+            healthTextView.setText(String.format("Health: %d", 200));
+            break;
+        case INTERMEDIATE:
+            difficultyTextView.setText("Intermediate");
+            healthTextView.setText(String.format("Health: %d", 150));
+            break;
+        case EXPERT:
+            difficultyTextView.setText("Expert");
+            healthTextView.setText(String.format("Health: %d", 100));
+            break;
+        default:
+            difficultyTextView.setText("N/A");
+            break;
         }
     }
 
     private void setSprite() {
         spriteTextView.setText(sprite);
         switch (sprite) {
-            case "Wizard":
-                spriteImageView.setImageResource(R.drawable.wizard_sprite);
-                break;
-            case "Elf":
-                spriteImageView.setImageResource(R.drawable.elf_sprite);
-                break;
-            case "Knight":
-                spriteImageView.setImageResource(R.drawable.knight_sprite);
-                break;
+        case "Wizard":
+            spriteImageView.setImageResource(R.drawable.wizard_sprite);
+            break;
+        case "Elf":
+            spriteImageView.setImageResource(R.drawable.elf_sprite);
+            break;
+        case "Knight":
+            spriteImageView.setImageResource(R.drawable.knight_sprite);
+            break;
+        default:
+            spriteImageView.setImageResource(R.drawable.knight_sprite);
+            break;
         }
     }
 

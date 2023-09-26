@@ -1,9 +1,10 @@
 package com.example.cs2340c_team8;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -12,7 +13,8 @@ import android.widget.Toast;
 
 public class GameOptionsActivity extends AppCompatActivity {
     private EditText usernameInput;
-    private RadioGroup rgDifficulty, rgSprite;
+    private RadioGroup rgDifficulty;
+    private RadioGroup rgSprite;
     private Button continueButton;
 
     @Override
@@ -55,18 +57,19 @@ public class GameOptionsActivity extends AppCompatActivity {
     }
 
     private int getDifficultyValue(String difficultyText) {
-        // Implement logic to map difficulty text to a numeric value
-        int difficulty = 0; // Default value
+        int difficulty;
         switch (difficultyText) {
-            case "Beginner":
-                difficulty = 0;
-                break;
-            case "Intermediate":
-                difficulty = 1;
-                break;
-            case "Expert":
-                difficulty = 2;
-                break;
+        case "Beginner":
+            difficulty = 0;
+            break;
+        case "Intermediate":
+            difficulty = 1;
+            break;
+        case "Expert":
+            difficulty = 2;
+            break;
+        default:
+            difficulty = 0;
         }
         return difficulty;
     }
