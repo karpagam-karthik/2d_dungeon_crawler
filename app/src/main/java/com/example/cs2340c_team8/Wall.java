@@ -1,7 +1,8 @@
 package com.example.cs2340c_team8;
 
 public class Wall {
-    private float x, y;
+    private float x;
+    private float y;
     private int height;
     private int width;
     private Wall[] neighbors;

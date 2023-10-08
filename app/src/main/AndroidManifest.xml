@@ -13,14 +13,29 @@
         android:theme="@style/Theme.CS2340C_Team8"
         tools:targetApi="31">
         <activity
-            android:name="com.example.cs2340c_team8.DungeonActivity"
+            android:name="com.example.cs2340c_team8.GameStartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="com.example.cs2340c_team8.GameOptionsActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.cs2340c_team8.DungeonActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.cs2340c_team8.LevelScoreActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.cs2340c_team8.LeaderboardActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
