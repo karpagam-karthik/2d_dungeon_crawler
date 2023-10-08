@@ -7,6 +7,28 @@
              android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/numericalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="80dp"
+        android:text="999"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/username_display"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="16dp"
+        android:text="Score: "
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/health_count"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/username_display"
         android:layout_width="wrap_content"
         android:layout_height="25dp"

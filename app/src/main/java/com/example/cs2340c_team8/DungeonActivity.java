@@ -21,6 +21,8 @@ import java.util.TimerTask;
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
     private TextView timeElapsedTextView;
+    private TextView difficultyTextView;
+    private TextView numericalScoreTextView;
     private String username;
     private TextView usernameTextView;
     private Difficulty difficulty;
@@ -41,6 +43,7 @@ public class DungeonActivity extends AppCompatActivity {
 
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         difficultyTextView = findViewById(R.id.difficulty_indicator);
+        numericalScoreTextView = findViewById(R.id.numericalScore);
         healthTextView = findViewById(R.id.health_count);
         usernameTextView = findViewById(R.id.username_display);
         spriteTextView = findViewById(R.id.spriteTextView);
@@ -123,8 +126,16 @@ public class DungeonActivity extends AppCompatActivity {
         long hours = runTime / (1000 * 60 * 60);
         long minutes = (runTime / (1000 * 60)) % 60;
         long seconds = (runTime / 1000) % 60;
+        long scoreSeconds = (runTime / 1000); //ADDED BY AAKASH
+
+        long scoreNum = 999 - scoreSeconds; //ADDED BY AAKASH
+        if (scoreNum < 0) {
+            scoreNum = 0;
+        }
 
         timeElapsedTextView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        numericalScoreTextView.setText(String.format("%02d", scoreNum)); //ADDED BY AAKASH
+
     }
 
     private void drawDungeon() {
