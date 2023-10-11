@@ -14,7 +14,7 @@ public class GameOverActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.game_over_layout);
+        setContentView(R.layout.game_over_screen);
 
         exitGameButton = findViewById(R.id.exitEndButton);
         exitGameButton.setOnClickListener(v -> {

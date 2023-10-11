@@ -15,7 +15,7 @@ public class GameStartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_screen);
+        setContentView(R.layout.game_start_screen);
 
         Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(v -> {

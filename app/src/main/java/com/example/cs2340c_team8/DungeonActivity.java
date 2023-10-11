@@ -10,9 +10,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 
+import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
 import com.example.cs2340c_team8.models.Wall;
 import com.example.cs2340c_team8.models.enums.Difficulty;
+import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
+import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 import com.example.cs2340c_team8.views.LeaderboardActivity;
 import com.example.cs2340c_team8.views.WallView;
 
@@ -30,11 +34,7 @@ public class DungeonActivity extends AppCompatActivity {
     private TextView timeElapsedTextView;
     private TextView difficultyTextView;
     private TextView numericalScoreTextView;
-    private String username;
-    private TextView usernameTextView;
-    private Difficulty difficulty;
     private TextView healthTextView;
-    private String sprite;
     private TextView spriteTextView;
     private ImageView spriteImageView;
     private Map<Wall, WallView> wallViewMap = new HashMap<>();
@@ -44,14 +44,21 @@ public class DungeonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dungeon);
+        DungeonScreenBinding dungeonScreenBinding = DataBindingUtil.setContentView(this, R.layout.dungeon_screen);
+        String username = getIntent().getStringExtra("username");
+        Difficulty difficulty = Difficulty.values()[getIntent().getIntExtra("difficulty", 1)];
+        String sprite = getIntent().getStringExtra("sprite");
+        dungeonScreenBinding.setViewmodel(new DungeonViewModel(username, difficulty, sprite));
+
+        dungeonScreenBinding.setLifecycleOwner(this);
+        dungeonScreenBinding.executePendingBindings();
+
         dungeonLayout = findViewById(R.id.dungeonLayout);
 
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         difficultyTextView = findViewById(R.id.difficulty_indicator);
         numericalScoreTextView = findViewById(R.id.numericalScore);
         healthTextView = findViewById(R.id.health_count);
-        usernameTextView = findViewById(R.id.username_display);
         spriteTextView = findViewById(R.id.spriteTextView);
         spriteImageView = findViewById(R.id.spriteImageView);
 
@@ -66,14 +73,8 @@ public class DungeonActivity extends AppCompatActivity {
             }
         }, 0, 500);
 
-
-        username = getIntent().getStringExtra("username");
-        difficulty = Difficulty.values()[getIntent().getIntExtra("difficulty", 1)];
-        sprite = getIntent().getStringExtra("sprite");
-
-        usernameTextView.setText(username);
-        setDifficultyAndHealth();
-        setSprite();
+        setDifficultyAndHealth(difficulty);
+        setSprite(sprite);
 
         Button button = findViewById(R.id.end_level_button);
         button.setOnClickListener(v -> {
@@ -89,7 +90,7 @@ public class DungeonActivity extends AppCompatActivity {
         drawDungeon();
     }
 
-    protected void setDifficultyAndHealth() {
+    protected void setDifficultyAndHealth(Difficulty difficulty) {
         switch (difficulty) {
         case BEGINNER:
             difficultyTextView.setText("Beginner");
@@ -109,7 +110,7 @@ public class DungeonActivity extends AppCompatActivity {
         }
     }
 
-    protected void setSprite() {
+    protected void setSprite(String sprite) {
         spriteTextView.setText(sprite);
         switch (sprite) {
         case "Wizard":

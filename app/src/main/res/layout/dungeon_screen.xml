@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.cs2340c_team8.viewmodels.DungeonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dungeonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/numericalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="80dp"
+            android:text="999"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/username_display"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="16dp"
+            android:text="Score: "
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/health_count"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/username_display"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:text="@{viewmodel.username}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/difficulty_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:text="Difficulty"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_elapsed" />
+
+        <TextView
+            android:id="@+id/level_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:text="Level 1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_indicator" />
+
+        <TextView
+            android:id="@+id/xp_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="49dp"
+            android:fontFamily="casual"
+            android:text="XP: 0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/health_count"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/money_count"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="casual"
+            android:text="Money: 0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/health_count" />
+
+        <TextView
+            android:id="@+id/collectibles_and_power_ups"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="casual"
+            android:text="Power-ups: N/A"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/money_count" />
+
+        <TextView
+            android:id="@+id/health_count"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="casual"
+            android:text="Health: 100"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spriteTextView" />
+
+        <TextView
+            android:id="@+id/time_elapsed"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:text="0:00:00"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_display" />
+
+        <Button
+            android:id="@+id/end_level_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="End Level"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/spriteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="casual"
+            android:text="Sprite"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/spriteImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@+id/spriteTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wizard_sprite" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
