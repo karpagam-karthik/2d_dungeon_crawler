@@ -1,5 +1,13 @@
 package com.example.cs2340c_team8;
 
+import com.example.cs2340c_team8.models.enums.PowerUpType;
+import com.example.cs2340c_team8.models.interfaces.Consumable;
+import com.example.cs2340c_team8.models.interfaces.Key;
+import com.example.cs2340c_team8.models.interfaces.Level;
+import com.example.cs2340c_team8.models.interfaces.Point;
+import com.example.cs2340c_team8.models.interfaces.PowerUp;
+import com.example.cs2340c_team8.models.interfaces.Weapon;
+
 import java.util.ArrayList;
 import java.util.List;
 

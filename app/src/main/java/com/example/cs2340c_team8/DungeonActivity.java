@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.cs2340c_team8.models.enums.Difficulty;
 import com.example.cs2340c_team8.views.LeaderboardActivity;
 
 import java.util.ArrayList;
