@@ -3,7 +3,6 @@ package com.example.cs2340c_team8.models;
 import static java.lang.System.currentTimeMillis;
 
 import com.example.cs2340c_team8.models.enums.Difficulty;
-import com.example.cs2340c_team8.Player;
 
 import java.util.Date;
 

@@ -11,8 +11,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.cs2340c_team8.models.Wall;
 import com.example.cs2340c_team8.models.enums.Difficulty;
 import com.example.cs2340c_team8.views.LeaderboardActivity;
+import com.example.cs2340c_team8.views.WallView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
