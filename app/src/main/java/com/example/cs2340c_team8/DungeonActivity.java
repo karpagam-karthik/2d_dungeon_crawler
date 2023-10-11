@@ -20,6 +20,8 @@ import java.util.TimerTask;
 
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
+    private long scoreNum;
+    private long scoreSeconds;
     private TextView timeElapsedTextView;
     private TextView difficultyTextView;
     private TextView numericalScoreTextView;
@@ -82,7 +84,7 @@ public class DungeonActivity extends AppCompatActivity {
         drawDungeon();
     }
 
-    private void setDifficultyAndHealth() {
+    protected void setDifficultyAndHealth() {
         switch (difficulty) {
         case BEGINNER:
             difficultyTextView.setText("Beginner");
@@ -102,7 +104,7 @@ public class DungeonActivity extends AppCompatActivity {
         }
     }
 
-    private void setSprite() {
+    protected void setSprite() {
         spriteTextView.setText(sprite);
         switch (sprite) {
         case "Wizard":
@@ -120,21 +122,29 @@ public class DungeonActivity extends AppCompatActivity {
         }
     }
 
-    private void runTimer() {
+    protected void runTimer() {
         long runTime = currentTimeMillis() - startTime;
         long hours = runTime / (1000 * 60 * 60);
         long minutes = (runTime / (1000 * 60)) % 60;
         long seconds = (runTime / 1000) % 60;
-        long scoreSeconds = (runTime / 1000); //ADDED BY AAKASH
+        scoreSeconds = (runTime / 1000);
 
-        long scoreNum = 999 - scoreSeconds; //ADDED BY AAKASH
+        scoreNum = 999 - scoreSeconds;
         if (scoreNum < 0) {
             scoreNum = 0;
         }
 
         timeElapsedTextView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-        numericalScoreTextView.setText(String.format("%02d", scoreNum)); //ADDED BY AAKASH
+        numericalScoreTextView.setText(String.format("%02d", scoreNum));
 
+    }
+
+    public long getScoreNum() {
+        return scoreNum;
+    }
+
+    public void setScoreSeconds(long num) {
+        scoreSeconds = num;
     }
 
     private void drawDungeon() {
