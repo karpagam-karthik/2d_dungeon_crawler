@@ -23,4 +23,17 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.cs2340c_team8", appContext.getPackageName());
     }
+
+    @Test
+    public void test1() {
+        Wall test = new Wall(1, 1, 5, 4, null);
+        assertEquals(1, test.getX(), 1);
+    }
+
+    @Test
+    public void test2() {
+        Wall test = new Wall(1, 3, 5, 4, null);
+        assertEquals(3, test.getY(), 1);
+    }
+
 }
