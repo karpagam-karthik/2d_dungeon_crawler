@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.cs2340c_team8.views.LeaderboardActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +75,7 @@ public class DungeonActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.end_level_button);
         button.setOnClickListener(v -> {
-            Intent end = new Intent(DungeonActivity.this, LevelScoreActivity.class);
+            Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
             end.putExtra("score", 8265);
             end.putExtra("time", timeElapsedTextView.getText());
             end.putExtra("keys", "2 of 3");
