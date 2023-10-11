@@ -31,7 +31,6 @@ public class DungeonActivity extends AppCompatActivity {
     private String username;
     private TextView usernameTextView;
     private Difficulty difficulty;
-    //private TextView difficultyTextView;
     private TextView healthTextView;
     private String sprite;
     private TextView spriteTextView;
