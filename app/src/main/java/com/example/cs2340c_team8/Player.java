@@ -24,9 +24,13 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         consumables = new ArrayList<>();
     }
 
-    public static synchronized Player getInstance() {
+    public static  Player getInstance() {
         if (instance == null) {
-            instance = new Player();
+            synchronized (Player.class) {
+                if (instance == null) {
+                    instance = new Player();
+                }
+            }
         }
         return instance;
     }
