@@ -4,8 +4,10 @@ import static java.lang.System.currentTimeMillis;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -25,6 +27,7 @@ public class DungeonActivity extends AppCompatActivity {
     private long scoreSeconds;
     private TextView timeElapsedTextView;
     private TextView scoreTextView;
+    private int currImg = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,25 @@ public class DungeonActivity extends AppCompatActivity {
             end.putExtra("success", true);
             startActivity(end);
             finish();
+        });
+
+        ImageView startScreenMap = findViewById(R.id.mapOne);
+        Button tempChangeMap = findViewById(R.id.tempNextButton);
+
+        tempChangeMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View tempView) {
+                if (currImg == 1) {
+                    startScreenMap.setImageResource(R.drawable.map_two);
+                    currImg = 2;
+                } else if (currImg == 2) {
+                    startScreenMap.setImageResource(R.drawable.map_three);
+                    currImg = 3;
+                } else if (currImg == 3) {
+                    startScreenMap.setImageResource(R.drawable.map_one);
+                    currImg = 1;
+                }
+            }
         });
     }
 

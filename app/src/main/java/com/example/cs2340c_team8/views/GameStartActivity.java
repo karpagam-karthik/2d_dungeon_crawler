@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.example.cs2340c_team8.R;
 
 public class GameStartActivity extends AppCompatActivity {
-    private int currImg = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +33,5 @@ public class GameStartActivity extends AppCompatActivity {
             startActivity(exit);
         });
 
-        ImageView startScreenMap = findViewById(R.id.mapOne);
-        Button tempChangeMap = findViewById(R.id.tempNextButton);
-
-        tempChangeMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View tempView) {
-                if (currImg == 1) {
-                    startScreenMap.setImageResource(R.drawable.map_two);
-                    currImg = 2;
-                } else if (currImg == 2) {
-                    startScreenMap.setImageResource(R.drawable.map_three);
-                    currImg = 3;
-                } else if (currImg == 3) {
-                    startScreenMap.setImageResource(R.drawable.map_one);
-                    currImg = 1;
-                }
-            }
-        });
     }
 }
