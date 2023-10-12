@@ -70,9 +70,9 @@ public class Leaderboard {
         return getTopNScores(1).get(0);
     }
 
-    private static long compareScores(Score score1, Score score2) {
+    public static long compareScores(Score score1, Score score2) {
         if (score1.getScore() - score2.getScore() == 0) {
-            return score1.getTimeMilliseconds() - score2.getTimeMilliseconds();
+            return score2.getTimeMilliseconds() - score1.getTimeMilliseconds();
         }
         return score1.getScore() - score2.getScore();
     }
