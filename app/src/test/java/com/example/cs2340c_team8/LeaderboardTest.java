@@ -18,24 +18,6 @@ public class LeaderboardTest {
     }
 
     @Test
-    public void testLeaderboardGetS() {
-        // Akshara Test Case 2
-        Leaderboard leaderboard = Leaderboard.getLeaderboard();
-        leaderboard.addScore(new Score("Test", 50, 12345));
-        leaderboard.addScore(new Score("Test", 40, 23456));
-        leaderboard.addScore(new Score("Test", 30, 34567));
-
-        List<Score> returnedScores = leaderboard.getTopNScores(5);
-        System.out.println(returnedScores);
-//        assertTrue(returnedScores.size() == 5);
-//
-//        assertTrue(returnedScores.get(0).getScore() == 50);
-//        assertTrue(returnedScores.get(1).getScore() == 40);
-//        assertTrue(returnedScores.get(2).getScore() == 30);
-//        assertTrue(returnedScores.get(3).getScore() == 20);
-//        assertTrue(returnedScores.get(4).getScore() == 10);
-    }
-    @Test
     public void testLeaderboardGet() {
         // Akshara Test Case 2
         Leaderboard leaderboard = Leaderboard.getLeaderboard();
