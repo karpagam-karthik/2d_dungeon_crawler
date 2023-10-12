@@ -1,13 +1,9 @@
 package com.example.cs2340c_team8.viewmodels;
 
-import android.content.Intent;
-
 import androidx.databinding.BaseObservable;
 
 import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Score;
-import com.example.cs2340c_team8.views.GameOverActivity;
-import com.example.cs2340c_team8.views.LeaderboardActivity;
 
 import java.util.List;
 

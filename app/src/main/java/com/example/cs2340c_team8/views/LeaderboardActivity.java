@@ -17,13 +17,15 @@ public class LeaderboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LeaderboardScreenBinding leaderboardScreenBinding = DataBindingUtil.setContentView(this, R.layout.leaderboard_screen);
+        LeaderboardScreenBinding leaderboardScreenBinding = DataBindingUtil
+                .setContentView(this, R.layout.leaderboard_screen);
 
         int score = getIntent().getIntExtra("score", 0);
         String timeElapsed = getIntent().getStringExtra("time");
         String keysCollected = getIntent().getStringExtra("keys");
         boolean levelPassed = getIntent().getBooleanExtra("success", false);
-        leaderboardScreenBinding.setViewmodel(new LeaderboardViewModel(score, timeElapsed, keysCollected, levelPassed));
+        leaderboardScreenBinding.setViewmodel(
+                new LeaderboardViewModel(score, timeElapsed, keysCollected, levelPassed));
 
         leaderboardScreenBinding.setLifecycleOwner(this);
         leaderboardScreenBinding.executePendingBindings();

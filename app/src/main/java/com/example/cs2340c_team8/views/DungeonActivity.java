@@ -31,11 +31,13 @@ public class DungeonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DungeonScreenBinding dungeonScreenBinding = DataBindingUtil.setContentView(this, R.layout.dungeon_screen);
+        DungeonScreenBinding dungeonScreenBinding = DataBindingUtil
+                .setContentView(this, R.layout.dungeon_screen);
 
         startTime = currentTimeMillis();
         String username = getIntent().getStringExtra("username");
-        Difficulty difficulty = Difficulty.values()[getIntent().getIntExtra("difficulty", 1)];
+        Difficulty difficulty = Difficulty.values()[getIntent()
+                .getIntExtra("difficulty", 1)];
         String sprite = getIntent().getStringExtra("sprite");
         dungeonScreenBinding.setViewmodel(new DungeonViewModel(username, difficulty, sprite));
 
@@ -60,7 +62,8 @@ public class DungeonActivity extends AppCompatActivity {
             LeaderboardViewModel.addNewScore(username, score, currentTimeMillis() - startTime);
 
             Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
-            end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]));
+            end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
+                    .split(" ")[1]));
             end.putExtra("time", timeElapsedTextView.getText());
             end.putExtra("keys", "2 of 3");
             end.putExtra("success", true);
@@ -68,10 +71,9 @@ public class DungeonActivity extends AppCompatActivity {
             finish();
         });
 
-        ImageView startScreenMap = findViewById(R.id.mapOne);
-        Button tempChangeMap = findViewById(R.id.tempNextButton);
-
-        tempChangeMap.setOnClickListener(new View.OnClickListener() {
+        ImageView startScreenMap = findViewById(R.id.mapImage);
+        Button nextMapButton = findViewById(R.id.nextMapButton);
+        nextMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View tempView) {
                 if (currImg == 1) {
