@@ -39,7 +39,6 @@ public class Leaderboard {
             return new LeaderboardNode(score);
         } else {
             long comparison = compareScores(score, node.getScore());
-            System.out.println(comparison);
             if (comparison < 0) {
                 node.setLeft(addScoreH(node.getLeft(), score));
             } else if (comparison > 0) {

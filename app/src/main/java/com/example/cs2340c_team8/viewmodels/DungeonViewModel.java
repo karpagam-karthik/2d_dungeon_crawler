@@ -1,19 +1,58 @@
 package com.example.cs2340c_team8.viewmodels;
 
+import static java.lang.System.currentTimeMillis;
 import androidx.databinding.BaseObservable;
 
-import com.example.cs2340c_team8.DungeonActivity;
+import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.enums.Difficulty;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DungeonViewModel extends BaseObservable {
     private String username;
     private Difficulty difficulty;
-    private String sprite;
+    private String spriteText;
+    private  String timeText;
+    private static String scoreText;
 
-    public DungeonViewModel(String username, Difficulty difficulty, String sprite) {
+    public DungeonViewModel(String username, Difficulty difficulty, String spriteText) {
         this.username = username;
         this.difficulty = difficulty;
-        this.sprite = sprite;
+        this.spriteText = spriteText;
+    }
+
+    public int getSpriteImage() {
+        switch (spriteText) {
+            case "Wizard":
+                return R.drawable.wizard_sprite;
+            case "Elf":
+                return R.drawable.elf_sprite;
+            default:
+                return R.drawable.knight_sprite;
+        }
+    }
+
+    public String getDifficultyText() {
+        switch (difficulty) {
+            case INTERMEDIATE:
+                return "Intermediate";
+            case EXPERT:
+                return "Expert";
+            default:
+                return "Beginner";
+        }
+    }
+
+    public String getHealth() {
+        switch (difficulty) {
+            case INTERMEDIATE:
+                return String.format("Health: %d", 150);
+            case EXPERT:
+                return String.format("Health: %d", 100);
+            default:
+                return String.format("Health: %d", 200);
+        }
     }
 
     public String getUsername() {
@@ -24,7 +63,15 @@ public class DungeonViewModel extends BaseObservable {
         return difficulty;
     }
 
-    public String getSprite() {
-        return sprite;
+    public String getSpriteText() {
+        return spriteText;
+    }
+
+    public String getScoreText() {
+        return scoreText;
+    }
+
+    public String getTimeText() {
+        return timeText;
     }
 }

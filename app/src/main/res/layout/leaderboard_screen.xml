@@ -21,7 +21,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Bob"
+            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getUsername() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="casual"
-            android:text="1234"
+            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? Integer.toString(viewmodel.getNthTopScore(0).getScore()) : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="1234"
+            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? Integer.toString(viewmodel.getNthTopScore(1).getScore()) : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="1234"
+            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? Integer.toString(viewmodel.getNthTopScore(2).getScore()) : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="1234"
+            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? Integer.toString(viewmodel.getNthTopScore(3).getScore()): "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="1234"
+            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? Integer.toString(viewmodel.getNthTopScore(4).getScore()) : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Bob"
+            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getUsername() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Bob"
+            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getUsername() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Bob"
+            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getUsername() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +162,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Bob"
+            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getUsername() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +175,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="casual"
-            android:text="2/11 00:00"
+            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getDateString() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/player1score"
@@ -188,7 +188,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="2/11 00:00"
+            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getDateString() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -202,7 +202,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="2/11 00:00"
+            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getDateString() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -216,7 +216,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="2/11 00:00"
+            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getDateString() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -230,7 +230,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="2/11 00:00"
+            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getDateString() : "" }'
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"

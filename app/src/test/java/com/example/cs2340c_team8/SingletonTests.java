@@ -3,6 +3,7 @@ package com.example.cs2340c_team8;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
 
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class SingletonTests {
         //checks constructor is private
         try {
             Class test = Class.forName("Leaderboard");
-            Constructor<LeaderboardActivity>[] constructors = test.getDeclaredConstructors();
+            Constructor<Leaderboard>[] constructors = test.getDeclaredConstructors();
             if (constructors.length != 1 || !constructors[0].isAccessible()) {
                 throw new ClassNotFoundException();
             }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.cs2340c_team8.GameStartActivity;
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 import com.example.cs2340c_team8.databinding.LeaderboardScreenBinding;

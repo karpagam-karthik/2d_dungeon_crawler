@@ -5,26 +5,36 @@ import android.content.Intent;
 import androidx.databinding.BaseObservable;
 
 import com.example.cs2340c_team8.models.Leaderboard;
+import com.example.cs2340c_team8.models.Score;
 import com.example.cs2340c_team8.views.GameOverActivity;
 import com.example.cs2340c_team8.views.LeaderboardActivity;
 
+import java.util.List;
+
 public class LeaderboardViewModel extends BaseObservable {
-    private Leaderboard leaderboard;
+    private static Leaderboard leaderboard = Leaderboard.getLeaderboard();
     private int score;
     private String time;
     private String keys;
     private String successString;
 
     public LeaderboardViewModel(int score, String time, String keys, boolean success) {
-        leaderboard = Leaderboard.getLeaderboard();
         this.score = score;
         this.time = time;
         this.keys = keys;
         this.successString = success ? "Passed" : "Failed";
     }
 
-    public Leaderboard getLeaderboard() {
-        return leaderboard;
+    public static void addNewScore(String username, int score, long time) {
+        leaderboard.addScore(new Score(username, score, time));
+    }
+
+    public Score getNthTopScore(int n) {
+        List<Score> topScores = leaderboard.getTopNScores(5);
+        if (n >= topScores.size()) {
+            return null;
+        }
+        return topScores.get(n);
     }
 
     public int getScore() {

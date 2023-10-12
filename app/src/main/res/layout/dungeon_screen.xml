@@ -15,28 +15,6 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/numericalScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="80dp"
-            android:text="999"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/username_display"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="16dp"
-            android:text="Score: "
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/health_count"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/username_display"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
@@ -56,7 +34,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="casual"
-            android:text="Difficulty"
+            android:text="@{viewmodel.getDifficultyText()}"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +52,19 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/difficulty_indicator" />
+
+        <TextView
+            android:id="@+id/score_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="casual"
+            android:text="Score: 0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/level_indicator" />
 
         <TextView
             android:id="@+id/xp_count"
@@ -121,7 +112,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="casual"
-            android:text="Health: 100"
+            android:text="@{viewmodel.getHealth()}"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +148,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="casual"
-            android:text="Sprite"
+            android:text="@{viewmodel.spriteText}"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +162,7 @@
             android:layout_marginTop="12dp"
             app:layout_constraintStart_toEndOf="@+id/spriteTextView"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/wizard_sprite" />
+            app:imageResource="@{viewmodel.getSpriteImage()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

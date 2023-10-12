@@ -1,4 +1,4 @@
-package com.example.cs2340c_team8;
+package com.example.cs2340c_team8.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.views.DungeonActivity;
 
 public class GameOptionsActivity extends AppCompatActivity {
     private EditText usernameInput;
