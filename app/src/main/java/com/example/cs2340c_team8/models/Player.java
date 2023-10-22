@@ -103,17 +103,17 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return points;
     }
 
-    private float getX() { //for positioning
+    public float getX() { //for positioning
         return x;
     }
-    private float getY() { //for positioning
+    public float getY() { //for positioning
         return y;
     }
 
-    private void setX(float X) { //for positioning
+    public void setX(float X) { //for positioning
         this.x = x;
     }
-    private void setY(float Y) { //for positioning
+    public void setY(float Y) { //for positioning
         this.y = y;
     }
 
