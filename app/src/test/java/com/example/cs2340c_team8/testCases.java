@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import static java.lang.System.currentTimeMillis;
 
+import com.example.cs2340c_team8.models.Door;
 import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
@@ -58,6 +59,14 @@ public class testCases {
     }
     @Test
     public void testPlayerStrategy() {
+        //using the strategy method, we want to make sure
+        // that interactable components are all of the same interface
+        Trap test1 = new Trap(10);
+        Enemy test2 = new Enemy();
+        Door test3 = new Door();
+        assertTrue(test1 instanceof Obstacle);
+        assertTrue(test2 instanceof Obstacle);
+        assertTrue(test3 instanceof Obstacle);
     }
     @Test
     public void testPlayerObserver() {
