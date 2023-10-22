@@ -4,9 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import static java.lang.System.currentTimeMillis;
 
+import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.Score;
+import com.example.cs2340c_team8.models.Trap;
+import com.example.cs2340c_team8.models.Wall;
+import com.example.cs2340c_team8.models.interfaces.Obstacle;
 
 import org.junit.Test;
 
@@ -43,10 +47,14 @@ public class testCases {
     }
     @Test
     public void testNoWallGaps() {
-        new
     }
     @Test
-    public void testNextLevel() {
+    public void testEnemyCollision() {
+        Player test = Player.getInstance();
+        Obstacle enemy = new Enemy();
+        int health = test.getHealth();
+        test.movementInteraction(enemy);
+        assertTrue(test.getHealth() == health - 10);
     }
     @Test
     public void testPlayerStrategy() {
@@ -55,10 +63,22 @@ public class testCases {
     public void testPlayerObserver() {
     }
     @Test
-    public void testGameOverNegativeNDuplicate() {
+    public void testTrapCollision() {
+        Player test = Player.getInstance();
+        int knockBack = 15;
+        Obstacle trap = new Trap(knockBack);
+        test.movementInteraction(trap);
+        assertTrue(test.getX() == knockBack);
+        assertTrue(test.getY() == -knockBack);
     }
     @Test
     public void testFinalLevel() {
+        Player test = Player.getInstance();
+        for(int i = 0; i < 4; i++) {
+            test.nextLevel(1);
+        }
+        assertTrue(test.getLevelNumber() > 3);
+        assertTrue(test.getLayout() == "Final Level");
     }
     @Test
     public void testPlayerWins() {
