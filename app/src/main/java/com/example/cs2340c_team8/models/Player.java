@@ -128,6 +128,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     public void setX(int x) { //for positioning
         this.x = x;
     }
+  
     public void setY(int y) { //for positioning
         this.y = y;
     }
@@ -135,6 +136,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     public void setHealth(int health) {
         this.health = health;
     }
+  
     public int getHealth() {
         return this.health;
     }
@@ -149,6 +151,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
             observer.update(str);
         }
     }
+  
     @Override
     public String toString() {
         String rtn = getLevelNumber() + getHealth()
