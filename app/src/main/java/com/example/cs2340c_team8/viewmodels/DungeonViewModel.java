@@ -1,7 +1,5 @@
 package com.example.cs2340c_team8.viewmodels;
 
-import android.graphics.Bitmap;
-
 import androidx.databinding.BaseObservable;
 
 import com.example.cs2340c_team8.R;

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Player implements Weapon, PowerUp, Level, Key, Point {
     private static Player instance;
-    private static final int spriteSize = 16;
+    private static final int SPRITE_SIZE = 16;
     private int health;
     private long time;
     private List<Weapon> weapons;
@@ -140,7 +140,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     }
 
     public static int getSpriteSize() {
-        return spriteSize;
+        return SPRITE_SIZE;
     }
 
     public void updateObservers() {
@@ -160,6 +160,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
      * isCollding will check if player and wall collide based on their positions.
      * @param player represents the player (controlled by user).
      * @param wall represents the list of walls.
+     * @return returns if a player is colliding with a Wall
      */
     public static boolean isColliding(Player player, Wall wall) {
         double distanceX = wall.getX() - player.getX();
@@ -169,11 +170,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         //Below line finds the distance between the player and wall
         double distance = Math.sqrt(distanceXFormula + distanceYFormula);
 
-        if (distance < 5) { //just putting '5' for now b/c '1' might cause player to phase past wall
-            return true;
-        } else {
-            return false;
-        }
+        //just putting '5' for now b/c '1' might cause player to phase past wall
+        return distance < 5;
     } //isColliding
 
     public void movementInteraction(Obstacle obstacle) {
@@ -182,15 +180,11 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
         } else if (obstacle.getEffect() == "Knock-back") { //strategy if a player encounters a trap
             player.setX(player.getX() + obstacle.getEffectMagnitude());
-            player.setY(player.getY() - obstacle.getEffectMagnitude()); //for now all traps will knock player in same direction for simplicity
+            player.setY(player.getY() - obstacle.getEffectMagnitude());
         } else if (obstacle.getEffect() == "Door") {
             player.nextLevel(player.getLevelNumber()); //strategy if a player encounters a door
-        } else {
-            //else do nothing to change movement, check if obstacle is a wall
         }
     }
-
-
     // Implement other methods from the interfaces as needed
 }
 

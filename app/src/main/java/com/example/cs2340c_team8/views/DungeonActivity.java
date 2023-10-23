@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -137,7 +136,8 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
         if (mapNumber == 1) {
             mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map1);
             bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(), bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
+            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
+                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
 
             for (int i = 0; i < bitmap1.getWidth(); i++) {
                 for (int j = 0; j < bitmap1.getHeight(); j++) {
@@ -158,7 +158,8 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
         } else if (mapNumber == 2) {
             mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map2);
             bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(), bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
+            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
+                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
             for (int i = 0; i < bitmap1.getWidth(); i++) {
                 for (int j = 0; j < bitmap1.getHeight(); j++) {
                     int pixel = bitmap1.getPixel(i, j);
@@ -176,7 +177,8 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
         } else if (mapNumber == 3) {
             mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map3);
             bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(), bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
+            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
+                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
             for (int i = 0; i < bitmap1.getWidth(); i++) {
                 for (int j = 0; j < bitmap1.getHeight(); j++) {
                     int pixel = bitmap1.getPixel(i, j);

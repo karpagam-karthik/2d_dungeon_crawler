@@ -1,17 +1,9 @@
 package com.example.cs2340c_team8.models;
 
-import static java.lang.System.currentTimeMillis;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.MovementStrategy;
-import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
-import com.example.cs2340c_team8.views.DungeonActivity;
-import com.example.cs2340c_team8.views.LeaderboardActivity;
-
 public class RightMovement implements MovementStrategy {
     private Player player;
     private Bitmap bitmap;
@@ -52,15 +44,18 @@ public class RightMovement implements MovementStrategy {
 
     @Override
     public int checkLevelCompleted(int currentMap) {
-        if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0 && player.getY() <= 20 && currentMap == 1) {
+        if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
+                && player.getY() <= 20 && currentMap == 1) {
             player.setY(25);
             player.setX(25);
             return 2;
-        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0 && player.getY() <= 20 && currentMap == 2) {
+        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
+                && player.getY() <= 20 && currentMap == 2) {
             player.setY(25);
             player.setX(25);
             return 3;
-        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0 && player.getY() <= 20 && currentMap == 3) {
+        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
+                && player.getY() <= 20 && currentMap == 3) {
             return -1;
         }
 
