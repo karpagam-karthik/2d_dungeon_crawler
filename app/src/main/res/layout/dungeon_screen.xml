@@ -131,20 +131,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username_display" />
 
-        <Button
-            android:id="@+id/end_level_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="130dp"
-            android:layout_marginBottom="36dp"
-            android:text="End Level"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/downButton" />
-
         <TextView
             android:id="@+id/spriteTextView"
             android:layout_width="wrap_content"
@@ -172,69 +158,57 @@
             android:id="@+id/mapImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="230dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/upButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/score_indicator"
             app:srcCompat="@drawable/map1" />
 
         <Button
             android:id="@+id/upButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="55dp"
             android:text="Up"
-            app:layout_constraintBottom_toTopOf="@+id/downButton"
-            app:layout_constraintEnd_toStartOf="@+id/rightButton"
-            app:layout_constraintStart_toEndOf="@+id/leftButton"
-            app:layout_constraintTop_toBottomOf="@+id/mapImage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/downButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="10dp"
             android:text="Down"
-            app:layout_constraintEnd_toStartOf="@+id/rightButton"
-            app:layout_constraintStart_toEndOf="@+id/leftButton"
-            app:layout_constraintTop_toBottomOf="@+id/upButton" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/leftButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="44dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="35dp"
             android:text="Left"
-            app:layout_constraintBottom_toTopOf="@+id/end_level_button"
-            app:layout_constraintEnd_toStartOf="@+id/upButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mapImage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/upButton" />
 
         <Button
             android:id="@+id/rightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="35dp"
             android:text="Right"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/upButton"
-            app:layout_constraintTop_toBottomOf="@+id/mapImage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/downButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

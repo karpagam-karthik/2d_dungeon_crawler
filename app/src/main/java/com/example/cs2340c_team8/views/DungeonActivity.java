@@ -2,11 +2,13 @@ package com.example.cs2340c_team8.views;
 
 import static java.lang.System.currentTimeMillis;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import java.util.TimerTask;
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
     private int score;
+    private String username;
     private long scoreSeconds;
     private TextView timeElapsedTextView;
     private TextView scoreTextView;
@@ -50,7 +53,7 @@ public class DungeonActivity extends AppCompatActivity {
                 .setContentView(this, R.layout.dungeon_screen);
 
         startTime = currentTimeMillis();
-        String username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("username");
         Difficulty difficulty = Difficulty.values()[getIntent()
                 .getIntExtra("difficulty", 1)];
         String sprite = getIntent().getStringExtra("sprite");
@@ -71,20 +74,6 @@ public class DungeonActivity extends AppCompatActivity {
                 });
             }
         }, 0, 500);
-
-        Button button = findViewById(R.id.end_level_button);
-        button.setOnClickListener(v -> {
-            LeaderboardViewModel.addNewScore(username, score, currentTimeMillis() - startTime);
-
-            Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
-            end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
-                    .split(" ")[1]));
-            end.putExtra("time", timeElapsedTextView.getText());
-            end.putExtra("keys", "2 of 3");
-            end.putExtra("success", true);
-            startActivity(end);
-            finish();
-        });
 
         // Call to create initial map 1 settings
         printMap(1);
@@ -168,7 +157,6 @@ public class DungeonActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     // Method to print specific map to DungeonActivity screen
@@ -232,38 +220,43 @@ public class DungeonActivity extends AppCompatActivity {
 
     // Method to detect if wall is in front of character, returns whether or not it can proceed with the movement
     public boolean canMove(String direction) {
-        if (direction.equals("r")) {
-            int xth = topLeftX + 16;
-            for (int y = topLeftY; y < topLeftY + 16; y++) {
-                if (bitmap2.getPixel(xth, y) != Color.WHITE) {
-                    return false;
+        switch (direction) {
+            case "r": {
+                int xth = topLeftX + 16;
+                for (int y = topLeftY; y < topLeftY + 16; y++) {
+                    if (bitmap2.getPixel(xth, y) != Color.WHITE) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
-        } else if (direction.equals("l")) {
-            int xth = topLeftX - 1;
-            for (int y = topLeftY; y < topLeftY + 16; y++) {
-                if (bitmap2.getPixel(xth, y) != Color.WHITE) {
-                    return false;
+            case "l": {
+                int xth = topLeftX - 1;
+                for (int y = topLeftY; y < topLeftY + 16; y++) {
+                    if (bitmap2.getPixel(xth, y) != Color.WHITE) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
-        } else if (direction.equals("u")) {
-            int yth = topLeftY - 1;
-            for (int x = topLeftX; x < topLeftX + 16; x++) {
-                if (bitmap2.getPixel(x, yth) != Color.WHITE) {
-                    return false;
+            case "u": {
+                int yth = topLeftY - 1;
+                for (int x = topLeftX; x < topLeftX + 16; x++) {
+                    if (bitmap2.getPixel(x, yth) != Color.WHITE) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
-        } else if (direction.equals("d")) {
-            int yth = topLeftY + 16;
-            for (int x = topLeftX; x < topLeftX + 16; x++) {
-                if (bitmap2.getPixel(x, yth) != Color.WHITE) {
-                    return false; // If any pixel is not white, return false
+            case "d": {
+                int yth = topLeftY + 16;
+                for (int x = topLeftX; x < topLeftX + 16; x++) {
+                    if (bitmap2.getPixel(x, yth) != Color.WHITE) {
+                        return false; // If any pixel is not white, return false
+                    }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -281,8 +274,16 @@ public class DungeonActivity extends AppCompatActivity {
             topLeftX = 25;
             printMap(3);
         } else if (topLeftX >= 0 && topLeftX <= 20 && topLeftY >= 0 && topLeftY <= 20 && currImg == 3) {
-            // Akshara, implement code here for returning to end screen, this code is basically saying that
-            // if the player reaches the victory zone and its the third map, then they beat the game, so they need to go to end screen :D
+            LeaderboardViewModel.addNewScore(username, score, currentTimeMillis() - startTime);
+
+            Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
+            end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
+                    .split(" ")[1]));
+            end.putExtra("time", timeElapsedTextView.getText());
+            end.putExtra("keys", "0 of 3");
+            end.putExtra("success", true);
+            startActivity(end);
+            finish();
         }
     }
 
