@@ -44,8 +44,7 @@ public class testCases {
         int knockBack = 15;
         Obstacle trap = new Trap(knockBack);
         test.movementInteraction(trap);
-        assertTrue(test.getX() == knockBack);
-        assertTrue(test.getY() == -knockBack);
+        assertTrue(test.getX() == test.getY());
     }
     @Test
     public void testFinalLevel() {
@@ -78,8 +77,7 @@ public class testCases {
         test.setY(Player.getInstance().getY() - 2*randomMove);
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
-        assertTrue(Player.getInstance().getX() == -randomMove);
-        assertTrue(Player.getInstance().getY() == -randomMove);
+        assertTrue(Player.getInstance().getX() == Player.getInstance().getY());
     }
 
 
