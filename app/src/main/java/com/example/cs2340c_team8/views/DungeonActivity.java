@@ -20,13 +20,14 @@ import androidx.databinding.DataBindingUtil;
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
 import com.example.cs2340c_team8.models.enums.Difficulty;
+import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DungeonActivity extends AppCompatActivity {
+public class DungeonActivity extends AppCompatActivity implements PlayerObserver {
     private long startTime;
     private int score;
     private String username;
@@ -309,5 +310,10 @@ public class DungeonActivity extends AppCompatActivity {
 
     public void setScoreSeconds(long num) {
         scoreSeconds = num;
+    }
+
+    @Override
+    public void update(String str) {
+
     }
 }
