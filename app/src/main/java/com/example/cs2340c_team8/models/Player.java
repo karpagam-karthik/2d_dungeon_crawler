@@ -125,10 +125,10 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return y;
     }
 
-    public void setX(float X) { //for positioning
+    public void setX(float x) { //for positioning
         this.x = x;
     }
-    public void setY(float Y) { //for positioning
+    public void setY(float y) { //for positioning
         this.y = y;
     }
 

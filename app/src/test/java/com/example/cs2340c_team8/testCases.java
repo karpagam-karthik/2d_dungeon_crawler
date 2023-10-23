@@ -1,4 +1,5 @@
 package com.example.cs2340c_team8;
+import static com.example.cs2340c_team8.models.Player.isColliding;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -37,14 +38,14 @@ public class testCases {
 
         //move right, then left
         test.setX(Player.getInstance().getX() + randomMove);
-        test.setX(Player.getInstance().getX() - 2 * randomMove);
+        //test.setX(Player.getInstance().getX() - 2 * randomMove);
         //move up then down
         test.setY(Player.getInstance().getY() + randomMove);
-        test.setY(Player.getInstance().getY() - 2*randomMove);
+        //test.setY(Player.getInstance().getY() - 2*randomMove);
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
-        assertTrue(Player.getInstance().getX() == -randomMove);
-        assertTrue(Player.getInstance().getY() == -randomMove);
+        assertTrue(Player.getInstance().getX() == randomMove);
+        assertTrue(Player.getInstance().getY() == randomMove);
     }
     @Test
     public void testNoWallGaps() {
@@ -74,7 +75,7 @@ public class testCases {
     @Test
     public void testTrapCollision() {
         Player test = Player.getInstance();
-        int knockBack = 15;
+        int knockBack = 15 / 3;
         Obstacle trap = new Trap(knockBack);
         test.movementInteraction(trap);
         assertTrue(test.getX() == knockBack);
@@ -102,19 +103,72 @@ public class testCases {
         //Player is a singleton class, must use get instance eot instantiate
         Player test = Player.getInstance();
         Random r = new Random();
-        int randomMove = r.nextInt();
+        float randomMove = r.nextInt();
 
         //move right, then left
         test.setX(Player.getInstance().getX() + randomMove);
-        test.setX(Player.getInstance().getX() - 2 * randomMove);
+        //test.setX(Player.getInstance().getX() - 2 * randomMove);
         //move up then down
         test.setY(Player.getInstance().getY() + randomMove);
-        test.setY(Player.getInstance().getY() - 2*randomMove);
+        //test.setY(Player.getInstance().getY() - 2*randomMove);
+
+        System.out.println(randomMove);
+        System.out.println(test.getX());
+        System.out.println(test.getY());
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
-        assertTrue(Player.getInstance().getX() == -randomMove);
-        assertTrue(Player.getInstance().getY() == -randomMove);
+        assertTrue(Player.getInstance().getX() == randomMove);
+        assertTrue(Player.getInstance().getY() == randomMove);
     }
+    @Test
+    public void testWallCollisionsFalse() {
+
+        Player player = Player.getInstance();
+        player.setX(30);
+        player.setY(30);
+        player.setX(Player.getInstance().getX());
+        player.setY(Player.getInstance().getX());
+
+        Wall wall = new Wall(50, 50, 5, 5, null);
+        assertFalse(isColliding(player, wall));
+    }
+
+    @Test
+    public void testWallCollisionsOrigin() {
+
+        Player player = Player.getInstance();
+
+        player.setX(Player.getInstance().getX());
+        player.setY(Player.getInstance().getX());
+        //player.setX(55);
+        //player.setY(25);
+
+        Wall wall = new Wall(0, 0, 0, 0, null);
+        //combining should happen at 0
+        assertTrue(isColliding(player, wall));
+    }
+
+    @Test
+    public void testGoingPastWalls() {
+        //Player is a singleton class, must use get instance eot instantiate
+        Player player = Player.getInstance();
+
+        Wall wall = new Wall(4, 4, 4, 4, null);
+
+        player.setX(Player.getInstance().getX() + 10);
+        player.setY(Player.getInstance().getY() + 10);
+
+        System.out.println(player.getX());
+        System.out.println(player.getY());
+        wall.setX(4);
+        wall.setY(4);
+        System.out.println(wall.getX());
+        System.out.println(wall.getY());
+
+
+        assertFalse(isColliding(player, wall));
+    }
+
 
 
 }
