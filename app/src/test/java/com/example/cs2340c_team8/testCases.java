@@ -7,20 +7,16 @@ import static java.lang.System.currentTimeMillis;
 
 import com.example.cs2340c_team8.models.Door;
 import com.example.cs2340c_team8.models.Enemy;
-import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.Score;
 import com.example.cs2340c_team8.models.Trap;
-import com.example.cs2340c_team8.models.Wall;
 import com.example.cs2340c_team8.models.interfaces.Obstacle;
 
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
 import java.util.Random;
 
 public class testCases {
-<<<<<<< HEAD
     //test game ending scenario where the player wins,
     //test if a player moves off screen or out of bounds what happens
     //test putting in a date which has not occured as a score date
@@ -48,11 +44,11 @@ public class testCases {
         assertTrue(Player.getInstance().getX() == randomMove);
         assertTrue(Player.getInstance().getY() == randomMove);
     }
+  
     @Test
     public void testNoWallGaps() {
     }
-=======
->>>>>>> 9b3f04d5ddba2d5f8531885e83af05c52215cdf5
+  
     @Test
     public void testEnemyCollision() {
         Player test = Player.getInstance();
@@ -61,6 +57,7 @@ public class testCases {
         test.movementInteraction(enemy);
         assertTrue(test.getHealth() == health - 10);
     }
+  
     @Test
     public void testPlayerStrategy() {
         //using the strategy method, we want to make sure
@@ -72,14 +69,16 @@ public class testCases {
         assertTrue(test2 instanceof Obstacle);
         assertTrue(test3 instanceof Obstacle);
     }
+  
     @Test
     public void testTrapCollision() {
         Player test = Player.getInstance();
         int knockBack = 15 / 3;
         Obstacle trap = new Trap(knockBack);
         test.movementInteraction(trap);
-        assertTrue(test.getX() == test.getY());
+        assertTrue(test.getX() == 30 && test.getY() == 20);
     }
+  
     @Test
     public void testFinalLevel() {
         Player test = Player.getInstance();
@@ -89,11 +88,13 @@ public class testCases {
         assertTrue(test.getLevelNumber() > 3);
         assertTrue(test.getLayout() == "Final Level");
     }
+  
     @Test
     public void testFutureDate() {
         Score test = new Score("testingPlayer",0,0);
         assertTrue(test.getTimeMilliseconds() <= currentTimeMillis());
     }
+  
     @Test
     public void testPlayerDirection() {
         //Player is a singleton class, must use get instance eot instantiate
@@ -102,23 +103,16 @@ public class testCases {
         float randomMove = r.nextInt();
 
         //move right, then left
-        float originalX = test.getX();
-        float originalY = test.getY();
-        test.setX(Player.getInstance().getX() + randomMove);
-        //test.setX(Player.getInstance().getX() - 2 * randomMove);
+        test.setX(test.getX() + randomMove);
+        test.setX(test.getX() - 2 * randomMove);
         //move up then down
-        test.setY(Player.getInstance().getY() + randomMove);
-        //test.setY(Player.getInstance().getY() - 2*randomMove);
-
-        System.out.println(randomMove);
-        System.out.println(test.getX());
-        System.out.println(test.getY());
+        test.setY(test.getY() + randomMove);
+        test.setY(test.getY() - 2 * randomMove);
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
-<<<<<<< HEAD
-        assertTrue(Player.getInstance().getX() == randomMove);
-        assertTrue(Player.getInstance().getY() == randomMove);
+        assertTrue(Player.getInstance().getX() == Player.getInstance().getY());
     }
+  
     @Test
     public void testWallCollisionsFalse() {
 
@@ -164,13 +158,6 @@ public class testCases {
         System.out.println(wall.getX());
         System.out.println(wall.getY());
 
-
         assertFalse(isColliding(player, wall));
-=======
-        assertTrue(Player.getInstance().getX() == Player.getInstance().getY());
->>>>>>> 9b3f04d5ddba2d5f8531885e83af05c52215cdf5
     }
-
-
-
 }

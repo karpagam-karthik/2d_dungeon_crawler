@@ -6,7 +6,6 @@ import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Score;
 
 import org.junit.Test;
-import java.util.List;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

@@ -61,9 +61,6 @@ public class GameOptionsActivity extends AppCompatActivity {
     private int getDifficultyValue(String difficultyText) {
         int difficulty;
         switch (difficultyText) {
-        case "Beginner":
-            difficulty = 0;
-            break;
         case "Intermediate":
             difficulty = 1;
             break;

@@ -2,12 +2,10 @@ package com.example.cs2340c_team8;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-
-        import com.example.cs2340c_team8.models.Leaderboard;
-        import com.example.cs2340c_team8.models.Player;
-
-        import org.junit.Test;
-        import java.lang.reflect.Constructor;
+import com.example.cs2340c_team8.models.Leaderboard;
+import com.example.cs2340c_team8.models.Player;
+import org.junit.Test;
+import java.lang.reflect.Constructor;
 
 public class SingletonTests {
     @Test

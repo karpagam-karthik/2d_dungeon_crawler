@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Player implements Weapon, PowerUp, Level, Key, Point {
     private static Player instance;
-
+    private static final int SPRITE_SIZE = 16;
     private int health;
     private long time;
     private List<Weapon> weapons;
@@ -26,8 +26,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     private int level;
     private List<PlayerObserver> observers;
 
-    private float x; //for x positioning
-    private float y; //for y positioning
+    private int x; //for x positioning
+    private int y; //for y positioning
 
     private Player() {
         health = 100;
@@ -37,8 +37,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         points = 0;
         powerUps = new ArrayList<>();
         consumables = new ArrayList<>();
-        x = 0; //likely need to change based on grid positioning
-        y = 0; //likely need to change based on grid positioning
+        x = 25; // likely need to change based on grid positioning
+        y = 25; // likely need to change based on grid positioning
         level = 1;
     }
 
@@ -118,27 +118,32 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return points;
     }
 
-    public float getX() { //for positioning
+    public int getX() { //for positioning
         return x;
     }
-    public float getY() { //for positioning
+    public int getY() { //for positioning
         return y;
     }
 
-    public void setX(float x) { //for positioning
+    public void setX(int x) { //for positioning
         this.x = x;
     }
-    public void setY(float y) { //for positioning
+  
+    public void setY(int y) { //for positioning
         this.y = y;
     }
 
     public void setHealth(int health) {
         this.health = health;
     }
+  
     public int getHealth() {
         return this.health;
     }
 
+    public static int getSpriteSize() {
+        return SPRITE_SIZE;
+    }
 
     public void updateObservers() {
         String str = getInstance().toString();
@@ -146,6 +151,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
             observer.update(str);
         }
     }
+  
     @Override
     public String toString() {
         String rtn = getLevelNumber() + getHealth()
@@ -157,6 +163,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
      * isCollding will check if player and wall collide based on their positions.
      * @param player represents the player (controlled by user).
      * @param wall represents the list of walls.
+     * @return returns if a player is colliding with a Wall
      */
     public static boolean isColliding(Player player, Wall wall) {
         double distanceX = wall.getX() - player.getX();
@@ -166,11 +173,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         //Below line finds the distance between the player and wall
         double distance = Math.sqrt(distanceXFormula + distanceYFormula);
 
-        if (distance < 5) { //just putting '5' for now b/c '1' might cause player to phase past wall
-            return true;
-        } else {
-            return false;
-        }
+        //just putting '5' for now b/c '1' might cause player to phase past wall
+        return distance < 5;
     } //isColliding
 
     public void movementInteraction(Obstacle obstacle) {
@@ -179,15 +183,11 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
         } else if (obstacle.getEffect() == "Knock-back") { //strategy if a player encounters a trap
             player.setX(player.getX() + obstacle.getEffectMagnitude());
-            player.setY(player.getY() - obstacle.getEffectMagnitude()); //for now all traps will knock player in same direction for simplicity
+            player.setY(player.getY() - obstacle.getEffectMagnitude());
         } else if (obstacle.getEffect() == "Door") {
             player.nextLevel(player.getLevelNumber()); //strategy if a player encounters a door
-        } else {
-            //else do nothing to change movement, check if obstacle is a wall
         }
     }
-
-
     // Implement other methods from the interfaces as needed
 }
 
