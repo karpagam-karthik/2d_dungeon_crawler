@@ -173,7 +173,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         }
     } //isColliding
 
-    public void movementInteraction(Obstacle obstacle ) {
+    public void movementInteraction(Obstacle obstacle) {
         Player player = getInstance();
         if (obstacle.getEffect() == "Damage") { //strategy if a player encounters an enemy
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage

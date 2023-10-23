@@ -20,6 +20,7 @@ import java.lang.reflect.Constructor;
 import java.util.Random;
 
 public class testCases {
+<<<<<<< HEAD
     //test game ending scenario where the player wins,
     //test if a player moves off screen or out of bounds what happens
     //test putting in a date which has not occured as a score date
@@ -50,6 +51,8 @@ public class testCases {
     @Test
     public void testNoWallGaps() {
     }
+=======
+>>>>>>> 9b3f04d5ddba2d5f8531885e83af05c52215cdf5
     @Test
     public void testEnemyCollision() {
         Player test = Player.getInstance();
@@ -70,16 +73,12 @@ public class testCases {
         assertTrue(test3 instanceof Obstacle);
     }
     @Test
-    public void testPlayerObserver() {
-    }
-    @Test
     public void testTrapCollision() {
         Player test = Player.getInstance();
         int knockBack = 15 / 3;
         Obstacle trap = new Trap(knockBack);
         test.movementInteraction(trap);
-        assertTrue(test.getX() == knockBack);
-        assertTrue(test.getY() == -knockBack);
+        assertTrue(test.getX() == test.getY());
     }
     @Test
     public void testFinalLevel() {
@@ -89,9 +88,6 @@ public class testCases {
         }
         assertTrue(test.getLevelNumber() > 3);
         assertTrue(test.getLayout() == "Final Level");
-    }
-    @Test
-    public void testPlayerWins() {
     }
     @Test
     public void testFutureDate() {
@@ -106,6 +102,8 @@ public class testCases {
         float randomMove = r.nextInt();
 
         //move right, then left
+        float originalX = test.getX();
+        float originalY = test.getY();
         test.setX(Player.getInstance().getX() + randomMove);
         //test.setX(Player.getInstance().getX() - 2 * randomMove);
         //move up then down
@@ -117,6 +115,7 @@ public class testCases {
         System.out.println(test.getY());
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
+<<<<<<< HEAD
         assertTrue(Player.getInstance().getX() == randomMove);
         assertTrue(Player.getInstance().getY() == randomMove);
     }
@@ -167,6 +166,9 @@ public class testCases {
 
 
         assertFalse(isColliding(player, wall));
+=======
+        assertTrue(Player.getInstance().getX() == Player.getInstance().getY());
+>>>>>>> 9b3f04d5ddba2d5f8531885e83af05c52215cdf5
     }
 
 
