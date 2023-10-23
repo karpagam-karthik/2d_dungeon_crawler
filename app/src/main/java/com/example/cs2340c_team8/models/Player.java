@@ -5,6 +5,7 @@ import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.Level;
 import com.example.cs2340c_team8.models.interfaces.Obstacle;
+import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.Point;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Weapon;
@@ -23,6 +24,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     private List<PowerUp> powerUps;
     private List<Consumable> consumables;
     private int level;
+    private List<PlayerObserver> observers;
 
     private float x; //for x positioning
     private float y; //for y positioning
@@ -137,6 +139,20 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return this.health;
     }
 
+
+    public void updateObservers() {
+        String str = getInstance().toString();
+        for (PlayerObserver observer : observers) {
+            observer.update(str);
+        }
+    }
+    @Override
+    public String toString() {
+        String rtn = getLevelNumber() + getHealth()
+                + getX() + getY() + getType();
+        return rtn;
+    }
+
     /**
      * isCollding will check if player and wall collide based on their positions.
      * @param player represents the player (controlled by user).
@@ -170,6 +186,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
             //else do nothing to change movement, check if obstacle is a wall
         }
     }
+
 
     // Implement other methods from the interfaces as needed
 }

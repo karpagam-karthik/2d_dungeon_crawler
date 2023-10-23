@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.models.Player;
+import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 import com.example.cs2340c_team8.databinding.LeaderboardScreenBinding;
-public class LeaderboardActivity extends AppCompatActivity {
+public class LeaderboardActivity extends AppCompatActivity implements PlayerObserver {
     private Button endGameButton;
     private Button playAgainButton;
 
@@ -43,5 +45,10 @@ public class LeaderboardActivity extends AppCompatActivity {
             startActivity(settings);
             finish();
         });
+    }
+
+    @Override
+    public void update(String str) {
+
     }
 }
