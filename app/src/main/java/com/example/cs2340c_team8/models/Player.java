@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Player implements Weapon, PowerUp, Level, Key, Point {
     private static Player instance;
-
+    private static final int spriteSize = 16;
     private int health;
     private long time;
     private List<Weapon> weapons;
@@ -26,8 +26,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     private int level;
     private List<PlayerObserver> observers;
 
-    private float x; //for x positioning
-    private float y; //for y positioning
+    private int x; //for x positioning
+    private int y; //for y positioning
 
     private Player() {
         health = 100;
@@ -37,8 +37,8 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         points = 0;
         powerUps = new ArrayList<>();
         consumables = new ArrayList<>();
-        x = 0; //likely need to change based on grid positioning
-        y = 0; //likely need to change based on grid positioning
+        x = 25; // likely need to change based on grid positioning
+        y = 25; // likely need to change based on grid positioning
         level = 1;
     }
 
@@ -118,17 +118,17 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return points;
     }
 
-    public float getX() { //for positioning
+    public int getX() { //for positioning
         return x;
     }
-    public float getY() { //for positioning
+    public int getY() { //for positioning
         return y;
     }
 
-    public void setX(float X) { //for positioning
+    public void setX(int x) { //for positioning
         this.x = x;
     }
-    public void setY(float Y) { //for positioning
+    public void setY(int y) { //for positioning
         this.y = y;
     }
 
@@ -139,6 +139,9 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return this.health;
     }
 
+    public static int getSpriteSize() {
+        return spriteSize;
+    }
 
     public void updateObservers() {
         String str = getInstance().toString();
