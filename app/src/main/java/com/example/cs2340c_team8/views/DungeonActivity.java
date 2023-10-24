@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
@@ -51,6 +55,14 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        WindowInsetsControllerCompat windowInsetsController =
+                ViewCompat.getWindowInsetsController(getWindow().getDecorView());
+        if (windowInsetsController == null) {
+            return;
+        }
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+
         DungeonScreenBinding dungeonScreenBinding = DataBindingUtil
                 .setContentView(this, R.layout.dungeon_screen);
 

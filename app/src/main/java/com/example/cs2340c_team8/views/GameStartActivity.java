@@ -21,7 +21,6 @@ public class GameStartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat windowInsetsController =
                 ViewCompat.getWindowInsetsController(getWindow().getDecorView());

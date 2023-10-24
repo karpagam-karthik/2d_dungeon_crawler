@@ -1,6 +1,10 @@
 package com.example.cs2340c_team8.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
@@ -18,6 +22,14 @@ public class LeaderboardActivity extends AppCompatActivity implements PlayerObse
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        WindowInsetsControllerCompat windowInsetsController =
+                ViewCompat.getWindowInsetsController(getWindow().getDecorView());
+        if (windowInsetsController == null) {
+            return;
+        }
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+
         LeaderboardScreenBinding leaderboardScreenBinding = DataBindingUtil
                 .setContentView(this, R.layout.leaderboard_screen);
 

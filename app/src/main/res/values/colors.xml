@@ -3,7 +3,13 @@
     <color name="mario_red">#FFE52521</color>
     <color name="mario_blue">#FF049CD8</color>
     <color name="mario_yellow">#FFFBD000</color>
+    <color name="mario_yellow_white_bg">#CCFBD000</color>
     <color name="mario_green">#FF43B047</color>
+    <color name="mario_pink">#FFFF00AA</color>
+    <color name="gray">#FF8F8F8F</color>
+    <color name="dark_gray">#FF3F3F3F</color>
+    <color name="white_bg_shadow">#FFAFAFAF</color>
+    <color name="red_bg_shadow">#FF000000</color>
     <color name="off_white">#FFFEFFEE</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.cs2340c_team8.viewmodels.LeaderboardViewModel" />
@@ -12,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/mario_white_bg">
 
         <TextView
             android:id="@+id/player5name"
@@ -254,18 +256,21 @@
 
         <TextView
             android:id="@+id/scoreTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:fontFamily="casual"
-            android:text="You Won!"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="42sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="#AFAFAF"
+            android:shadowDx="0"
+            android:shadowDy="15"
+            android:shadowRadius="15"
+            android:text="You Win!"
+            android:textAlignment="center"
+            android:textColor="@color/mario_green"
+            android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.00999999" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/leaderboardTitle"
@@ -281,26 +286,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/keyPassedText" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/end_game_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="35dp"
-            android:text="Exit Game"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:drawableLeft="@android:drawable/ic_media_next"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/off_white"
+            app:strokeWidth="3dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/playAgainButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="35dp"
-            android:text="Play Again"
+            android:fontFamily="@font/patrick_hand_regular"
+            android:text="@string/play_again"
+            android:textColor="@color/off_white"
+            android:textFontWeight="600"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/off_white"
+            app:strokeWidth="3dp"
+            app:elevation="40dp"/>
 
         <TextView
             android:id="@+id/scoreValueText"

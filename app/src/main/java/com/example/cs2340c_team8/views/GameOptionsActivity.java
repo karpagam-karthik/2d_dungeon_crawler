@@ -1,6 +1,10 @@
 package com.example.cs2340c_team8.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +26,14 @@ public class GameOptionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        WindowInsetsControllerCompat windowInsetsController =
+                ViewCompat.getWindowInsetsController(getWindow().getDecorView());
+        if (windowInsetsController == null) {
+            return;
+        }
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+
         setContentView(R.layout.game_options_screen);
 
         usernameInput = findViewById(R.id.usernameInput);

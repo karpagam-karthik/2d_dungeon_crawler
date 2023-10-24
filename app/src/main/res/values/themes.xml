@@ -4,11 +4,11 @@
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/mario_green</item>
-        <item name="colorPrimaryVariant">@color/mario_red</item>
+        <item name="colorPrimaryVariant">@color/mario_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/mario_red</item>
-        <item name="colorSecondaryVariant">@color/mario_red</item>
+        <item name="colorSecondary">@color/mario_green</item>
+        <item name="colorSecondaryVariant">@color/mario_green</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
