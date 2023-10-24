@@ -19,17 +19,6 @@ import org.junit.Test;
 import java.util.Random;
 
 public class testCases {
-    //test game ending scenario where the player wins,
-    //test if a player moves off screen or out of bounds what happens
-    //test putting in a date which has not occurred as a score date
-    //test walls have no gaps in between them, neighbors list has at least 2 walls
-    //test getting to next room
-    //test game-over leaderboard scenario where a player has a negative score or two duplicate scores
-    //test players movement is strategy pattern
-    //test players movement is observer pattern
-    //test final exit exists/level
-    //test direction of player movement work as intended
-
     @Test
     public void testPlayerSameDirection() {
         Player test = Player.getInstance();

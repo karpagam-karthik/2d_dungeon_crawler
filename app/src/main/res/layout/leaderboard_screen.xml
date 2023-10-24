@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.cs2340c_team8.viewmodels.LeaderboardViewModel" />
@@ -12,56 +13,91 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/mario_white_bg">
 
         <TextView
-            android:id="@+id/player5name"
-            android:layout_width="wrap_content"
+            android:id="@+id/scoreTitle"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
-            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getUsername() : "" }'
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/player1score"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDx="0"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text='@{((viewmodel.getSuccess()) ? "You Win!" : "You Lose!")}'
+            android:textAlignment="center"
+            android:textColor= "@{((viewmodel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/player4name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/keyPassedText"
+            android:id="@+id/scoreValueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="casual"
-            android:hint="@{viewmodel.keys}"
-            android:text="@{viewmodel.keys}"
-            android:textSize="24sp"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDx="0"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="@{Integer.toString(viewmodel.score)}"
+            android:textAlignment="center"
+            android:textColor="@color/dark_gray"
+            android:textSize="44sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/keyScoreText" />
+            app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
 
         <TextView
             android:id="@+id/timeElapsedScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="26dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
-            android:hint="@{viewmodel.time}"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
             android:text="@{viewmodel.time}"
+            android:textColor="@color/mario_green"
             android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/keyPassedText"
+            app:layout_constraintEnd_toStartOf="@+id/scoreValueText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/keyScoreText2" />
+            app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
+
+        <TextView
+            android:id="@+id/keyPassedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="@{viewmodel.keys}"
+            android:textColor="@color/mario_green"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/scoreValueText"
+            app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
 
         <TextView
             android:id="@+id/player1score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(0)) != null) ? Integer.toString(viewmodel.getNthTopScore(0).getScore()) : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/leaderboardTitle" />
@@ -71,9 +107,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(1)) != null) ? Integer.toString(viewmodel.getNthTopScore(1).getScore()) : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player1score" />
@@ -83,9 +123,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(2)) != null) ? Integer.toString(viewmodel.getNthTopScore(2).getScore()) : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,9 +140,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(3)) != null) ? Integer.toString(viewmodel.getNthTopScore(3).getScore()): "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,9 +157,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(4)) != null) ? Integer.toString(viewmodel.getNthTopScore(4).getScore()) : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player4score" />
@@ -122,9 +174,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getUsername() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/leaderboardTitle" />
@@ -135,9 +191,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getUsername() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player1name" />
@@ -148,9 +208,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getUsername() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player2name" />
@@ -161,12 +225,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getUsername() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player3name" />
+
+        <TextView
+            android:id="@+id/player5name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/mario_font"
+            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getUsername() : "" }'
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintEnd_toStartOf="@+id/player1score"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player4name" />
 
         <TextView
             android:id="@+id/player1time"
@@ -174,9 +259,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getDateString() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/player1score"
             app:layout_constraintTop_toBottomOf="@+id/leaderboardTitle" />
@@ -187,9 +276,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getDateString() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toEndOf="@+id/player1score"
@@ -201,9 +294,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getDateString() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toEndOf="@+id/player1score"
@@ -215,9 +312,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
             android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getDateString() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toEndOf="@+id/player1score"
@@ -229,128 +330,67 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="casual"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textColor="@color/dark_gray"
             android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getDateString() : "" }'
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toEndOf="@+id/player1score"
             app:layout_constraintTop_toBottomOf="@+id/player4time" />
 
         <TextView
-            android:id="@+id/levelPassedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="casual"
-            android:hint="@{viewmodel.successString}"
-            android:text="@{viewmodel.successString}"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.578"
-            app:layout_constraintStart_toEndOf="@+id/keyPassedText"
-            app:layout_constraintTop_toBottomOf="@+id/levelScoreText" />
-
-        <TextView
-            android:id="@+id/scoreTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="casual"
-            android:text="You Won!"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="42sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.00999999" />
-
-        <TextView
             android:id="@+id/leaderboardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="casual"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
             android:text="Leaderboard"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            android:textSize="42sp"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/keyPassedText" />
+            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/end_game_button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="35dp"
-            android:text="Exit Game"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/playAgainButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="35dp"
-            android:text="Play Again"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/scoreValueText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="casual"
-            android:text="@{Integer.toString(viewmodel.score)}"
-            android:textSize="44sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
-
-        <TextView
-            android:id="@+id/levelScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="casual"
-            android:text="Level:"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/keyScoreText"
-            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
-
-        <TextView
-            android:id="@+id/keyScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="casual"
-            android:text="Keys:"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
-
-        <TextView
-            android:id="@+id/keyScoreText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="casual"
-            android:text="Time:"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toStartOf="@+id/keyScoreText"
+            android:fontFamily="@font/patrick_hand_regular"
+            android:text="Exit"
+            android:textFontWeight="600"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/off_white"
+            app:strokeWidth="3dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playAgainButton"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/patrick_hand_regular"
+            android:text="@string/play_again"
+            android:textColor="@color/off_white"
+            android:textFontWeight="600"
+            android:textSize="18sp"
+            app:cornerRadius="12dp"
+            app:elevation="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
+            app:strokeColor="@color/off_white"
+            app:strokeWidth="3dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
