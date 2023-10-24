@@ -12,13 +12,13 @@ public class LeaderboardViewModel extends BaseObservable {
     private int score;
     private String time;
     private String keys;
-    private String successString;
+    private boolean success;
 
     public LeaderboardViewModel(int score, String time, String keys, boolean success) {
         this.score = score;
         this.time = time;
         this.keys = keys;
-        this.successString = success ? "Passed" : "Failed";
+        this.success = success;
     }
 
     public static void addNewScore(String username, int score, long time) {
@@ -45,7 +45,7 @@ public class LeaderboardViewModel extends BaseObservable {
         return keys;
     }
 
-    public String getSuccessString() {
-        return successString;
+    public boolean getSuccess() {
+        return success;
     }
 }

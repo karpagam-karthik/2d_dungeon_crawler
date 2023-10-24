@@ -27,11 +27,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exitEndButton"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginBottom="35dp"
         android:fontFamily="@font/patrick_hand_regular"
-        android:text="Exit Game"
+        android:text="Exit"
         android:textColor="@color/off_white"
         android:textFontWeight="600"
         android:textSize="18sp"

@@ -66,11 +66,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exitButton"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:drawableLeft="@android:drawable/ic_media_previous"
+        android:fontFamily="@font/patrick_hand_regular"
+        android:text="Exit"
+        android:textFontWeight="600"
+        android:textSize="18sp"
         app:cornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
