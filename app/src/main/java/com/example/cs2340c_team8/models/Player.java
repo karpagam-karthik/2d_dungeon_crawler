@@ -1,19 +1,19 @@
 package com.example.cs2340c_team8.models;
 
-import com.example.cs2340c_team8.models.enums.PowerUpType;
+import com.example.cs2340c_team8.models.enums.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.Level;
 import com.example.cs2340c_team8.models.interfaces.Obstacle;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.Point;
-import com.example.cs2340c_team8.models.interfaces.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
-public class Player implements Weapon, PowerUp, Level, Key, Point {
+public class Player implements Weapon, com.example.cs2340c_team8.models.interfaces.PowerUp, Level, Key, Point {
     private static Player instance;
     private static final int SPRITE_SIZE = 16;
     private int health;
@@ -21,13 +21,12 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     private List<Weapon> weapons;
     private List<Key> keys;
     private int points;
-    private List<PowerUp> powerUps;
+    private List<com.example.cs2340c_team8.models.interfaces.PowerUp> powerUps;
     private List<Consumable> consumables;
     private int level;
     private List<PlayerObserver> observers;
-
-    private int x; //for x positioning
-    private int y; //for y positioning
+    private int posX; //for x positioning
+    private int posY; //for y positioning
 
     private Player() {
         health = 100;
@@ -37,8 +36,9 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         points = 0;
         powerUps = new ArrayList<>();
         consumables = new ArrayList<>();
-        x = 25; // likely need to change based on grid positioning
-        y = 25; // likely need to change based on grid positioning
+        observers = new ArrayList<>();
+        posX = 25; // likely need to change based on grid positioning
+        posY = 25; // likely need to change based on grid positioning
         level = 1;
     }
 
@@ -67,9 +67,9 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return 10;
     }
 
-    public PowerUpType getPowerUpType() {
+    public PowerUp getPowerUpType() {
         // Implement power-up type logic
-        return PowerUpType.HEALTH_BOOST;
+        return PowerUp.HEALTH_BOOST;
     }
 
     public int getEffect() {
@@ -119,18 +119,18 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     }
 
     public int getX() { //for positioning
-        return x;
+        return posX;
     }
     public int getY() { //for positioning
-        return y;
+        return posY;
     }
 
-    public void setX(int x) { //for positioning
-        this.x = x;
+    public void setPosX(int posX) { //for positioning
+        this.posX = posX;
     }
   
-    public void setY(int y) { //for positioning
-        this.y = y;
+    public void setPosY(int posY) { //for positioning
+        this.posY = posY;
     }
 
     public void setHealth(int health) {
@@ -145,10 +145,17 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         return SPRITE_SIZE;
     }
 
+    public void addObserver(PlayerObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void removeObserver(PlayerObserver observer) {
+        this.observers.remove(observer);
+    }
+
     public void updateObservers() {
-        String str = getInstance().toString();
         for (PlayerObserver observer : observers) {
-            observer.update(str);
+            observer.update(posX, posY);
         }
     }
   
@@ -160,7 +167,7 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
     }
 
     /**
-     * isCollding will check if player and wall collide based on their positions.
+     * isColliding will check if player and wall collide based on their positions.
      * @param player represents the player (controlled by user).
      * @param wall represents the list of walls.
      * @return returns if a player is colliding with a Wall
@@ -182,12 +189,11 @@ public class Player implements Weapon, PowerUp, Level, Key, Point {
         if (obstacle.getEffect() == "Damage") { //strategy if a player encounters an enemy
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
         } else if (obstacle.getEffect() == "Knock-back") { //strategy if a player encounters a trap
-            player.setX(player.getX() + obstacle.getEffectMagnitude());
-            player.setY(player.getY() - obstacle.getEffectMagnitude());
+            player.setPosX(player.getX() + obstacle.getEffectMagnitude());
+            player.setPosY(player.getY() - obstacle.getEffectMagnitude());
         } else if (obstacle.getEffect() == "Door") {
             player.nextLevel(player.getLevelNumber()); //strategy if a player encounters a door
         }
     }
-    // Implement other methods from the interfaces as needed
 }
 

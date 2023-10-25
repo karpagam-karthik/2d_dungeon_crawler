@@ -15,7 +15,7 @@ import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 import com.example.cs2340c_team8.databinding.LeaderboardScreenBinding;
-public class LeaderboardActivity extends AppCompatActivity implements PlayerObserver {
+public class LeaderboardActivity extends AppCompatActivity {
     private Button endGameButton;
     private Button playAgainButton;
 
@@ -56,10 +56,5 @@ public class LeaderboardActivity extends AppCompatActivity implements PlayerObse
             startActivity(settings);
             finish();
         });
-    }
-
-    @Override
-    public void update(String str) {
-
     }
 }

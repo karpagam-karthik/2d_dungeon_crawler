@@ -38,44 +38,6 @@ public class LevelIndicatorView extends View {
         shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
     }
 
-    private Bitmap createCharacterLevelIndicatorSpriteBitmap() {
-        BitmapDrawable bitmapDrawable;
-        switch (character) {
-        case MARIO:
-            bitmapDrawable = (BitmapDrawable)
-                    getResources().getDrawable(R.drawable.mario_hat);
-            return bitmapDrawable.getBitmap();
-        case LUIGI:
-            bitmapDrawable = (BitmapDrawable)
-                    getResources().getDrawable(R.drawable.luigi_hat);
-            return bitmapDrawable.getBitmap();
-        default:
-            bitmapDrawable = (BitmapDrawable)
-                    getResources().getDrawable(R.drawable.princess_peach_crown);
-            return bitmapDrawable.getBitmap();
-        }
-    }
-
-    private int getSpriteOffsetX() {
-        switch (character) {
-        case MARIO:
-        case LUIGI:
-            return 53;
-        default:
-            return 76;
-        }
-    }
-
-    private int getSpriteOffsetY() {
-        switch (character) {
-        case MARIO:
-        case LUIGI:
-            return 55;
-        default:
-            return 84;
-        }
-    }
-
     private Paint createCharacterColorPaint() {
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -134,16 +96,5 @@ public class LevelIndicatorView extends View {
                     startX + (rectLength * i), startY + rectWidth, outerCirclePaint);
         }
         canvas.drawCircle(startX + (rectLength * 3), startY, circleRadius, outerCirclePaint);
-
-        canvas.drawBitmap(createCharacterLevelIndicatorSpriteBitmap(),
-                startX + (100 * (level - 1)) - getSpriteOffsetX(),
-                startY - getSpriteOffsetY(), outerCirclePaint);
-    }
-
-    public int getLevel() {
-        return level;
-    }
-    public void setLevel(int level) {
-        this.level = level;
     }
 }

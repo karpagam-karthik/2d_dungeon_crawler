@@ -16,13 +16,13 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/level_indicator_sprite"-->
-<!--            android:layout_width="26dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            app:imageResource="@{viewmodel.getSpriteImage()}"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent" />-->
+        <ImageView
+            android:id="@+id/level_indicator_sprite"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:imageResource="@{viewmodel.getSpriteImage()}"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/username_display"

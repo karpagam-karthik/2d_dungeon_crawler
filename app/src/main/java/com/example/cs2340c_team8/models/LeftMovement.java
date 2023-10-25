@@ -22,7 +22,7 @@ public class LeftMovement implements MovementStrategy {
             bitmap.setPixel(player.getX() + playerSize - 1, a, tileColor);
         }
 
-        player.setX(player.getX() - 1);
+        player.setPosX(player.getX() - 1);
 
         for (int r = player.getX(); r < player.getX() + playerSize; r++) {
             for (int c = player.getY(); c < player.getY() + playerSize; c++) {
@@ -48,13 +48,13 @@ public class LeftMovement implements MovementStrategy {
     public int checkLevelCompleted(int currentMap) {
         if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 1) {
-            player.setY(25);
-            player.setX(25);
+            player.setPosY(25);
+            player.setPosX(25);
             return 2;
         } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 2) {
-            player.setY(25);
-            player.setX(25);
+            player.setPosY(25);
+            player.setPosX(25);
             return 3;
         } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 3) {

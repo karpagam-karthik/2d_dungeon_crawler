@@ -26,9 +26,9 @@ public class testCases {
         int randomMove = r.nextInt();
 
         //move right, then left
-        test.setX(Player.getInstance().getX() + randomMove);
+        test.setPosX(Player.getInstance().getX() + randomMove);
         //move up then down
-        test.setY(Player.getInstance().getY() + randomMove);
+        test.setPosY(Player.getInstance().getY() + randomMove);
 
         //if player can move properly from origin, they should be at randomMove,randomMove
         assertTrue(test.getX() == test.getY());
@@ -88,11 +88,11 @@ public class testCases {
         int randomMove = r.nextInt();
 
         //move right, then left
-        test.setX(test.getX() + randomMove);
-        test.setX(test.getX() - 2 * randomMove);
+        test.setPosX(test.getX() + randomMove);
+        test.setPosX(test.getX() - 2 * randomMove);
         //move up then down
-        test.setY(test.getY() + randomMove);
-        test.setY(test.getY() - 2 * randomMove);
+        test.setPosY(test.getY() + randomMove);
+        test.setPosY(test.getY() - 2 * randomMove);
 
         //if player can move properly from origin, they should be at -randomMove,-randomMove
         assertTrue(test.getX() == test.getY());
@@ -102,10 +102,10 @@ public class testCases {
     public void testWallCollisionsFalse() {
 
         Player player = Player.getInstance();
-        player.setX(30);
-        player.setY(30);
-        player.setX(Player.getInstance().getX());
-        player.setY(Player.getInstance().getX());
+        player.setPosX(30);
+        player.setPosY(30);
+        player.setPosX(Player.getInstance().getX());
+        player.setPosY(Player.getInstance().getX());
 
         Wall wall = new Wall(50, 50, 5, 5, null);
         assertFalse(isColliding(player, wall));
@@ -115,8 +115,8 @@ public class testCases {
     public void testWallCollisionsOrigin() {
         Player player = Player.getInstance();
 
-        player.setX(Player.getInstance().getX());
-        player.setY(Player.getInstance().getX());
+        player.setPosX(Player.getInstance().getX());
+        player.setPosY(Player.getInstance().getX());
 
         Wall wall = new Wall(25, 25, 0, 0, null);
         //combining should happen at 0
@@ -130,8 +130,8 @@ public class testCases {
 
         Wall wall = new Wall(4, 4, 4, 4, null);
 
-        player.setX(Player.getInstance().getX() + 10);
-        player.setY(Player.getInstance().getY() + 10);
+        player.setPosX(Player.getInstance().getX() + 10);
+        player.setPosY(Player.getInstance().getY() + 10);
 
         wall.setX(4);
         wall.setY(4);
