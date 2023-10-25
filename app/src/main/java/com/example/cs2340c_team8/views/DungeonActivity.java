@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
+import com.example.cs2340c_team8.models.enums.Character;
 import com.example.cs2340c_team8.models.enums.Difficulty;
 import com.example.cs2340c_team8.models.interfaces.MovementStrategy;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
@@ -71,10 +73,21 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
         Difficulty difficulty = Difficulty.values()[getIntent()
                 .getIntExtra("difficulty", 1)];
         String sprite = getIntent().getStringExtra("sprite");
-        dungeonScreenBinding.setViewmodel(new DungeonViewModel(username, difficulty, sprite));
+        DungeonViewModel dungeonViewModel = new DungeonViewModel(username, difficulty, sprite);
+        dungeonScreenBinding.setViewmodel(dungeonViewModel);
 
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
+
+        int levelIndicatorStartX = 100;
+        int levelIndicatorStartY = getResources().getDisplayMetrics().heightPixels - 32;
+        int level = 4;
+
+        ConstraintLayout layout = findViewById(R.id.dungeonLayout);
+        LevelIndicatorView levelIndicatorView =
+                new LevelIndicatorView(this, levelIndicatorStartX, levelIndicatorStartY,
+                        getCharacterFromSpriteString(sprite), level);
+        layout.addView(levelIndicatorView);
 
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
@@ -114,6 +127,17 @@ public class DungeonActivity extends AppCompatActivity implements PlayerObserver
             movementStrategy = new DownMovement(bitmap2);
             movePlayer();
         });
+    }
+
+    private Character getCharacterFromSpriteString(String spriteString) {
+        switch (spriteString) {
+        case "Mario":
+            return Character.MARIO;
+        case "Luigi":
+            return Character.LUIGI;
+        default:
+            return Character.PRINCESS_PEACH;
+        }
     }
 
     public void movePlayer() {
