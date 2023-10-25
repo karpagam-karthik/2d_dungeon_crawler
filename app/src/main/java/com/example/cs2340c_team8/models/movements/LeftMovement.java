@@ -1,27 +1,29 @@
-package com.example.cs2340c_team8.models;
+package com.example.cs2340c_team8.models.movements;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.MovementStrategy;
 
-public class UpMovement implements MovementStrategy {
+public class LeftMovement implements MovementStrategy {
     private Player player;
     private Bitmap bitmap;
     private int tileColor = Color.WHITE;
     private int playerColor = Color.BLUE;
     private final int playerSize = Player.getSpriteSize();
-    public UpMovement(Bitmap bitmap) {
+    public LeftMovement(Bitmap bitmap) {
         player = Player.getInstance();
         this.bitmap = bitmap;
     }
 
     @Override
     public Bitmap movePlayer() {
-        for (int a = player.getX(); a < player.getX() + 16; a++) {
-            bitmap.setPixel(a, player.getY() + playerSize - 1, tileColor);
+        for (int a = player.getY(); a < player.getY() + playerSize; a++) {
+            bitmap.setPixel(player.getX() + playerSize - 1, a, tileColor);
         }
-        player.setPosY(player.getY() - 1);
+
+        player.setPosX(player.getX() - 1);
 
         for (int r = player.getX(); r < player.getX() + playerSize; r++) {
             for (int c = player.getY(); c < player.getY() + playerSize; c++) {
@@ -34,13 +36,12 @@ public class UpMovement implements MovementStrategy {
 
     @Override
     public boolean canPlayerMove() {
-        int yth = player.getY() - 1;
-        for (int x = player.getX(); x < player.getX() + 16; x++) {
-            if (bitmap.getPixel(x, yth) != Color.WHITE) {
+        int xth = player.getX() - 1;
+        for (int y = player.getY(); y < player.getY() + 16; y++) {
+            if (bitmap.getPixel(xth, y) != Color.WHITE) {
                 return false;
             }
         }
-
         return true;
     }
 

@@ -6,12 +6,12 @@ import static org.junit.Assert.assertTrue;
 
 import static java.lang.System.currentTimeMillis;
 
-import com.example.cs2340c_team8.models.Door;
+import com.example.cs2340c_team8.models.elements.Door;
 import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.Score;
-import com.example.cs2340c_team8.models.Trap;
-import com.example.cs2340c_team8.models.Wall;
+import com.example.cs2340c_team8.models.elements.Trap;
+import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.interfaces.Obstacle;
 
 import org.junit.Test;

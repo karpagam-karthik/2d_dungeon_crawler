@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
-import com.example.cs2340c_team8.models.Wall;
+import com.example.cs2340c_team8.models.elements.Wall;
 
 public class WallView extends View {
     private Paint paint;

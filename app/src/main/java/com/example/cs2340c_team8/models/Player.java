@@ -1,5 +1,6 @@
 package com.example.cs2340c_team8.models;
 
+import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.enums.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
@@ -11,7 +12,6 @@ import com.example.cs2340c_team8.models.interfaces.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
 public class Player implements Weapon, com.example.cs2340c_team8.models.interfaces.PowerUp, Level, Key, Point {
     private static Player instance;

@@ -21,15 +21,13 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
-import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enums.Character;
 import com.example.cs2340c_team8.models.enums.Difficulty;
 import com.example.cs2340c_team8.models.interfaces.MovementStrategy;
-import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
-import com.example.cs2340c_team8.models.DownMovement;
-import com.example.cs2340c_team8.models.LeftMovement;
-import com.example.cs2340c_team8.models.RightMovement;
-import com.example.cs2340c_team8.models.UpMovement;
+import com.example.cs2340c_team8.models.movements.DownMovement;
+import com.example.cs2340c_team8.models.movements.LeftMovement;
+import com.example.cs2340c_team8.models.movements.RightMovement;
+import com.example.cs2340c_team8.models.movements.UpMovement;
 import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 

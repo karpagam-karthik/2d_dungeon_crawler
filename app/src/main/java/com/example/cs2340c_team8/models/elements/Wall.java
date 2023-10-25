@@ -1,4 +1,4 @@
-package com.example.cs2340c_team8.models;
+package com.example.cs2340c_team8.models.elements;
 
 public class Wall {
     private float x;
