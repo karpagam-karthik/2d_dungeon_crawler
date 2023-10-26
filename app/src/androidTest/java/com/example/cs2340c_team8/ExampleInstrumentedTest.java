@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import com.example.cs2340c_team8.models.Wall;
+import com.example.cs2340c_team8.models.elements.Wall;
 
 /**
  * Instrumented test, which will execute on an Android device.

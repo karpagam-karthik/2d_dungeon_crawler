@@ -19,11 +19,11 @@ public class DungeonViewModel extends BaseObservable {
     public int getSpriteImage() {
         switch (spriteText) {
         case "Mario":
-            return R.drawable.wizard_sprite;
+            return R.drawable.mario_hat;
         case "Luigi":
-            return R.drawable.elf_sprite;
+            return R.drawable.luigi_hat;
         default:
-            return R.drawable.knight_sprite;
+            return R.drawable.princess_peach_crown;
         }
     }
 

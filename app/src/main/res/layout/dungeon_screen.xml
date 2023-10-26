@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.cs2340c_team8.viewmodels.DungeonViewModel" />
@@ -12,7 +13,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dungeonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/level_indicator_sprite"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:imageResource="@{viewmodel.getSpriteImage()}"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/username_display"
@@ -146,13 +156,13 @@
 
         <ImageView
             android:id="@+id/spriteImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
+            app:imageResource="@{viewmodel.getSpriteImage()}"
             app:layout_constraintStart_toEndOf="@+id/spriteTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:imageResource="@{viewmodel.getSpriteImage()}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/mapImage"

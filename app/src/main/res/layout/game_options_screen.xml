@@ -38,6 +38,7 @@
             android:foregroundTint="@color/mario_green"
             android:hint="Username"
             android:inputType="text"
+            android:text="AJ"
             android:textAlignment="center"
             android:textColor="@color/mario_green"
             android:textColorHint="@color/gray"

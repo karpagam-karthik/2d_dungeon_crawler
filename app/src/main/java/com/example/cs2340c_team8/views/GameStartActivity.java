@@ -59,6 +59,5 @@ public class GameStartActivity extends AppCompatActivity {
             exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(exit);
         });
-
     }
 }
