@@ -87,6 +87,22 @@
             app:layout_constraintTop_toBottomOf="@+id/scoreTitle" />
 
         <TextView
+            android:id="@+id/leaderboardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/mario_font"
+            android:shadowColor="@color/white_bg_shadow"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:text="Leaderboard"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
+
+        <TextView
             android:id="@+id/player1score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -341,22 +357,6 @@
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toEndOf="@+id/player1score"
             app:layout_constraintTop_toBottomOf="@+id/player4time" />
-
-        <TextView
-            android:id="@+id/leaderboardTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/mario_font"
-            android:shadowColor="@color/white_bg_shadow"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:text="Leaderboard"
-            android:textColor="@color/dark_gray"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scoreValueText" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/end_game_button"

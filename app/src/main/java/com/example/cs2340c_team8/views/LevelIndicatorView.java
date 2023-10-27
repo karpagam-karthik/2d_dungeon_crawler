@@ -1,59 +1,37 @@
 package com.example.cs2340c_team8.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 
-import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.models.enums.Character;
+import com.example.cs2340c_team8.models.GameConfig;
 
 public class LevelIndicatorView extends View {
     private final int startX;
     private final int startY;
-    private final Character character;
     private int level;
     private final Paint outerCirclePaint;
     private final Paint innerPaint;
     private final Paint shadowPaint;
+
     public LevelIndicatorView(Context context, int startX, int startY,
-                              Character character, int level) {
+                              int level) {
         super(context);
         this.startX = startX;
         this.startY = startY;
-        this.character = character;
         this.level = level;
 
         outerCirclePaint = new Paint();
         outerCirclePaint.setColor(Color.rgb(255, 255, 255));
         outerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        innerPaint = createCharacterColorPaint();
+        innerPaint = GameConfig.createCustomPaint();
 
         shadowPaint = new Paint();
         shadowPaint.setColor(Color.rgb(220, 220, 220));
         shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-    }
-
-    private Paint createCharacterColorPaint() {
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-        switch (character) {
-        case MARIO:
-            paint.setColor(Color.rgb(229, 37, 33));
-            break;
-        case LUIGI:
-            paint.setColor(Color.rgb(67, 176, 71));
-            break;
-        default:
-            paint.setColor(Color.rgb(255, 0, 170));
-        }
-
-        return paint;
     }
 
     @Override

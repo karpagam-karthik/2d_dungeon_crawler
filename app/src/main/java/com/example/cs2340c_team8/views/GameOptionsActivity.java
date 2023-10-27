@@ -16,6 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.models.GameConfig;
+import com.example.cs2340c_team8.models.enums.Character;
+import com.example.cs2340c_team8.models.enums.Difficulty;
 
 public class GameOptionsActivity extends AppCompatActivity {
     private EditText usernameInput;
@@ -45,44 +48,44 @@ public class GameOptionsActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        // Validate name
         String username = usernameInput.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "Enter a Username", Toast.LENGTH_SHORT).show();
             return;
         }
+        GameConfig.setUsername(username);
 
-        int selectedDifficultyId = rgDifficulty.getCheckedRadioButtonId();
-        RadioButton selectedDifficulty = findViewById(selectedDifficultyId);
-        int difficulty = getDifficultyValue(selectedDifficulty.getText().toString());
+        RadioButton selectedDifficulty = findViewById(rgDifficulty.getCheckedRadioButtonId());
+        GameConfig.setDifficulty(deriveChosenDifficulty(selectedDifficulty.getText().toString()));
 
-        // Get selected sprite
-        int selectedSpriteId = rgSprite.getCheckedRadioButtonId();
-        RadioButton selectedSprite = findViewById(selectedSpriteId);
-        String sprite = selectedSprite.getText().toString();
+        RadioButton selectedSprite = findViewById(rgSprite.getCheckedRadioButtonId());
+        GameConfig.setCharacter(deriveChosenCharacter(selectedSprite.getText().toString()));
 
-        // Start the game activity with the selected options
         Intent gameIntent = new Intent(this, DungeonActivity.class);
-        gameIntent.putExtra("username", username);
-        gameIntent.putExtra("difficulty", difficulty);
-        gameIntent.putExtra("sprite", sprite);
         startActivity(gameIntent);
         finish();
     }
 
-    private int getDifficultyValue(String difficultyText) {
-        int difficulty;
+    private Difficulty deriveChosenDifficulty(String difficultyText) {
         switch (difficultyText) {
         case "Intermediate":
-            difficulty = 1;
-            break;
+            return Difficulty.INTERMEDIATE;
         case "Expert":
-            difficulty = 2;
-            break;
+            return Difficulty.EXPERT;
         default:
-            difficulty = 0;
+            return Difficulty.BEGINNER;
         }
-        return difficulty;
+    }
+
+    private Character deriveChosenCharacter(String characterText) {
+        switch (characterText) {
+        case "Luigi":
+            return Character.LUIGI;
+        case "Princess Peach":
+            return Character.PRINCESS_PEACH;
+        default:
+            return Character.MARIO;
+        }
     }
 }
 

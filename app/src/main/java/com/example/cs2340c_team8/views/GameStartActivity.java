@@ -1,7 +1,6 @@
 package com.example.cs2340c_team8.views;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.models.GameConfig;
+import com.example.cs2340c_team8.models.enums.MarioColor;
 
 public class GameStartActivity extends AppCompatActivity {
     @Override
@@ -32,18 +33,8 @@ public class GameStartActivity extends AppCompatActivity {
         setContentView(R.layout.game_start_screen);
 
         TextView richTextView = findViewById(R.id.gameTitle);
-        SpannableString text = new SpannableString("Super Mario\nDungeons");
-        text.setSpan(new ForegroundColorSpan(Color.rgb(4, 156, 216)), 0, 1, 0); // Blue
-        text.setSpan(new ForegroundColorSpan(Color.rgb(251, 208, 0)), 1, 2, 0); // Yellow
-        text.setSpan(new ForegroundColorSpan(Color.rgb(229, 37, 33)), 2, 3, 0); // Red
-        text.setSpan(new ForegroundColorSpan(Color.rgb(67, 176, 71)), 3, 4, 0); // Green
-        text.setSpan(new ForegroundColorSpan(Color.rgb(251, 208, 0)), 4, 5, 0); // Yellow
-        text.setSpan(new ForegroundColorSpan(Color.rgb(229, 37, 33)), 6, 7, 0);
-        text.setSpan(new ForegroundColorSpan(Color.rgb(67, 176, 71)), 7, 8, 0);
-        text.setSpan(new ForegroundColorSpan(Color.rgb(251, 208, 0)), 8, 9, 0);
-        text.setSpan(new ForegroundColorSpan(Color.rgb(4, 156, 216)), 9, 10, 0);
-        text.setSpan(new ForegroundColorSpan(Color.rgb(67, 176, 71)), 10, 11, 0);
-        richTextView.setText(text);
+        SpannableString gameTitle = new SpannableString("Super Mario\nDungeons");
+        richTextView.setText(gameTitle);
 
         Button playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(v -> {
@@ -59,5 +50,28 @@ public class GameStartActivity extends AppCompatActivity {
             exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(exit);
         });
+    }
+
+    private void themeGameTitle(SpannableString text) {
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.BLUE)), 0, 1, 0); // Blue
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.YELLOW)), 1, 2, 0); // Yellow
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.RED)), 2, 3, 0); // Red
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.GREEN)), 3, 4, 0); // Green
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.YELLOW)), 4, 5, 0); // Yellow
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.RED)), 6, 7, 0);
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.GREEN)), 7, 8, 0);
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.YELLOW)), 8, 9, 0);
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.BLUE)), 9, 10, 0);
+        text.setSpan(new ForegroundColorSpan(
+                GameConfig.getMarioColor(MarioColor.GREEN)), 10, 11, 0);
     }
 }

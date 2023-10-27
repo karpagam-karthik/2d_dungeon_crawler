@@ -7,42 +7,39 @@ import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.Level;
 import com.example.cs2340c_team8.models.interfaces.Obstacle;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
-import com.example.cs2340c_team8.models.interfaces.Point;
-import com.example.cs2340c_team8.models.interfaces.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Player implements Weapon, com.example.cs2340c_team8.models.interfaces.PowerUp, Level, Key, Point {
+public class Player implements com.example.cs2340c_team8.models.interfaces.PowerUp, Level, Key {
     private static Player instance;
     private static final int SPRITE_SIZE = 16;
     private int health;
     private long time;
-    private List<Weapon> weapons;
     private List<Key> keys;
     private int points;
     private List<com.example.cs2340c_team8.models.interfaces.PowerUp> powerUps;
     private List<Consumable> consumables;
     private int level;
     private List<PlayerObserver> observers;
-    private int posX; //for x positioning
-    private int posY; //for y positioning
+    private int posX;
+    private int posY;
 
     private Player() {
         health = 100;
         time = 0;
-        weapons = new ArrayList<>();
         keys = new ArrayList<>();
         points = 0;
         powerUps = new ArrayList<>();
         consumables = new ArrayList<>();
         observers = new ArrayList<>();
-        posX = 25; // likely need to change based on grid positioning
-        posY = 25; // likely need to change based on grid positioning
+        posX = 25;
+        posY = 25;
         level = 1;
     }
 
-    public static  Player getInstance() {
+    public static Player getInstance() {
         if (instance == null) {
             synchronized (Player.class) {
                 if (instance == null) {
@@ -51,20 +48,6 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
             }
         }
         return instance;
-    }
-
-    // Implement methods from the interfaces
-
-    @Override
-    public String getType() {
-        // Implement weapon type logic
-        return "Default";
-    }
-
-    @Override
-    public int getDamage() {
-        // Implement weapon damage logic
-        return 10;
     }
 
     public PowerUp getPowerUpType() {
@@ -81,6 +64,7 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
         // Implement power-up duration logic
         return 10;
     }
+
     public int getLevelNumber() {
         // Implement level number logic
         return level;
@@ -112,15 +96,10 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
         return false;
     }
 
-    @Override
-    public int getAmount() {
-        // Implement point amount logic
-        return points;
-    }
-
     public int getX() { //for positioning
         return posX;
     }
+
     public int getY() { //for positioning
         return posY;
     }
@@ -128,7 +107,7 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
     public void setPosX(int posX) { //for positioning
         this.posX = posX;
     }
-  
+
     public void setPosY(int posY) { //for positioning
         this.posY = posY;
     }
@@ -136,7 +115,7 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
     public void setHealth(int health) {
         this.health = health;
     }
-  
+
     public int getHealth() {
         return this.health;
     }
@@ -158,18 +137,19 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
             observer.update(posX, posY);
         }
     }
-  
+
     @Override
     public String toString() {
-        String rtn = getLevelNumber() + getHealth()
-                + getX() + getY() + getType();
+        String rtn = String.valueOf(getLevelNumber() + getHealth()
+                + getX() + getY());
         return rtn;
     }
 
     /**
      * isColliding will check if player and wall collide based on their positions.
+     *
      * @param player represents the player (controlled by user).
-     * @param wall represents the list of walls.
+     * @param wall   represents the list of walls.
      * @return returns if a player is colliding with a Wall
      */
     public static boolean isColliding(Player player, Wall wall) {
@@ -186,13 +166,13 @@ public class Player implements Weapon, com.example.cs2340c_team8.models.interfac
 
     public void movementInteraction(Obstacle obstacle) {
         Player player = getInstance();
-        if (obstacle.getEffect() == "Damage") { //strategy if a player encounters an enemy
+        if (Objects.equals(obstacle.getEffect(), "Damage")) {
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
-        } else if (obstacle.getEffect() == "Knock-back") { //strategy if a player encounters a trap
+        } else if (Objects.equals(obstacle.getEffect(), "Knock-back")) {
             player.setPosX(player.getX() + obstacle.getEffectMagnitude());
             player.setPosY(player.getY() - obstacle.getEffectMagnitude());
-        } else if (obstacle.getEffect() == "Door") {
-            player.nextLevel(player.getLevelNumber()); //strategy if a player encounters a door
+        } else if (Objects.equals(obstacle.getEffect(), "Door")) {
+            player.nextLevel(player.getLevelNumber());
         }
     }
 }

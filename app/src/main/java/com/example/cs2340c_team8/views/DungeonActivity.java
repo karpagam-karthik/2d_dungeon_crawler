@@ -21,13 +21,13 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
-import com.example.cs2340c_team8.models.enums.Character;
-import com.example.cs2340c_team8.models.enums.Difficulty;
-import com.example.cs2340c_team8.models.interfaces.MovementStrategy;
-import com.example.cs2340c_team8.models.movements.DownMovement;
-import com.example.cs2340c_team8.models.movements.LeftMovement;
-import com.example.cs2340c_team8.models.movements.RightMovement;
-import com.example.cs2340c_team8.models.movements.UpMovement;
+import com.example.cs2340c_team8.models.Player;
+import com.example.cs2340c_team8.models.GameConfig;
+import com.example.cs2340c_team8.models.interfaces.PlayerMovement;
+import com.example.cs2340c_team8.models.movements.DownPlayerMovement;
+import com.example.cs2340c_team8.models.movements.LeftPlayerMovement;
+import com.example.cs2340c_team8.models.movements.RightPlayerMovement;
+import com.example.cs2340c_team8.models.movements.UpPlayerMovement;
 import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
 
@@ -37,17 +37,13 @@ import java.util.TimerTask;
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
     private int score;
-    private String username;
     private long scoreSeconds;
     private TextView timeElapsedTextView;
     private TextView scoreTextView;
     private int currImg = 1;
-    private int topLeftY = 25;
-    private int topLeftX = 25;
     private int playerSize = 16;
     private int playerColor = Color.BLUE;
-    private int tileColor = Color.WHITE;
-    private MovementStrategy movementStrategy;
+    private PlayerMovement playerMovement;
     private BitmapDrawable mapOneBitmapDrawable;
     private Bitmap bitmap1;
     private Bitmap bitmap2;
@@ -66,64 +62,65 @@ public class DungeonActivity extends AppCompatActivity {
 
         DungeonScreenBinding dungeonScreenBinding = DataBindingUtil
                 .setContentView(this, R.layout.dungeon_screen);
-
-        startTime = currentTimeMillis();
-        username = getIntent().getStringExtra("username");
-        Difficulty difficulty = Difficulty.values()[getIntent()
-                .getIntExtra("difficulty", 1)];
-        String sprite = getIntent().getStringExtra("sprite");
-        DungeonViewModel dungeonViewModel = new DungeonViewModel(username, difficulty, sprite);
+        DungeonViewModel dungeonViewModel = new DungeonViewModel();
         dungeonScreenBinding.setViewmodel(dungeonViewModel);
 
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
 
         ConstraintLayout layout = findViewById(R.id.dungeonLayout);
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
 
         // TODO: Joystick functionality testing
-//        Thumbstick thumbstick = new Thumbstick(this, getCharacterFromSpriteString(sprite));
-//        layout.addView(thumbstick);
+        Thumbstick thumbstick = new Thumbstick(this,
+                500, screenHeight - 250);
+        layout.addView(thumbstick);
 
         // TODO: Switch from blue box to a Player Sprite
-//        Player player = Player.getInstance();
-//        PlayerView playerView = new PlayerView(this, getCharacterFromSpriteString(sprite));
-//        player.addObserver(playerView);
-//        layout.addView(playerView);
+        Player player = Player.getInstance();
+        PlayerView playerView = new PlayerView(this);
+        player.addObserver(playerView);
+        layout.addView(playerView);
 
         // TODO: Abstract animation on level change to external methods
-//        int level = 1;                                                                            // Test Level Number
-//        int levelIndicatorStartX = 100;                                                           // TODO: Remove Hard-coded value
-//        int levelIndicatorStartY = getResources().getDisplayMetrics().heightPixels - 32;          // TODO: Remove Hard-coded value
+        // TODO: Remove Hard-coded Level Number
+        int level = 2;
+        // TODO: Remove Hard-coded value
+        int levelIndicatorStartX = screenWidth - 248;
+        // TODO: Remove Hard-coded value
+        int levelIndicatorStartY = screenHeight - 8;
 
-//        LevelIndicatorView levelIndicatorView =
-//                new LevelIndicatorView(this, levelIndicatorStartX, levelIndicatorStartY,
-//                        getCharacterFromSpriteString(sprite), level);                             // Creates a new LevelIndicatorView
-//        layout.addView(levelIndicatorView);                                                       // Displays the View on the Layout
+        LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this,
+                levelIndicatorStartX, levelIndicatorStartY, level);
+        layout.addView(levelIndicatorView);
 
-//        int levelIndicatorSpriteOffset = 70;                                                      // TODO: Create a constant for this value
-//        int levelIndicatorSpriteStartX = levelIndicatorStartX - levelIndicatorSpriteOffset;       // Relative Offset for Sprite's X Coordinate
-//        int levelIndicatorSpriteStartY = levelIndicatorStartY - levelIndicatorSpriteOffset;       // Relative Offset for Sprite's Y Coordinate
-//        int levelOffset = (level - 1) * 102;                                                      // Horizontal Offset to position Sprite on the appropriate level circle. TODO: Create a constant for the value 102
-//
-//        ImageView spriteImageView = findViewById(R.id.level_indicator_sprite);
-//        spriteImageView.setX(levelIndicatorSpriteStartX);
-//        spriteImageView.setY(levelIndicatorSpriteStartY);
-//        spriteImageView.setZ(20);
+        // TODO: Create a constant for this value
+        int levelIndicatorSpriteOffset = 70;
+        int levelIndicatorSpriteStartX = levelIndicatorStartX - levelIndicatorSpriteOffset;
+        int levelIndicatorSpriteStartY = levelIndicatorStartY - levelIndicatorSpriteOffset;
+        // TODO: Create a constant for the value 102
+        int levelOffset = (level - 1) * 102;
 
-//        spriteImageView.animate().x(levelIndicatorSpriteStartX).setDuration(500);                 // Brings the Sprite onto the First Level
-//        spriteImageView.animate().x(levelIndicatorSpriteStartX + levelOffset).setDuration(3000);  // Moves the Sprite to Test Level
+        ImageView spriteImageView = findViewById(R.id.level_indicator_sprite);
+        spriteImageView.setX(levelIndicatorSpriteStartX);
+        spriteImageView.setY(levelIndicatorSpriteStartY);
+        spriteImageView.setZ(20);
 
-        // IMP: Code to Animate Level Indicator while Updating the Level number
+        spriteImageView.animate().x(levelIndicatorSpriteStartX).setDuration(500);
+        spriteImageView.animate().x(levelIndicatorSpriteStartX + levelOffset).setDuration(3000);
 
+        // TODO: Code to Animate Level Indicator while Updating the Level number
         /*
             layout.removeView(levelIndicatorView);
             levelIndicatorView = new LevelIndicatorView(this, levelIndicatorStartX,
-                levelIndicatorStartY, getCharacterFromSpriteString(sprite), level + 1);
+                levelIndicatorStartY, level + 1);
             layout.addView(levelIndicatorView);
             levelOffset = (level) * 102;
             spriteImageView.animate().x(levelIndicatorSpriteStartX + levelOffset).setDuration(3000);
         */
 
+        startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
 
@@ -141,44 +138,33 @@ public class DungeonActivity extends AppCompatActivity {
 
         Button goRight = findViewById(R.id.rightButton);
         goRight.setOnClickListener(tempView -> {
-            movementStrategy = new RightMovement(bitmap2);
+            playerMovement = new RightPlayerMovement(bitmap2);
             movePlayer();
         });
 
         Button goLeft = findViewById(R.id.leftButton);
         goLeft.setOnClickListener(tempView -> {
-            movementStrategy = new LeftMovement(bitmap2);
+            playerMovement = new LeftPlayerMovement(bitmap2);
             movePlayer();
         });
 
         Button goUp = findViewById(R.id.upButton);
         goUp.setOnClickListener(tempView -> {
-            movementStrategy = new UpMovement(bitmap2);
+            playerMovement = new UpPlayerMovement(bitmap2);
             movePlayer();
         });
 
         Button goDown = findViewById(R.id.downButton);
         goDown.setOnClickListener(tempView -> {
-            movementStrategy = new DownMovement(bitmap2);
+            playerMovement = new DownPlayerMovement(bitmap2);
             movePlayer();
         });
     }
 
-    private Character getCharacterFromSpriteString(String spriteString) {
-        switch (spriteString) {
-        case "Mario":
-            return Character.MARIO;
-        case "Luigi":
-            return Character.LUIGI;
-        default:
-            return Character.PRINCESS_PEACH;
-        }
-    }
-
     public void movePlayer() {
-        if (movementStrategy.canPlayerMove()) {
-            currentMap.setImageBitmap(movementStrategy.movePlayer());
-            int newImg = movementStrategy.checkLevelCompleted(currImg);
+        if (playerMovement.canPlayerMove()) {
+            currentMap.setImageBitmap(playerMovement.movePlayer());
+            int newImg = playerMovement.checkLevelCompleted(currImg);
 
             if (newImg == -1) {
                 loadEndingScreen();
@@ -190,7 +176,7 @@ public class DungeonActivity extends AppCompatActivity {
     }
 
     public void loadEndingScreen() {
-        LeaderboardViewModel.addNewScore(username, score, currentTimeMillis() - startTime);
+        LeaderboardViewModel.addNewScore(GameConfig.username, score, currentTimeMillis() - startTime);
 
         Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
         end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())

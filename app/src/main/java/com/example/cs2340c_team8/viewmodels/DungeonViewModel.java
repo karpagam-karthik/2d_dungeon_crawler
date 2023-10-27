@@ -2,33 +2,27 @@ package com.example.cs2340c_team8.viewmodels;
 
 import androidx.databinding.BaseObservable;
 
-import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.models.enums.Difficulty;
+import com.example.cs2340c_team8.models.GameConfig;
 
 public class DungeonViewModel extends BaseObservable {
-    private String username;
-    private Difficulty difficulty;
-    private String spriteText;
+    public boolean isFirePowerUpActive() {
+        return true; //TODO Check if Player has collected the Power-Up
+    }
 
-    public DungeonViewModel(String username, Difficulty difficulty, String spriteText) {
-        this.username = username;
-        this.difficulty = difficulty;
-        this.spriteText = spriteText;
+    public boolean isIcePowerUpActive() {
+        return false; //TODO Check if Player has collected the Power-Up
+    }
+
+    public boolean isStarPowerUpActive() {
+        return false; //TODO Check if Player has collected the Power-Up
     }
 
     public int getSpriteImage() {
-        switch (spriteText) {
-        case "Mario":
-            return R.drawable.mario_hat;
-        case "Luigi":
-            return R.drawable.luigi_hat;
-        default:
-            return R.drawable.princess_peach_crown;
-        }
+        return GameConfig.fetchCharacterMiniSprite();
     }
 
     public String getDifficultyText() {
-        switch (difficulty) {
+        switch (GameConfig.difficulty) {
         case INTERMEDIATE:
             return "Intermediate";
         case EXPERT:
@@ -39,21 +33,28 @@ public class DungeonViewModel extends BaseObservable {
     }
 
     public String getHealth() {
-        switch (difficulty) {
+        switch (GameConfig.difficulty) {
         case INTERMEDIATE:
-            return String.format("Health: %d", 150);
+            return String.format("%d", 150);
         case EXPERT:
-            return String.format("Health: %d", 100);
+            return String.format("%d", 100);
         default:
-            return String.format("Health: %d", 200);
+            return String.format("%d", 200);
         }
     }
 
     public String getUsername() {
-        return username;
+        return GameConfig.username;
     }
 
     public String getSpriteText() {
-        return spriteText;
+        switch (GameConfig.character) {
+        case LUIGI:
+            return "Luigi";
+        case PRINCESS_PEACH:
+            return "Princess Peach";
+        default:
+            return "Mario";
+        }
     }
 }
