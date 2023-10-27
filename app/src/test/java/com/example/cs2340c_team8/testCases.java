@@ -12,7 +12,7 @@ import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.Score;
 import com.example.cs2340c_team8.models.elements.Trap;
 import com.example.cs2340c_team8.models.elements.Wall;
-import com.example.cs2340c_team8.models.interfaces.Obstacle;
+import com.example.cs2340c_team8.models.interfaces.Element;
 
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ public class testCases {
     @Test
     public void testEnemyCollision() {
         Player test = Player.getInstance();
-        Obstacle enemy = new Enemy();
+        Element enemy = new Enemy();
         int health = test.getHealth();
         test.movementInteraction(enemy);
         assertTrue(test.getHealth() == health - 10);
@@ -50,16 +50,16 @@ public class testCases {
         Trap test1 = new Trap(10);
         Enemy test2 = new Enemy();
         Door test3 = new Door();
-        assertTrue(test1 instanceof Obstacle);
-        assertTrue(test2 instanceof Obstacle);
-        assertTrue(test3 instanceof Obstacle);
+        assertTrue(test1 instanceof Element);
+        assertTrue(test2 instanceof Element);
+        assertTrue(test3 instanceof Element);
     }
 
     @Test
     public void testTrapCollision() {
         Player test = Player.getInstance();
         int knockBack = 15;
-        Obstacle trap = new Trap(knockBack);
+        Element trap = new Trap(knockBack);
         test.movementInteraction(trap);
         assertTrue(test.getX() == 30 && test.getY() == 20);
     }

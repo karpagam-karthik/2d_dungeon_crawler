@@ -16,8 +16,7 @@ public class LevelIndicatorView extends View {
     private final Paint innerPaint;
     private final Paint shadowPaint;
 
-    public LevelIndicatorView(Context context, int startX, int startY,
-                              int level) {
+    public LevelIndicatorView(Context context, int startX, int startY, int level) {
         super(context);
         this.startX = startX;
         this.startY = startY;

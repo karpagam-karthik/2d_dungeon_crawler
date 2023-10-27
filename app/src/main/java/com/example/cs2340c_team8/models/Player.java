@@ -5,7 +5,7 @@ import com.example.cs2340c_team8.models.enums.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.Level;
-import com.example.cs2340c_team8.models.interfaces.Obstacle;
+import com.example.cs2340c_team8.models.interfaces.Element;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 
 import java.util.ArrayList;
@@ -164,7 +164,7 @@ public class Player implements com.example.cs2340c_team8.models.interfaces.Power
         return distance < 5;
     } //isColliding
 
-    public void movementInteraction(Obstacle obstacle) {
+    public void movementInteraction(Element obstacle) {
         Player player = getInstance();
         if (Objects.equals(obstacle.getEffect(), "Damage")) {
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage

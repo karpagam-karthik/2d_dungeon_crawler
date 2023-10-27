@@ -69,12 +69,8 @@ public class DungeonActivity extends AppCompatActivity {
         dungeonScreenBinding.executePendingBindings();
 
         ConstraintLayout layout = findViewById(R.id.dungeonLayout);
-        int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = getResources().getDisplayMetrics().heightPixels;
-
-        // TODO: Joystick functionality testing
         Thumbstick thumbstick = new Thumbstick(this,
-                500, screenHeight - 250);
+                GameConfig.thumbstickX, GameConfig.thumbstickY);
         layout.addView(thumbstick);
 
         // TODO: Switch from blue box to a Player Sprite
@@ -85,39 +81,31 @@ public class DungeonActivity extends AppCompatActivity {
 
         // TODO: Abstract animation on level change to external methods
         // TODO: Remove Hard-coded Level Number
-        int level = 2;
-        // TODO: Remove Hard-coded value
-        int levelIndicatorStartX = screenWidth - 248;
-        // TODO: Remove Hard-coded value
-        int levelIndicatorStartY = screenHeight - 8;
+        int level = 1;
 
         LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this,
-                levelIndicatorStartX, levelIndicatorStartY, level);
+                GameConfig.levelIndicatorX, GameConfig.levelIndicatorY, level);
         layout.addView(levelIndicatorView);
 
-        // TODO: Create a constant for this value
-        int levelIndicatorSpriteOffset = 70;
-        int levelIndicatorSpriteStartX = levelIndicatorStartX - levelIndicatorSpriteOffset;
-        int levelIndicatorSpriteStartY = levelIndicatorStartY - levelIndicatorSpriteOffset;
-        // TODO: Create a constant for the value 102
-        int levelOffset = (level - 1) * 102;
+        int levelIndicatorSpriteX = GameConfig.levelIndicatorX - GameConfig.levelIndicatorSpriteOffset;
+        int levelIndicatorSpriteY = GameConfig.levelIndicatorY - GameConfig.levelIndicatorSpriteOffset;
+        int levelOffset = (level - 1) * GameConfig.levelIndicatorLevelOffset;
 
         ImageView spriteImageView = findViewById(R.id.level_indicator_sprite);
-        spriteImageView.setX(levelIndicatorSpriteStartX);
-        spriteImageView.setY(levelIndicatorSpriteStartY);
-        spriteImageView.setZ(20);
-
-        spriteImageView.animate().x(levelIndicatorSpriteStartX).setDuration(500);
-        spriteImageView.animate().x(levelIndicatorSpriteStartX + levelOffset).setDuration(3000);
+        spriteImageView.setX(levelIndicatorSpriteX);
+        spriteImageView.setY(levelIndicatorSpriteY);
+        spriteImageView.setZ(10);
+        spriteImageView.animate().x(levelIndicatorSpriteX).setDuration(500);
 
         // TODO: Code to Animate Level Indicator while Updating the Level number
         /*
+            spriteImageView.animate().x(levelIndicatorSpriteX + levelOffset).setDuration(3000);
             layout.removeView(levelIndicatorView);
-            levelIndicatorView = new LevelIndicatorView(this, levelIndicatorStartX,
-                levelIndicatorStartY, level + 1);
+            levelIndicatorView = new LevelIndicatorView(this, GameConfig.levelIndicatorX,
+                GameConfig.levelIndicatorY, level + 1);
             layout.addView(levelIndicatorView);
             levelOffset = (level) * 102;
-            spriteImageView.animate().x(levelIndicatorSpriteStartX + levelOffset).setDuration(3000);
+            spriteImageView.animate().x(levelIndicatorSpriteX + levelOffset).setDuration(3000);
         */
 
         startTime = currentTimeMillis();

@@ -32,8 +32,12 @@ public class GameStartActivity extends AppCompatActivity {
 
         setContentView(R.layout.game_start_screen);
 
+        GameConfig.setScreenWidth(getResources().getDisplayMetrics().widthPixels);
+        GameConfig.setScreenHeight(getResources().getDisplayMetrics().heightPixels);
+
         TextView richTextView = findViewById(R.id.gameTitle);
         SpannableString gameTitle = new SpannableString("Super Mario\nDungeons");
+        themeGameTitle(gameTitle);
         richTextView.setText(gameTitle);
 
         Button playButton = findViewById(R.id.playButton);
