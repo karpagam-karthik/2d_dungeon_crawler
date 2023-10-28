@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.GameConfig;
+import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enums.Character;
 import com.example.cs2340c_team8.models.enums.Difficulty;
 

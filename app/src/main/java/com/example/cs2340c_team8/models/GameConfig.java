@@ -14,7 +14,6 @@ public class GameConfig {
     public static String username;
     public static Difficulty difficulty;
     public static Character character;
-
     // UI Positioning Values
     public static int screenWidth;
     public static int screenHeight;
@@ -24,6 +23,7 @@ public class GameConfig {
     public static int thumbstickY;
     public static final int levelIndicatorSpriteOffset = 70;
     public static final int levelIndicatorLevelOffset = 102;
+    public static boolean gameOver;
 
     public static int fetchCharacterMiniSprite() {
         switch (character) {
@@ -73,14 +73,14 @@ public class GameConfig {
 
     private static void setStartingHealth() {
         switch (difficulty) {
-        case INTERMEDIATE:
-            PLAYER.setHealth(150);
-            break;
-        case EXPERT:
-            PLAYER.setHealth(100);
-            break;
-        default:
-            PLAYER.setHealth(200);
+            case INTERMEDIATE:
+                PLAYER.setHealth(150);
+                break;
+            case EXPERT:
+                PLAYER.setHealth(100);
+                break;
+            default:
+                PLAYER.setHealth(200);
         }
     }
 

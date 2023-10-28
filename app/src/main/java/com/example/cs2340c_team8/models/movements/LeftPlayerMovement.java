@@ -11,7 +11,7 @@ public class LeftPlayerMovement implements PlayerMovement {
     private Bitmap bitmap;
     private int tileColor = Color.WHITE;
     private int playerColor = Color.BLUE;
-    private final int playerSize = Player.getSpriteSize();
+    private final int playerSize = Player.getSpriteSizeX();
     public LeftPlayerMovement(Bitmap bitmap) {
         player = Player.getInstance();
         this.bitmap = bitmap;
@@ -23,7 +23,7 @@ public class LeftPlayerMovement implements PlayerMovement {
             bitmap.setPixel(player.getX() + playerSize - 1, a, tileColor);
         }
 
-        player.setPosX(player.getX() - 1);
+        player.setStartX(player.getX() - 1);
 
         for (int r = player.getX(); r < player.getX() + playerSize; r++) {
             for (int c = player.getY(); c < player.getY() + playerSize; c++) {
@@ -49,13 +49,13 @@ public class LeftPlayerMovement implements PlayerMovement {
     public int checkLevelCompleted(int currentMap) {
         if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 1) {
-            player.setPosY(25);
-            player.setPosX(25);
+            player.setStartY(25);
+            player.setStartX(25);
             return 2;
         } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 2) {
-            player.setPosY(25);
-            player.setPosX(25);
+            player.setStartY(25);
+            player.setStartX(25);
             return 3;
         } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
                 && player.getY() <= 20 && currentMap == 3) {

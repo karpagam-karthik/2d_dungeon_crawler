@@ -127,7 +127,7 @@
             android:shadowColor="@color/red_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="@{viewmodel.getHealth()}"
+            android:text="@{viewmodel.health}"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/heartSprite"

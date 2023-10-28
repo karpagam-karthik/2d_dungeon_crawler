@@ -1,42 +1,43 @@
 package com.example.cs2340c_team8.models;
 
 import com.example.cs2340c_team8.models.elements.Wall;
-import com.example.cs2340c_team8.models.enums.PowerUp;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.Level;
 import com.example.cs2340c_team8.models.interfaces.Element;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
+import com.example.cs2340c_team8.models.interfaces.PowerUp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Player implements com.example.cs2340c_team8.models.interfaces.PowerUp, Level, Key {
+public class Player implements PowerUp, Level, Key {
+    private static final int spriteSizeX = 25;
+    private static final int spriteSizeY = 25;
     private static Player instance;
-    private static final int SPRITE_SIZE = 16;
     private int health;
-    private long time;
-    private List<Key> keys;
-    private int points;
-    private List<com.example.cs2340c_team8.models.interfaces.PowerUp> powerUps;
-    private List<Consumable> consumables;
     private int level;
-    private List<PlayerObserver> observers;
-    private int posX;
-    private int posY;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+    private List<Key> keys;
+    private List<PowerUp> powerUps;
+    private List<Consumable> consumables;
+    private static List<PlayerObserver> observers;
 
     private Player() {
-        health = 100;
-        time = 0;
         keys = new ArrayList<>();
-        points = 0;
         powerUps = new ArrayList<>();
         consumables = new ArrayList<>();
         observers = new ArrayList<>();
-        posX = 25;
-        posY = 25;
+
         level = 1;
+        startX = 25;
+        startY = 25;
+        endX = startX + spriteSizeX;
+        endY = startY + spriteSizeY;
     }
 
     public static Player getInstance() {
@@ -48,11 +49,6 @@ public class Player implements com.example.cs2340c_team8.models.interfaces.Power
             }
         }
         return instance;
-    }
-
-    public PowerUp getPowerUpType() {
-        // Implement power-up type logic
-        return PowerUp.HEALTH_BOOST;
     }
 
     public int getEffect() {
@@ -96,20 +92,24 @@ public class Player implements com.example.cs2340c_team8.models.interfaces.Power
         return false;
     }
 
-    public int getX() { //for positioning
-        return posX;
+    public int getX() {
+        return startX;
     }
 
-    public int getY() { //for positioning
-        return posY;
+    public int getY() {
+        return startY;
     }
 
-    public void setPosX(int posX) { //for positioning
-        this.posX = posX;
+    public void setStartX(int startX) {
+        this.startX = startX;
+        endX = startX + spriteSizeX;
+        updateObservers();
     }
 
-    public void setPosY(int posY) { //for positioning
-        this.posY = posY;
+    public void setStartY(int startY) {
+        this.startY = startY;
+        endY = startY + spriteSizeY;
+        updateObservers();
     }
 
     public void setHealth(int health) {
@@ -120,21 +120,25 @@ public class Player implements com.example.cs2340c_team8.models.interfaces.Power
         return this.health;
     }
 
-    public static int getSpriteSize() {
-        return SPRITE_SIZE;
+    public static int getSpriteSizeX() {
+        return spriteSizeX;
     }
 
-    public void addObserver(PlayerObserver observer) {
-        this.observers.add(observer);
+    public static int getSpriteSizeY() {
+        return spriteSizeY;
     }
 
-    public void removeObserver(PlayerObserver observer) {
-        this.observers.remove(observer);
+    public static void addObserver(PlayerObserver observer) {
+        observers.add(observer);
+    }
+
+    public static void removeObserver(PlayerObserver observer) {
+        observers.remove(observer);
     }
 
     public void updateObservers() {
         for (PlayerObserver observer : observers) {
-            observer.update(posX, posY);
+            observer.updatePlayerPosition(startX, startY, endX, endY);
         }
     }
 
@@ -169,8 +173,8 @@ public class Player implements com.example.cs2340c_team8.models.interfaces.Power
         if (Objects.equals(obstacle.getEffect(), "Damage")) {
             player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
         } else if (Objects.equals(obstacle.getEffect(), "Knock-back")) {
-            player.setPosX(player.getX() + obstacle.getEffectMagnitude());
-            player.setPosY(player.getY() - obstacle.getEffectMagnitude());
+            player.setStartX(player.getX() + obstacle.getEffectMagnitude());
+            player.setStartY(player.getY() - obstacle.getEffectMagnitude());
         } else if (Objects.equals(obstacle.getEffect(), "Door")) {
             player.nextLevel(player.getLevelNumber());
         }

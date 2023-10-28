@@ -30,6 +30,7 @@ import com.example.cs2340c_team8.models.movements.RightPlayerMovement;
 import com.example.cs2340c_team8.models.movements.UpPlayerMovement;
 import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
 import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
+import com.example.cs2340c_team8.views.enemies.BulletBillView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -60,10 +61,21 @@ public class DungeonActivity extends AppCompatActivity {
         }
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
 
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    runTimer();
+                });
+            }
+        }, 0, 500);
+
         DungeonScreenBinding dungeonScreenBinding = DataBindingUtil
                 .setContentView(this, R.layout.dungeon_screen);
-        DungeonViewModel dungeonViewModel = new DungeonViewModel();
+        DungeonViewModel dungeonViewModel = new DungeonViewModel(DungeonActivity.this, timer);
         dungeonScreenBinding.setViewmodel(dungeonViewModel);
+        Player.addObserver(dungeonViewModel);
 
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
@@ -74,10 +86,13 @@ public class DungeonActivity extends AppCompatActivity {
         layout.addView(thumbstick);
 
         // TODO: Switch from blue box to a Player Sprite
-        Player player = Player.getInstance();
+//        Player player = Player.getInstance();
         PlayerView playerView = new PlayerView(this);
-        player.addObserver(playerView);
+        Player.addObserver(playerView);
         layout.addView(playerView);
+
+        BulletBillView bulletBillView = new BulletBillView(this);
+        layout.addView(bulletBillView);
 
         // TODO: Abstract animation on level change to external methods
         // TODO: Remove Hard-coded Level Number
@@ -111,16 +126,6 @@ public class DungeonActivity extends AppCompatActivity {
         startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(() -> {
-                    runTimer();
-                });
-            }
-        }, 0, 500);
 
         printMap(1);
 
@@ -170,7 +175,7 @@ public class DungeonActivity extends AppCompatActivity {
         end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
                 .split(" ")[1]));
         end.putExtra("time", timeElapsedTextView.getText());
-        end.putExtra("keys", "0 of 3");
+        end.putExtra("keys", "3 of 3");
         end.putExtra("success", true);
         startActivity(end);
         finish();
