@@ -1,4 +1,4 @@
-package com.example.cs2340c_team8.views;
+package com.example.cs2340c_team8.views.activities;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.databinding.DungeonScreenBinding;
+import com.example.cs2340c_team8.databinding.DungeonBinding;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.interfaces.PlayerMovement;
@@ -28,8 +28,11 @@ import com.example.cs2340c_team8.models.movements.DownPlayerMovement;
 import com.example.cs2340c_team8.models.movements.LeftPlayerMovement;
 import com.example.cs2340c_team8.models.movements.RightPlayerMovement;
 import com.example.cs2340c_team8.models.movements.UpPlayerMovement;
-import com.example.cs2340c_team8.viewmodels.DungeonViewModel;
-import com.example.cs2340c_team8.viewmodels.LeaderboardViewModel;
+import com.example.cs2340c_team8.viewModels.DungeonViewModel;
+import com.example.cs2340c_team8.viewModels.LeaderboardViewModel;
+import com.example.cs2340c_team8.views.LevelIndicatorView;
+import com.example.cs2340c_team8.views.PlayerView;
+import com.example.cs2340c_team8.views.Thumbstick;
 import com.example.cs2340c_team8.views.enemies.BulletBillView;
 
 import java.util.Timer;
@@ -53,6 +56,7 @@ public class DungeonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat windowInsetsController =
                 ViewCompat.getWindowInsetsController(getWindow().getDecorView());
@@ -71,14 +75,16 @@ public class DungeonActivity extends AppCompatActivity {
             }
         }, 0, 500);
 
-        DungeonScreenBinding dungeonScreenBinding = DataBindingUtil
-                .setContentView(this, R.layout.dungeon_screen);
-        DungeonViewModel dungeonViewModel = new DungeonViewModel(DungeonActivity.this, timer);
-        dungeonScreenBinding.setViewmodel(dungeonViewModel);
-        Player.addObserver(dungeonViewModel);
+        DungeonBinding dungeonScreenBinding = DataBindingUtil
+                .setContentView(this, R.layout.dungeon);
 
+        DungeonViewModel dungeonViewModel = new DungeonViewModel(DungeonActivity.this, timer);
+        dungeonScreenBinding.setViewModel(dungeonViewModel);
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
+
+        Player player = Player.getInstance();
+        player.addObserver(dungeonViewModel);
 
         ConstraintLayout layout = findViewById(R.id.dungeonLayout);
         Thumbstick thumbstick = new Thumbstick(this,
@@ -86,42 +92,20 @@ public class DungeonActivity extends AppCompatActivity {
         layout.addView(thumbstick);
 
         // TODO: Switch from blue box to a Player Sprite
-//        Player player = Player.getInstance();
         PlayerView playerView = new PlayerView(this);
-        Player.addObserver(playerView);
+        player.addObserver(playerView);
         layout.addView(playerView);
 
         BulletBillView bulletBillView = new BulletBillView(this);
         layout.addView(bulletBillView);
 
-        // TODO: Abstract animation on level change to external methods
-        // TODO: Remove Hard-coded Level Number
-        int level = 1;
-
-        LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this,
-                GameConfig.levelIndicatorX, GameConfig.levelIndicatorY, level);
+        ImageView sprite = findViewById(R.id.level_indicator_sprite);
+        LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this, sprite);
         layout.addView(levelIndicatorView);
 
-        int levelIndicatorSpriteX = GameConfig.levelIndicatorX - GameConfig.levelIndicatorSpriteOffset;
-        int levelIndicatorSpriteY = GameConfig.levelIndicatorY - GameConfig.levelIndicatorSpriteOffset;
-        int levelOffset = (level - 1) * GameConfig.levelIndicatorLevelOffset;
-
-        ImageView spriteImageView = findViewById(R.id.level_indicator_sprite);
-        spriteImageView.setX(levelIndicatorSpriteX);
-        spriteImageView.setY(levelIndicatorSpriteY);
-        spriteImageView.setZ(10);
-        spriteImageView.animate().x(levelIndicatorSpriteX).setDuration(500);
-
         // TODO: Code to Animate Level Indicator while Updating the Level number
-        /*
-            spriteImageView.animate().x(levelIndicatorSpriteX + levelOffset).setDuration(3000);
-            layout.removeView(levelIndicatorView);
-            levelIndicatorView = new LevelIndicatorView(this, GameConfig.levelIndicatorX,
-                GameConfig.levelIndicatorY, level + 1);
-            layout.addView(levelIndicatorView);
-            levelOffset = (level) * 102;
-            spriteImageView.animate().x(levelIndicatorSpriteX + levelOffset).setDuration(3000);
-        */
+        // GameConfig.incrementLevel();
+        // levelIndicatorView.update();
 
         startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);

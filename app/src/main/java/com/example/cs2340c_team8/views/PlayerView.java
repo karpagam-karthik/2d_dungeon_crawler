@@ -11,29 +11,34 @@ import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 
 public class PlayerView extends View implements PlayerObserver {
     private final Player player = Player.getInstance();
-    private int posX;
-    private int posY;
-    private Paint playerPaint;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+    private final Paint playerPaint;
     public PlayerView(Context context) {
         super(context);
 
-        this.posX = player.getX();
-        this.posY = player.getY();
+        this.startX = player.getStartX();
+        this.startY = player.getStartY();
+        this.endX = player.getEndX();
+        this.endY = player.getEndY();
 
         playerPaint = GameConfig.createCustomPaint();
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawRect(posX, posY, posX + Player.getSpriteSizeX(),
-                posY + Player.getSpriteSizeY(), playerPaint);
+        canvas.drawRect(startX, startY, endX, endY, playerPaint);
     }
 
     @Override
-    public void updatePlayerPosition(int posX, int posY, int endX, int endY) {
+    public void updatePlayerPosition(int startX, int startY, int endX, int endY) {
         //TODO: Validate Move. Might need endX and endY, coordinates of bottom right corner
-        this.posX = posX;
-        this.posY = posY;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
 
         this.invalidate();
     }

@@ -14,16 +14,18 @@ public class GameConfig {
     public static String username;
     public static Difficulty difficulty;
     public static Character character;
+    private static int level = 1;
+
     // UI Positioning Values
     public static int screenWidth;
     public static int screenHeight;
-    public static int levelIndicatorX;
-    public static int levelIndicatorY;
     public static int thumbstickX;
     public static int thumbstickY;
+    public static int levelIndicatorX;
+    public static int levelIndicatorY;
+    public static final int levelIndicatorSpriteZ = 10;
     public static final int levelIndicatorSpriteOffset = 70;
     public static final int levelIndicatorLevelOffset = 102;
-    public static boolean gameOver;
 
     public static int fetchCharacterMiniSprite() {
         switch (character) {
@@ -107,5 +109,17 @@ public class GameConfig {
         screenHeight = newScreenHeight;
         levelIndicatorY = screenHeight - 8;
         thumbstickY = screenHeight - 250;
+    }
+
+    public static int getLevel() {
+        return level;
+    }
+
+    public static void incrementLevel() {
+        level += 1;
+    }
+
+    public static void decrementLevel() {
+        level -= 1;
     }
 }

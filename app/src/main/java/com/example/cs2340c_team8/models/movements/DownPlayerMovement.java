@@ -11,20 +11,19 @@ public class DownPlayerMovement implements PlayerMovement {
     private Bitmap bitmap;
     private int tileColor = Color.WHITE;
     private int playerColor = Color.BLUE;
-    private final int playerSize = Player.getSpriteSizeX();
     public DownPlayerMovement(Bitmap bitmap) {
         player = Player.getInstance();
         this.bitmap = bitmap;
     }
     @Override
     public Bitmap movePlayer() {
-        for (int a = player.getX(); a < player.getX() + 16; a++) {
-            bitmap.setPixel(a, player.getY(), tileColor);
+        for (int a = player.getStartX(); a < player.getStartX() + 16; a++) {
+            bitmap.setPixel(a, player.getStartY(), tileColor);
         }
-        player.setStartY(player.getY() + 1);
+        player.setStartY(player.getStartY() + 1);
 
-        for (int r = player.getX(); r < player.getX() + playerSize; r++) {
-            for (int c = player.getY(); c < player.getY() + playerSize; c++) {
+        for (int r = player.getStartX(); r < player.getEndX(); r++) {
+            for (int c = player.getStartY(); c < player.getEndY(); c++) {
                 bitmap.setPixel(r, c, playerColor);
             }
         }
@@ -34,8 +33,8 @@ public class DownPlayerMovement implements PlayerMovement {
 
     @Override
     public boolean canPlayerMove() {
-        int yth = player.getY() + 16;
-        for (int x = player.getX(); x < player.getX() + 16; x++) {
+        int yth = player.getStartY() + 16;
+        for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
             if (bitmap.getPixel(x, yth) != Color.WHITE) {
                 return false; // If any pixel is not white, return false
             }
@@ -45,18 +44,18 @@ public class DownPlayerMovement implements PlayerMovement {
 
     @Override
     public int checkLevelCompleted(int currentMap) {
-        if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
-                && player.getY() <= 20 && currentMap == 1) {
+        if (player.getStartX() >= 0 && player.getStartX() <= 20 && player.getStartY() >= 0
+                && player.getStartY() <= 20 && currentMap == 1) {
             player.setStartY(25);
             player.setStartX(25);
             return 2;
-        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
-                && player.getY() <= 20 && currentMap == 2) {
+        } else if (player.getStartX() >= 0 && player.getStartX() <= 20 && player.getStartY() >= 0
+                && player.getStartY() <= 20 && currentMap == 2) {
             player.setStartY(25);
             player.setStartX(25);
             return 3;
-        } else if (player.getX() >= 0 && player.getX() <= 20 && player.getY() >= 0
-                && player.getY() <= 20 && currentMap == 3) {
+        } else if (player.getStartX() >= 0 && player.getStartX() <= 20 && player.getStartY() >= 0
+                && player.getStartY() <= 20 && currentMap == 3) {
             return -1;
         }
 

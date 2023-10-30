@@ -1,9 +1,11 @@
-package com.example.cs2340c_team8.viewmodels;
+package com.example.cs2340c_team8.viewModels;
 
 import static java.lang.System.currentTimeMillis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.health.connect.datatypes.units.Power;
+import android.media.metrics.PlaybackErrorEvent;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -12,8 +14,10 @@ import androidx.databinding.Bindable;
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
+import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
-import com.example.cs2340c_team8.views.LeaderboardActivity;
+import com.example.cs2340c_team8.models.interfaces.PowerUp;
+import com.example.cs2340c_team8.views.activities.LeaderboardActivity;
 
 import androidx.databinding.library.baseAdapters.BR;
 
@@ -30,16 +34,17 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
         this.timer = timer;
         this.stopUpdating = false;
     }
+
     public boolean isFirePowerUpActive() {
-        return true; //TODO Check if Player has collected the Power-Up
+        return player.getPowerUps().containsKey(PowerUpType.FIRE);
     }
 
     public boolean isIcePowerUpActive() {
-        return false; //TODO Check if Player has collected the Power-Up
+        return player.getPowerUps().containsKey(PowerUpType.ICE);
     }
 
     public boolean isStarPowerUpActive() {
-        return false; //TODO Check if Player has collected the Power-Up
+        return player.getPowerUps().containsKey(PowerUpType.STAR);
     }
 
     public int getSpriteImage() {
@@ -83,14 +88,11 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
 
         if (health <= 0 && !stopUpdating) {
             this.stopUpdating = true;
+            player.clearObservers();
 
             TextView timeElapsedTextView = activity.findViewById(R.id.time_elapsed);
             TextView scoreTextView = activity.findViewById(R.id.score_indicator);
             int score = Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]);
-
-            LeaderboardViewModel.addNewScore(GameConfig.username, score, currentTimeMillis() - 100);
-
-            System.out.println("Uh-oh");
 
             Intent end = new Intent(activity, LeaderboardActivity.class);
             end.putExtra("score", score);

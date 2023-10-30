@@ -11,6 +11,7 @@ import com.example.cs2340c_team8.models.enemies.Goomba;
 
 // TODO: Remove after testing. Instead use the ImageView sprite property of Goomba
 public class GoombaView extends View {
+    private final Player player = Player.getInstance();
     private final Goomba goomba = new Goomba(200, 200);
     private int posX;
     private int posY;
@@ -19,7 +20,7 @@ public class GoombaView extends View {
     public GoombaView(Context context) {
         super(context);
 
-        Player.addObserver(goomba);
+        player.addObserver(goomba);
 
         this.posX = goomba.getStartX();
         this.posY = goomba.getStartY();

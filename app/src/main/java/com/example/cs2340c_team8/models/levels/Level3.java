@@ -10,6 +10,11 @@ public class Level3 extends Level {
         super(spawnX, spawnY);
     }
 
+    @Override
+    void onLevelCompleted() {
+
+    }
+
     // TODO: Complete Implementation
     public ArrayList<Enemy> createEnemyEntities() {
         this.enemies = new ArrayList<>();

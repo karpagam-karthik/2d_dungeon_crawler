@@ -5,22 +5,27 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
 
 public class LevelIndicatorView extends View {
     private final int startX;
     private final int startY;
-    private int level;
     private final Paint outerCirclePaint;
     private final Paint innerPaint;
     private final Paint shadowPaint;
+    private final ImageView sprite;
+    private int level;
 
-    public LevelIndicatorView(Context context, int startX, int startY, int level) {
+    public LevelIndicatorView(Context context, ImageView sprite) {
         super(context);
-        this.startX = startX;
-        this.startY = startY;
-        this.level = level;
+        this.startX = GameConfig.levelIndicatorX;
+        this.startY = GameConfig.levelIndicatorY;
+
+        this.level = GameConfig.getLevel();
+        this.sprite = sprite;
+        this.sprite.setZ(GameConfig.levelIndicatorSpriteZ);
 
         outerCirclePaint = new Paint();
         outerCirclePaint.setColor(Color.rgb(255, 255, 255));
@@ -31,6 +36,11 @@ public class LevelIndicatorView extends View {
         shadowPaint = new Paint();
         shadowPaint.setColor(Color.rgb(220, 220, 220));
         shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+    }
+
+    public void update() {
+        this.level = GameConfig.getLevel();
+        this.invalidate();
     }
 
     @Override
@@ -44,6 +54,10 @@ public class LevelIndicatorView extends View {
         int rectLength = 100;
         int rectWidth = 14;
         int shadowRectWidth = rectWidth + 6;
+
+        int spriteX = GameConfig.levelIndicatorX - GameConfig.levelIndicatorSpriteOffset;
+        int spriteY = GameConfig.levelIndicatorY - GameConfig.levelIndicatorSpriteOffset;
+        int offset = (level - 1) * GameConfig.levelIndicatorLevelOffset;
 
         canvas.drawCircle(startX, startY, circleRadius, outerCirclePaint);
 
@@ -72,6 +86,15 @@ public class LevelIndicatorView extends View {
             canvas.drawRect(startX + (rectLength * (i - 1)), startY - rectWidth,
                     startX + (rectLength * i), startY + rectWidth, outerCirclePaint);
         }
+
         canvas.drawCircle(startX + (rectLength * 3), startY, circleRadius, outerCirclePaint);
+
+        if (offset == 0) {
+            sprite.setX(spriteX);
+            sprite.setY(spriteY);
+        }
+
+        sprite.animate().x(spriteX + offset).setDuration(3000);
+        sprite.animate().y(spriteY).setDuration(3000);
     }
 }

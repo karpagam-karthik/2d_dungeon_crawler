@@ -11,6 +11,7 @@ import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
 
 // TODO: Remove after testing. Instead use the ImageView sprite property of KoopaTroopa
 public class KoopaTroopaView extends View {
+    private final Player player = Player.getInstance();
     private final KoopaTroopa koopaTroopa = new KoopaTroopa(200, 200);
     private int posX;
     private int posY;
@@ -19,7 +20,7 @@ public class KoopaTroopaView extends View {
     public KoopaTroopaView(Context context) {
         super(context);
 
-        Player.addObserver(koopaTroopa);
+        player.addObserver(koopaTroopa);
 
         this.posX = koopaTroopa.getStartX();
         this.posY = koopaTroopa.getStartY();

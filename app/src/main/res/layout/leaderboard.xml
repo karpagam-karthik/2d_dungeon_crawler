@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.example.cs2340c_team8.viewmodels.LeaderboardViewModel" />
+            name="viewModel"
+            type="com.example.cs2340c_team8.viewModels.LeaderboardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +25,9 @@
             android:shadowDx="0"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getSuccess()) ? "You Win!" : "Game Over!")}'
+            android:text='@{((viewModel.getSuccess()) ? "You Win!" : "Game Over!")}'
             android:textAlignment="center"
-            android:textColor="@{((viewmodel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
+            android:textColor="@{((viewModel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
             android:shadowDx="0"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="@{Integer.toString(viewmodel.score)}"
+            android:text="@{Integer.toString(viewModel.score)}"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
             android:textSize="44sp"
@@ -62,8 +61,8 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="@{viewmodel.time}"
-            android:textColor="@{((viewmodel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
+            android:text="@{viewModel.time}"
+            android:textColor="@{((viewModel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/scoreValueText"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,8 +78,8 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="@{viewmodel.keys}"
-            android:textColor="@{((viewmodel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
+            android:text="@{viewModel.keys}"
+            android:textColor="@{((viewModel.getSuccess()) ? @color/mario_green : @color/mario_red)}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/scoreValueText"
@@ -111,7 +110,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? Integer.toString(viewmodel.getNthTopScore(0).getScore()) : "" }'
+            android:text='@{((viewModel.getNthTopScore(0)) != null) ? Integer.toString(viewModel.getNthTopScore(0).getScore()) : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +126,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? Integer.toString(viewmodel.getNthTopScore(1).getScore()) : "" }'
+            android:text='@{((viewModel.getNthTopScore(1)) != null) ? Integer.toString(viewModel.getNthTopScore(1).getScore()) : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +142,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? Integer.toString(viewmodel.getNthTopScore(2).getScore()) : "" }'
+            android:text='@{((viewModel.getNthTopScore(2)) != null) ? Integer.toString(viewModel.getNthTopScore(2).getScore()) : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +159,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? Integer.toString(viewmodel.getNthTopScore(3).getScore()): "" }'
+            android:text='@{((viewModel.getNthTopScore(3)) != null) ? Integer.toString(viewModel.getNthTopScore(3).getScore()): "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +176,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? Integer.toString(viewmodel.getNthTopScore(4).getScore()) : "" }'
+            android:text='@{((viewModel.getNthTopScore(4)) != null) ? Integer.toString(viewModel.getNthTopScore(4).getScore()) : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +193,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getUsername() : "" }'
+            android:text='@{((viewModel.getNthTopScore(0)) != null) ? viewModel.getNthTopScore(0).getUsername() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
@@ -211,7 +210,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getUsername() : "" }'
+            android:text='@{((viewModel.getNthTopScore(1)) != null) ? viewModel.getNthTopScore(1).getUsername() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
@@ -228,7 +227,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getUsername() : "" }'
+            android:text='@{((viewModel.getNthTopScore(2)) != null) ? viewModel.getNthTopScore(2).getUsername() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
@@ -245,7 +244,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getUsername() : "" }'
+            android:text='@{((viewModel.getNthTopScore(3)) != null) ? viewModel.getNthTopScore(3).getUsername() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
@@ -262,7 +261,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getUsername() : "" }'
+            android:text='@{((viewModel.getNthTopScore(4)) != null) ? viewModel.getNthTopScore(4).getUsername() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/player1score"
@@ -279,7 +278,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(0)) != null) ? viewmodel.getNthTopScore(0).getDateString() : "" }'
+            android:text='@{((viewModel.getNthTopScore(0)) != null) ? viewModel.getNthTopScore(0).getDateString() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -296,7 +295,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(1)) != null) ? viewmodel.getNthTopScore(1).getDateString() : "" }'
+            android:text='@{((viewModel.getNthTopScore(1)) != null) ? viewModel.getNthTopScore(1).getDateString() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -314,7 +313,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(2)) != null) ? viewmodel.getNthTopScore(2).getDateString() : "" }'
+            android:text='@{((viewModel.getNthTopScore(2)) != null) ? viewModel.getNthTopScore(2).getDateString() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -332,7 +331,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(3)) != null) ? viewmodel.getNthTopScore(3).getDateString() : "" }'
+            android:text='@{((viewModel.getNthTopScore(3)) != null) ? viewModel.getNthTopScore(3).getDateString() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -350,7 +349,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text='@{((viewmodel.getNthTopScore(4)) != null) ? viewmodel.getNthTopScore(4).getDateString() : "" }'
+            android:text='@{((viewModel.getNthTopScore(4)) != null) ? viewModel.getNthTopScore(4).getDateString() : "" }'
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -366,6 +365,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/patrick_hand_regular"
             android:text="Exit"
+            android:onClick="@{viewModel::exitGame}"
             android:textFontWeight="600"
             android:textSize="18sp"
             app:cornerRadius="12dp"
@@ -384,6 +384,7 @@
             android:textColor="@color/off_white"
             android:textFontWeight="600"
             android:textSize="18sp"
+            android:onClick="@{viewModel::playAgain}"
             app:cornerRadius="12dp"
             app:elevation="40dp"
             app:layout_constraintBottom_toBottomOf="parent"

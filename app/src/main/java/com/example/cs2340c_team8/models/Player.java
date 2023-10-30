@@ -1,43 +1,42 @@
 package com.example.cs2340c_team8.models;
 
 import com.example.cs2340c_team8.models.elements.Wall;
+import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
-import com.example.cs2340c_team8.models.interfaces.Level;
-import com.example.cs2340c_team8.models.interfaces.Element;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
+import com.example.cs2340c_team8.models.powerups.FirePowerUp;
+import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
-public class Player implements PowerUp, Level, Key {
-    private static final int spriteSizeX = 25;
-    private static final int spriteSizeY = 25;
-    private static Player instance;
-    private int health;
-    private int level;
+public class Player {
+    private static volatile Player instance;
+    private final int spriteSizeX = 25;
+    private final int spriteSizeY = 25;
     private int startX;
     private int startY;
     private int endX;
     private int endY;
-    private List<Key> keys;
-    private List<PowerUp> powerUps;
+    private int health;
+    private List<PlayerObserver> observers;
+    private HashMap<PowerUpType, PowerUp> powerUps;
     private List<Consumable> consumables;
-    private static List<PlayerObserver> observers;
+    private List<Key> keys;
 
     private Player() {
-        keys = new ArrayList<>();
-        powerUps = new ArrayList<>();
-        consumables = new ArrayList<>();
-        observers = new ArrayList<>();
-
-        level = 1;
         startX = 25;
         startY = 25;
         endX = startX + spriteSizeX;
         endY = startY + spriteSizeY;
+
+        observers = new ArrayList<>();
+        powerUps = new HashMap<>();
+        consumables = new ArrayList<>();
+        keys = new ArrayList<>();
     }
 
     public static Player getInstance() {
@@ -51,53 +50,54 @@ public class Player implements PowerUp, Level, Key {
         return instance;
     }
 
-    public int getEffect() {
-        // Implement power-up effect logic
-        return 5;
+    public void addObserver(PlayerObserver observer) {
+        observers.add(observer);
     }
 
-    public long getDuration() {
-        // Implement power-up duration logic
-        return 10;
+    public void clearObservers() {
+        observers = new ArrayList<>();
     }
 
-    public int getLevelNumber() {
-        // Implement level number logic
-        return level;
-    }
-
-    public int nextLevel(int level) {
-        this.level += 1;
-        return level + 1;
-    }
-
-    @Override
-    public String getLayout() {
-        // Implement level layout logic
-        if (level < 4) {
-            return "Default Layout";
-        } else {
-            return "Final Level";
+    public void updateObservers() {
+        for (PlayerObserver observer : observers) {
+            observer.updatePlayerPosition(startX, startY, endX, endY);
         }
     }
 
-    public int getMatchedPoints() {
-        // Implement matched points logic
-        return 0;
+    public HashMap<PowerUpType, PowerUp> getPowerUps() {
+        return powerUps;
     }
 
-    @Override
-    public boolean isMatchedDoor() {
-        // Implement matched door logic
-        return false;
+    public void addPowerUp(PowerUp powerUp) {
+        powerUps.put(powerUp.getType(), powerUp);
     }
 
-    public int getX() {
+    public void removePowerUp(PowerUp powerUp) {
+        powerUps.remove(powerUp.getType());
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getStartX() {
         return startX;
     }
 
-    public int getY() {
+    public int getStartY() {
         return startY;
+    }
+
+    public int getEndX() {
+        return endX;
+    }
+
+    public int getEndY() {
+        return endY;
     }
 
     public void setStartX(int startX) {
@@ -112,53 +112,9 @@ public class Player implements PowerUp, Level, Key {
         updateObservers();
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getHealth() {
-        return this.health;
-    }
-
-    public static int getSpriteSizeX() {
-        return spriteSizeX;
-    }
-
-    public static int getSpriteSizeY() {
-        return spriteSizeY;
-    }
-
-    public static void addObserver(PlayerObserver observer) {
-        observers.add(observer);
-    }
-
-    public static void removeObserver(PlayerObserver observer) {
-        observers.remove(observer);
-    }
-
-    public void updateObservers() {
-        for (PlayerObserver observer : observers) {
-            observer.updatePlayerPosition(startX, startY, endX, endY);
-        }
-    }
-
-    @Override
-    public String toString() {
-        String rtn = String.valueOf(getLevelNumber() + getHealth()
-                + getX() + getY());
-        return rtn;
-    }
-
-    /**
-     * isColliding will check if player and wall collide based on their positions.
-     *
-     * @param player represents the player (controlled by user).
-     * @param wall   represents the list of walls.
-     * @return returns if a player is colliding with a Wall
-     */
     public static boolean isColliding(Player player, Wall wall) {
-        double distanceX = wall.getX() - player.getX();
-        double distanceY = wall.getY() - player.getY();
+        double distanceX = wall.getX() - player.getStartX();
+        double distanceY = wall.getY() - player.getStartY();
         double distanceXFormula = Math.pow(distanceX, 2);
         double distanceYFormula = Math.pow(distanceY, 2);
         //Below line finds the distance between the player and wall
@@ -166,18 +122,50 @@ public class Player implements PowerUp, Level, Key {
 
         //just putting '5' for now b/c '1' might cause player to phase past wall
         return distance < 5;
-    } //isColliding
-
-    public void movementInteraction(Element obstacle) {
-        Player player = getInstance();
-        if (Objects.equals(obstacle.getEffect(), "Damage")) {
-            player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
-        } else if (Objects.equals(obstacle.getEffect(), "Knock-back")) {
-            player.setStartX(player.getX() + obstacle.getEffectMagnitude());
-            player.setStartY(player.getY() - obstacle.getEffectMagnitude());
-        } else if (Objects.equals(obstacle.getEffect(), "Door")) {
-            player.nextLevel(player.getLevelNumber());
-        }
     }
+
+//    public void movementInteraction(Element obstacle) {
+//        Player player = getInstance();
+//        if (Objects.equals(obstacle.getEffect(), "Damage")) {
+//            player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
+//        } else if (Objects.equals(obstacle.getEffect(), "Knock-back")) {
+//            player.setStartX(player.getX() + obstacle.getEffectMagnitude());
+//            player.setStartY(player.getY() - obstacle.getEffectMagnitude());
+//        } else if (Objects.equals(obstacle.getEffect(), "Door")) {
+//            player.nextLevel(player.getLevelNumber());
+//        }
+//    }
+
+//    public int getLevelNumber() {
+//        // Implement level number logic
+//        return level;
+//    }
+//
+//    public int nextLevel(int level) {
+//        this.level += 1;
+//        return level + 1;
+//    }
+//
+//    @Override
+//    public String getLayout() {
+//        // Implement level layout logic
+//        if (level < 4) {
+//            return "Default Layout";
+//        } else {
+//            return "Final Level";
+//        }
+//    }
+//
+//    public int getMatchedPoints() {
+//        // Implement matched points logic
+//        return 0;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        String rtn = String.valueOf(getLevelNumber() + getHealth()
+//                + getX() + getY());
+//        return rtn;
+//    }
 }
 

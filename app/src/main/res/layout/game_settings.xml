@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.cs2340c_team8.viewModels.GameSettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +23,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="Game Settings"
+            android:text="@string/settings_screen_title_text"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
             android:textSize="36sp"
@@ -36,9 +38,8 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/mario_font"
             android:foregroundTint="@color/mario_green"
-            android:hint="Username"
+            android:hint="@string/settings_screen_username_hint"
             android:inputType="text"
-            android:text="AJ"
             android:textAlignment="center"
             android:textColor="@color/mario_green"
             android:textColorHint="@color/gray"
@@ -56,7 +57,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="Difficulty Level"
+            android:text="@string/settings_screen_difficulty_level_text"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
@@ -87,7 +88,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="@string/beginner"
+                android:text="@string/settings_screen_beginner_text_value"
                 android:textColor="@color/mario_green"
                 android:textSize="18sp" />
 
@@ -103,7 +104,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="@string/intermediate"
+                android:text="@string/settings_screen_intermediate_text_value"
                 android:textColor="@color/mario_yellow_white_bg"
                 android:textSize="18sp" />
 
@@ -119,7 +120,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="@string/expert"
+                android:text="@string/settings_screen_expert_text_value"
                 android:textColor="@color/mario_red"
                 android:textSize="18sp" />
         </RadioGroup>
@@ -133,7 +134,7 @@
             android:shadowColor="@color/white_bg_shadow"
             android:shadowDy="10"
             android:shadowRadius="10"
-            android:text="Character"
+            android:text="@string/settings_screen_character_title_text"
             android:textAlignment="center"
             android:textColor="@color/dark_gray"
             android:textSize="20sp"
@@ -165,7 +166,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="Mario"
+                android:text="@string/settings_screen_mario_text_value"
                 android:textColor="@color/mario_red"
                 android:textSize="18sp" />
 
@@ -188,7 +189,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="Luigi"
+                android:text="@string/settings_screen_luigi_text_value"
                 android:textColor="@color/mario_green"
                 android:textSize="18sp" />
 
@@ -212,7 +213,7 @@
                 android:shadowColor="@color/white_bg_shadow"
                 android:shadowDy="10"
                 android:shadowRadius="10"
-                android:text="Princess Peach"
+                android:text="@string/settings_screen_princess_peach_text_value"
                 android:textColor="@color/mario_pink"
                 android:textSize="18sp" />
 
@@ -231,10 +232,11 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/patrick_hand_regular"
-            android:text="Start"
+            android:text="@string/settings_screen_start_button_text"
             android:textColor="@color/off_white"
             android:textFontWeight="600"
             android:textSize="18sp"
+            android:onClick="@{viewModel::startGame}"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

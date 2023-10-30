@@ -11,6 +11,7 @@ import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
 
 // TODO: Remove after testing. Instead use the ImageView sprite property of PiranhaPlant
 public class PiranhaPlantView extends View {
+    private final Player player = Player.getInstance();
     private final PiranhaPlant piranhaPlant = new PiranhaPlant(200, 200);
     private int posX;
     private int posY;
@@ -19,7 +20,7 @@ public class PiranhaPlantView extends View {
     public PiranhaPlantView(Context context) {
         super(context);
 
-        Player.addObserver(piranhaPlant);
+        player.addObserver(piranhaPlant);
 
         this.posX = piranhaPlant.getStartX();
         this.posY = piranhaPlant.getStartY();

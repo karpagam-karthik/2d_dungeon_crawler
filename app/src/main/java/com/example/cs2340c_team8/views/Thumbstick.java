@@ -101,8 +101,8 @@ public class Thumbstick extends View {
         double velocityX = actuatorX * pixelsPerFrame;
         double velocityY = actuatorY * pixelsPerFrame;
 
-        player.setStartX((int) (player.getX() + velocityX));
-        player.setStartY((int) (player.getY() + velocityY));
+        player.setStartX((int) (player.getStartX() + velocityX));
+        player.setStartY((int) (player.getStartY() + velocityY));
         player.updateObservers();
 
         this.invalidate();
