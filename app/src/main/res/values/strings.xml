@@ -1,9 +1,21 @@
 <resources>
     <string name="app_name">Super Mario Dungeons</string>
-    <string name="button_start_game">Play</string>
+    <string name="title_screen_play_button_text">Play</string>
     <string name="button_exit_game">Exit</string>
     <string name="play_again">Play Again</string>
-    <string name="beginner">Beginner</string>
-    <string name="intermediate">Intermediate</string>
-    <string name="expert">Expert</string>
+    <string name="settings_screen_beginner_text_value">Beginner</string>
+    <string name="settings_screen_intermediate_text_value">Intermediate</string>
+    <string name="settings_screen_expert_text_value">Expert</string>
+    <string name="title_screen_welcome_to">Welcome To</string>
+    <string name="title_screen_exit_button_text">Exit</string>
+    <string name="settings_screen_username_hint">Username</string>
+    <string name="settings_screen_title_text">Game Settings</string>
+    <string name="settings_screen_difficulty_level_text">Difficulty Level</string>
+    <string name="settings_screen_princess_peach_text_value">Princess Peach</string>
+    <string name="settings_screen_luigi_text_value">Luigi</string>
+    <string name="settings_screen_mario_text_value">Mario</string>
+    <string name="settings_screen_start_button_text">Start</string>
+    <string name="settings_screen_character_title_text">Character</string>
+    <string name="credits_screen_thank_you_title">Thank You</string>
+    <string name="credits_screen_exit_button_text">Exit</string>
 </resources>

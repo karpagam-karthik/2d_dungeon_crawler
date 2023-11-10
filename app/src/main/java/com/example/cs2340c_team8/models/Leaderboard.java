@@ -14,7 +14,7 @@ public class Leaderboard {
         size = 0;
     }
 
-    public static Leaderboard getLeaderboard() {
+    public static Leaderboard getInstance() {
         if (leaderboard == null) {
             synchronized (Leaderboard.class) {
                 if (leaderboard == null) {

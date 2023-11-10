@@ -12,7 +12,7 @@ public class LeaderboardTest {
     @Test
     public void testEmptyLeaderboardGetSize() {
         // Akshara Test Case 1
-        Leaderboard leaderboard = Leaderboard.getLeaderboard();
+        Leaderboard leaderboard = Leaderboard.getInstance();
         List<Score> returnedScores = leaderboard.getTopNScores(5);
         assertTrue(returnedScores.size() == 0);
     }
@@ -20,7 +20,7 @@ public class LeaderboardTest {
     @Test
     public void testLeaderboardGet() {
         // Akshara Test Case 2
-        Leaderboard leaderboard = Leaderboard.getLeaderboard();
+        Leaderboard leaderboard = Leaderboard.getInstance();
         leaderboard.addScore(new Score("Test", 50, 12345));
         leaderboard.addScore(new Score("Test", 40, 23456));
         leaderboard.addScore(new Score("Test", 30, 34567));
