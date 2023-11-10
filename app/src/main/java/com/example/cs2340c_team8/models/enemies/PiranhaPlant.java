@@ -16,7 +16,7 @@ public class PiranhaPlant implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
-    private final int pixelsPerFrame = 5;
+    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -31,16 +31,18 @@ public class PiranhaPlant implements Enemy {
         this.startY = startY;
         this.endY = startY + spriteSizeY;
 
+        int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
             case INTERMEDIATE:
-                damage = 15;
+                damage = (int) (0.1 * startingHealth);
                 break;
             case EXPERT:
-                damage = 20;
+                damage = (int) (0.2 * startingHealth);
                 break;
             default:
-                damage = 10;
+                damage = (int) (0.05 * startingHealth);
         }
+
         // TODO: Uncomment after shifting away from BulletBillView class
 //        Player.addObserver(this);
     }
@@ -75,7 +77,6 @@ public class PiranhaPlant implements Enemy {
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
 
-        // TODO: Implement Knock-back to ensure that there isn't continues damage to player
         player.setStartY(playerStartY - 40);
     }
 
@@ -83,7 +84,7 @@ public class PiranhaPlant implements Enemy {
         return sprite;
     }
 
-    public int getPixelsPerFrame() {
+    public double getPixelsPerFrame() {
         return pixelsPerFrame;
     }
 

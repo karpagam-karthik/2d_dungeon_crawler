@@ -16,7 +16,7 @@ public class Goomba implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
-    private final int pixelsPerFrame = 5;
+    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 0.5;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -31,15 +31,16 @@ public class Goomba implements Enemy {
         this.startY = startY;
         this.endY = startY + spriteSizeY;
 
+        int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
             case INTERMEDIATE:
-                damage = 15;
+                damage = (int) (0.25 * startingHealth);
                 break;
             case EXPERT:
-                damage = 20;
+                damage = (int) (0.35 * startingHealth);
                 break;
             default:
-                damage = 10;
+                damage = (int) (0.15 * startingHealth);
         }
 
         // TODO: Uncomment after shifting away from BulletBillView class
@@ -84,7 +85,7 @@ public class Goomba implements Enemy {
         return sprite;
     }
 
-    public int getPixelsPerFrame() {
+    public double getPixelsPerFrame() {
         return pixelsPerFrame;
     }
 

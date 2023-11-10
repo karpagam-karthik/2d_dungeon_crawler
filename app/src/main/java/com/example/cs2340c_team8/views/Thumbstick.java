@@ -11,12 +11,11 @@ import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
 
 public class Thumbstick extends View {
-    private static final int pixelsPerFrame = 5;
+    private final Player player = Player.getInstance();
     private int centerX;
     private int centerY;
     private final int outerRadius = 90;
     private final int innerRadius = 80;
-    private final Player player = Player.getInstance();
     private Paint outerCirclePaint;
     private Paint innerCirclePaint;
     private Paint highlightPaint;
@@ -98,8 +97,8 @@ public class Thumbstick extends View {
         innerCircleCenterX = (int) (centerX + actuatorX * outerRadius);
         innerCircleCenterY = (int) (centerY + actuatorY * outerRadius);
 
-        double velocityX = actuatorX * pixelsPerFrame;
-        double velocityY = actuatorY * pixelsPerFrame;
+        double velocityX = actuatorX * player.getPixelsPerFrame();
+        double velocityY = actuatorY * player.getPixelsPerFrame();
 
         player.setStartX((int) (player.getStartX() + velocityX));
         player.setStartY((int) (player.getStartY() + velocityY));
@@ -111,6 +110,7 @@ public class Thumbstick extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        System.out.println(event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (isPressed(event.getX(), event.getY())) {

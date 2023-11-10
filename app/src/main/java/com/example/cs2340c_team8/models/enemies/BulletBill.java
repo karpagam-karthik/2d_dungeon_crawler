@@ -18,7 +18,7 @@ public class BulletBill implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 30;
     private final int spriteSizeY = 30;
-    private final int pixelsPerFrame = 10;
+    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.5;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -33,15 +33,16 @@ public class BulletBill implements Enemy {
         this.startY = startY;
         this.endY = startY + spriteSizeY;
 
+        int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
             case INTERMEDIATE:
-                damage = 15;
+                damage = (int) (0.7 * startingHealth);
                 break;
             case EXPERT:
-                damage = 20;
+                damage = startingHealth;
                 break;
             default:
-                damage = 10;
+                damage = (int) (0.5 * startingHealth);
         }
 
         // TODO: Uncomment after shifting away from BulletBillView class
@@ -76,8 +77,6 @@ public class BulletBill implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-
-        // TODO: Implement Knock-back to ensure that there isn't continues damage to player
         player.setStartY(playerStartY - 40);
     }
 
@@ -85,7 +84,7 @@ public class BulletBill implements Enemy {
         return sprite;
     }
 
-    public int getPixelsPerFrame() {
+    public double getPixelsPerFrame() {
         return pixelsPerFrame;
     }
 

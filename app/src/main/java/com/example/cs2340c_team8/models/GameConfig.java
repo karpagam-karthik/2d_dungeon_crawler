@@ -11,6 +11,7 @@ import com.example.cs2340c_team8.models.enums.MarioColor;
 public class GameConfig {
     // Frequently accessed objects and settings
     public static final Player PLAYER = Player.getInstance();
+    public static int playerPixelsPerFrame = 5;
     public static String username;
     public static Difficulty difficulty;
     public static Character character;
@@ -113,6 +114,17 @@ public class GameConfig {
 
     public static int getLevel() {
         return level;
+    }
+
+    public static int getStartingHealth() {
+        switch (difficulty) {
+            case INTERMEDIATE:
+                return 150;
+            case EXPERT:
+                return 100;
+            default:
+                return 200;
+        }
     }
 
     public static void incrementLevel() {

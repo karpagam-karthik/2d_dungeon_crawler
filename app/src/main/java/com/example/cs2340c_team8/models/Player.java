@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Player {
     private static volatile Player instance;
+    private static double pixelsPerFrame = GameConfig.playerPixelsPerFrame;
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
     private int startX;
@@ -84,6 +85,10 @@ public class Player {
         this.health = health;
     }
 
+    public double getPixelsPerFrame() {
+        return pixelsPerFrame;
+    }
+
     public int getStartX() {
         return startX;
     }
@@ -98,6 +103,10 @@ public class Player {
 
     public int getEndY() {
         return endY;
+    }
+
+    public void setPixelsPerFrame(double pixelsPerFrame) {
+        Player.pixelsPerFrame = pixelsPerFrame;
     }
 
     public void setStartX(int startX) {
