@@ -220,5 +220,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/downButton" />
 
+        <com.example.cs2340c_team8.views.GameView
+            android:id="@+id/gameView"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            tools:layout_editor_absoluteX="165dp"
+            tools:layout_editor_absoluteY="2dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
