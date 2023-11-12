@@ -1,6 +1,7 @@
 package com.example.cs2340c_team8.views.enemies;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,8 +12,9 @@ import com.example.cs2340c_team8.models.enemies.Goomba;
 
 // TODO: Remove after testing. Instead use the ImageView sprite property of Goomba
 public class GoombaView extends View {
+    private Bitmap blank = null;
     private final Player player = Player.getInstance();
-    private final Goomba goomba = new Goomba(200, 200);
+    private final Goomba goomba = new Goomba(blank, 200, 200, false, 1);
     private int posX;
     private int posY;
     private Paint paint;
