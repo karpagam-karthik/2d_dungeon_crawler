@@ -62,9 +62,13 @@ public class PiranhaPlant implements Enemy {
     // TODO: Implement
     @Override
     public void moveEnemy() {
-        startY += movementSpeed;
+        setStartY(startY + movementSpeed);
         if (startY >= endingY) {
             startY = startingY;
+        }
+
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
         }
     }
 

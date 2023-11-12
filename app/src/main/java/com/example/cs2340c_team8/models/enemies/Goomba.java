@@ -67,15 +67,19 @@ public class Goomba implements Enemy {
     @Override
     public void moveEnemy() {
         if (movingDown) {
-            startY += movementSpeed;
+            setStartY(startY + movementSpeed);
             if (startY >= endingY) {
                 movingDown = false;
             }
         } else {
-            startY -= movementSpeed;
+            setStartY(startY - movementSpeed);
             if (startY <= startingY) {
                 movingDown = true;
             }
+        }
+
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
         }
     }
 

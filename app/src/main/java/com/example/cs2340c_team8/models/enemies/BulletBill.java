@@ -67,9 +67,13 @@ public class BulletBill implements Enemy {
 
     @Override
     public void moveEnemy() {
-        startX -= movementSpeed;
+        setStartX(startX - movementSpeed);
         if (startX <= endingX) {
             startX = startingX;
+        }
+
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
         }
     }
 

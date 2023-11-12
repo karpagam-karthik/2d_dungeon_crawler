@@ -66,15 +66,19 @@ public class KoopaTroopa implements Enemy {
     @Override
     public void moveEnemy() {
         if (movingDown) {
-            startX += movementSpeed;
+            setStartX(startX + movementSpeed);
             if (startX >= endingX) {
                 movingDown = false;
             }
         } else {
-            startX -= movementSpeed;
+            setStartX(startX - movementSpeed);
             if (startX <= startingX) {
                 movingDown = true;
             }
+        }
+
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
         }
     }
 

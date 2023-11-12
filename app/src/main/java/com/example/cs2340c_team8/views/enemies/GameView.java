@@ -44,15 +44,21 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap = BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
 
-
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
         secondGoomba = new Goomba(goomba, 600, 48, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 550, 200,1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
+
         player = Player.getInstance();
         player.setStartX(100);
         player.setStartY(100);
+
+        player.addObserver(firstGoomba);
+        player.addObserver(secondGoomba);
+        player.addObserver(firstKoopaTroopa);
+        player.addObserver(firstBulletBill);
+        player.addObserver(firstShell);
     }
 
     @Override
