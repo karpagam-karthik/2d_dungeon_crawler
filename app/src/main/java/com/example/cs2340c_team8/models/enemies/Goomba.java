@@ -16,8 +16,8 @@ public class Goomba implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 25;
-    private final int spriteSizeY = 25;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 0.5;
     private ImageView sprite;
     private int startX;

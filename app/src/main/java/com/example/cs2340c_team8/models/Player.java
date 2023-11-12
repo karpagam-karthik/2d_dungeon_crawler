@@ -16,8 +16,8 @@ import java.util.List;
 public class Player {
     private static volatile Player instance;
     private static double pixelsPerFrame = GameConfig.playerPixelsPerFrame;
-    private final int spriteSizeX = 25;
-    private final int spriteSizeY = 25;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private int startX;
     private int startY;
     private int endX;

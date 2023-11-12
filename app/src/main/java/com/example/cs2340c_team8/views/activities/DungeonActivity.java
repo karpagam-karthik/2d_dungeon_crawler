@@ -92,12 +92,12 @@ public class DungeonActivity extends AppCompatActivity {
         layout.addView(thumbstick);
 
         // TODO: Switch from blue box to a Player Sprite
-        PlayerView playerView = new PlayerView(this);
-        player.addObserver(playerView);
-        layout.addView(playerView);
+        //PlayerView playerView = new PlayerView(this);
+        //player.addObserver(playerView);
+        //layout.addView(playerView);
 
-        BulletBillView bulletBillView = new BulletBillView(this);
-        layout.addView(bulletBillView);
+        //BulletBillView bulletBillView = new BulletBillView(this);
+        //layout.addView(bulletBillView);
 
         ImageView sprite = findViewById(R.id.level_indicator_sprite);
         LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this, sprite);

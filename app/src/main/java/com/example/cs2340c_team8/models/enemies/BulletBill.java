@@ -17,8 +17,8 @@ public class BulletBill implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 30;
-    private final int spriteSizeY = 30;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.5;
     private ImageView sprite;
     private int startX;
