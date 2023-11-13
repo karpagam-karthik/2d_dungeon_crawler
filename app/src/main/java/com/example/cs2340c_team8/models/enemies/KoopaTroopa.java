@@ -1,5 +1,7 @@
 package com.example.cs2340c_team8.models.enemies;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -14,8 +16,8 @@ public class KoopaTroopa implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 25;
-    private final int spriteSizeY = 25;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.1;
     private ImageView sprite;
     private int startX;
@@ -24,12 +26,26 @@ public class KoopaTroopa implements Enemy {
     private int endY;
     private final int damage;
 
-    public KoopaTroopa(int startX, int startY) {
+    // New
+    private Bitmap koopaTroopa;
+    private boolean movingDown;
+    private int movementSpeed;
+    private int endingX;
+    private int startingX;
+
+    public KoopaTroopa(Bitmap koopaTroopa, int startX, int startY, boolean movingDown, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
         this.startY = startY;
         this.endY = startY + spriteSizeY;
+
+        //
+        this.koopaTroopa = koopaTroopa;
+        this.movingDown = movingDown;
+        this.movementSpeed = movementSpeed;
+        this.endingX = startX + 100;
+        this.startingX = startX;
 
         int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
@@ -49,7 +65,21 @@ public class KoopaTroopa implements Enemy {
     // TODO: Implement
     @Override
     public void moveEnemy() {
+        if (movingDown) {
+            setStartX(startX + movementSpeed);
+            if (startX >= endingX) {
+                movingDown = false;
+            }
+        } else {
+            setStartX(startX - movementSpeed);
+            if (startX <= startingX) {
+                movingDown = true;
+            }
+        }
 
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
+        }
     }
 
     @Override

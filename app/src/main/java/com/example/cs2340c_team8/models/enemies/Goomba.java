@@ -1,5 +1,7 @@
 package com.example.cs2340c_team8.models.enemies;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -14,8 +16,8 @@ public class Goomba implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 25;
-    private final int spriteSizeY = 25;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 0.5;
     private ImageView sprite;
     private int startX;
@@ -24,12 +26,26 @@ public class Goomba implements Enemy {
     private int endY;
     private final int damage;
 
-    public Goomba(int startX, int startY) {
+    // New
+    private Bitmap goomba;
+    private boolean movingDown;
+    private int movementSpeed;
+    private int endingY;
+    private int startingY;
+
+    public Goomba(Bitmap goomba, int startX, int startY, boolean movingDown, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
         this.startY = startY;
         this.endY = startY + spriteSizeY;
+
+        // New
+        this.goomba = goomba;
+        this.movingDown = movingDown;
+        this.movementSpeed = movementSpeed;
+        this.endingY = startY + 100;
+        this.startingY = startY;
 
         int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
@@ -50,7 +66,21 @@ public class Goomba implements Enemy {
     // TODO: Implement
     @Override
     public void moveEnemy() {
+        if (movingDown) {
+            setStartY(startY + movementSpeed);
+            if (startY >= endingY) {
+                movingDown = false;
+            }
+        } else {
+            setStartY(startY - movementSpeed);
+            if (startY <= startingY) {
+                movingDown = true;
+            }
+        }
 
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
+        }
     }
 
     @Override

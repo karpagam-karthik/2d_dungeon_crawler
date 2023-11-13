@@ -1,6 +1,7 @@
 package com.example.cs2340c_team8.models.enemies;
 
-import android.view.View;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -16,8 +17,8 @@ public class BulletBill implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 30;
-    private final int spriteSizeY = 30;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.5;
     private ImageView sprite;
     private int startX;
@@ -26,12 +27,27 @@ public class BulletBill implements Enemy {
     private int endY;
     private final int damage;
 
-    public BulletBill(int startX, int startY) {
+    // New
+    private Bitmap bulletBill;
+    private int movementLength;
+    private int movementSpeed;
+    private int endingX;
+    private int startingX;
+
+
+    public BulletBill(Bitmap bulletBill, int startX, int startY, int movementLength, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
         this.startY = startY;
         this.endY = startY + spriteSizeY;
+
+        // New
+        this.bulletBill = bulletBill;
+        this.movementLength = movementLength;
+        this.movementSpeed = movementSpeed;
+        this.endingX = startX - movementLength;
+        this.startingX = startX;
 
         int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
@@ -51,7 +67,14 @@ public class BulletBill implements Enemy {
 
     @Override
     public void moveEnemy() {
+        setStartX(startX - movementSpeed);
+        if (startX <= endingX) {
+            startX = startingX;
+        }
 
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
+        }
     }
 
     @Override

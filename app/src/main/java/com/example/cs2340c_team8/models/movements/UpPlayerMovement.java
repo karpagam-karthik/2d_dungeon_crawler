@@ -40,7 +40,6 @@ public class UpPlayerMovement implements PlayerMovement {
                 return false;
             }
         }
-
         return true;
     }
 

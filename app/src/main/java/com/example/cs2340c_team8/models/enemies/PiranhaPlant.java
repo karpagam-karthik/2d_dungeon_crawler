@@ -1,5 +1,7 @@
 package com.example.cs2340c_team8.models.enemies;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -14,8 +16,8 @@ public class PiranhaPlant implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 25;
-    private final int spriteSizeY = 25;
+    private final int spriteSizeX = 16;
+    private final int spriteSizeY = 16;
     private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame;
     private ImageView sprite;
     private int startX;
@@ -24,12 +26,22 @@ public class PiranhaPlant implements Enemy {
     private int endY;
     private final int damage;
 
-    public PiranhaPlant(int startX, int startY) {
+    // New
+    private int startingY;
+    private int endingY;
+    private int movementSpeed;
+
+    public PiranhaPlant(int startX, int startY, int endingY, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
         this.startY = startY;
         this.endY = startY + spriteSizeY;
+
+        // New
+        this.startingY = startY;
+        this.endingY = endingY;
+        this.movementSpeed = movementSpeed;
 
         int startingHealth = GameConfig.getStartingHealth();
         switch (GameConfig.difficulty) {
@@ -50,7 +62,14 @@ public class PiranhaPlant implements Enemy {
     // TODO: Implement
     @Override
     public void moveEnemy() {
+        setStartY(startY + movementSpeed);
+        if (startY >= endingY) {
+            startY = startingY;
+        }
 
+        if (isCollidingWithPlayer()) {
+            attackPlayer();
+        }
     }
 
     @Override
