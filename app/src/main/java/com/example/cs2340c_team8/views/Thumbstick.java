@@ -1,8 +1,5 @@
 package com.example.cs2340c_team8.views;
 
-import static com.example.cs2340c_team8.views.enemies.GameView.isValidMoveX;
-import static com.example.cs2340c_team8.views.enemies.GameView.isValidMoveY;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +9,7 @@ import android.view.View;
 
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
+//import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.views.enemies.GameView;
 
 public class Thumbstick extends View {
@@ -84,6 +82,9 @@ public class Thumbstick extends View {
             actuatorX = deltaX / deltaDistance;
             actuatorY = deltaY / deltaDistance;
         }
+//        if (isValidMove(actuatorX, actuatorY)) {
+//            update();
+//        }
         update();
         if (GameView.isValidMoveX(getActuatorX())) {
           double velocityX = actuatorX * player.getPixelsPerFrame();
@@ -118,7 +119,6 @@ public class Thumbstick extends View {
 //        player.updateObservers();
 
         this.invalidate();
-
     }
 
     @Override

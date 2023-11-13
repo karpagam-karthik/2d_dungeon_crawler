@@ -33,8 +33,6 @@ public class BulletBill implements Enemy {
     private int movementSpeed;
     private int endingX;
     private int startingX;
-
-
     public BulletBill(Bitmap bulletBill, int startX, int startY, int movementLength, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;

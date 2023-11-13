@@ -1,6 +1,9 @@
 package com.example.cs2340c_team8.views.enemies;
 
+import static java.lang.System.currentTimeMillis;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,14 +13,25 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
 import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
+import com.example.cs2340c_team8.models.levels.Level;
+import com.example.cs2340c_team8.models.levels.Level1;
+import com.example.cs2340c_team8.models.levels.Level2;
+import com.example.cs2340c_team8.models.levels.Level3;
+import com.example.cs2340c_team8.viewModels.LeaderboardViewModel;
+import com.example.cs2340c_team8.views.activities.DungeonActivity;
+import com.example.cs2340c_team8.views.activities.LeaderboardActivity;
+
+import java.util.ArrayList;
 
 public class GameView extends View {
+    private Level level;
     private int currentMap = 1;
     private static Bitmap map1;
     private Bitmap goomba;
@@ -35,10 +49,91 @@ public class GameView extends View {
     private static int tileColor2 = Color.rgb(107, 68, 150);
     private static int tileColor3 = Color.rgb(255, 119, 0);
     private int calls = 0;
+    private boolean gameCompleted;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        gameCompleted = false;
+//        level = new Level1(this, 100, 100);
     }
+
+//    @Override
+//    protected void onDraw(Canvas canvas) {
+//        super.onDraw(canvas);
+//
+////        if (level.getClass() == Level1.class && calls == 0) {
+////            createMapOne();
+////            calls++;
+////        } else if (level.getClass() == Level2.class && calls == 0) {
+////            createMapTwo();
+////            calls++;
+////        } else if (level.getClass() == Level3.class && calls == 0) {
+////            createMapThree();
+////            calls++;
+////        }
+//
+//        if (currentMap == 1) {
+//            ArrayList<Enemy> enemies = level.get
+//            canvas.drawBitmap(map1, scaleMap(), null);
+//            canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
+//            canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
+//            canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
+//            canvas.drawBitmap(shell, scaleShell(firstShell), null);
+//            canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+//            firstGoomba.moveEnemy();
+//            firstKoopaTroopa.moveEnemy();
+//            firstBulletBill.moveEnemy();
+//            firstShell.moveEnemy();
+//        } else if (currentMap == 2) {
+//            canvas.drawBitmap(map1, scaleMap(), null);
+//            canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
+//            canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
+//            canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
+//            canvas.drawBitmap(shell, scaleShell(firstShell), null);
+//            canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+//            firstGoomba.moveEnemy();
+//            firstKoopaTroopa.moveEnemy();
+//            firstBulletBill.moveEnemy();
+//            firstShell.moveEnemy();
+//        } else if (currentMap == 3) {
+//            canvas.drawBitmap(map1, scaleMap(), null);
+//            canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
+//            canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
+//            canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
+//            canvas.drawBitmap(shell, scaleShell(firstShell), null);
+//            canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+//            firstGoomba.moveEnemy();
+//            firstKoopaTroopa.moveEnemy();
+//            firstBulletBill.moveEnemy();
+//            firstShell.moveEnemy();
+//        }
+//
+//        if (isLevelOver(player.getStartX(), player.getStartY())) {
+//            if (currentMap == 3) {
+//                gameCompleted = true;
+//            }
+//            switch (level.getClass()) {
+//                case Level1.class:
+//                    level = new Level2(this, 100, 100);
+//                case Level2.class:
+//                    level = new Level3(this, 100, 100);
+//                default:
+////                    LeaderboardViewModel.addNewScore(GameConfig.username, score, currentTimeMillis() - startTime);
+////
+////                    Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
+////                    end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
+////                            .split(" ")[1]));
+////                    end.putExtra("time", timeElapsedTextView.getText());
+////                    end.putExtra("keys", "3 of 3");
+////                    end.putExtra("success", true);
+////                    startActivity(end);
+////                    finish();
+//            }
+//            currentMap++;
+////            calls = 0;
+//        }
+//        invalidate();
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -92,7 +187,7 @@ public class GameView extends View {
 
         if (isLevelOver(player.getStartX(), player.getStartY())) {
             if (currentMap == 3) {
-                //loadEndingScreen();
+                gameCompleted = true;
             }
             currentMap++;
             calls = 0;
@@ -200,8 +295,6 @@ public class GameView extends View {
                 }
             }
             return true;
-        } else if (actuatorX == 0) {
-            return false;
         }
         return false;
     }
@@ -223,8 +316,6 @@ public class GameView extends View {
                 }
             }
             return true;
-        } else if (actuatorY == 0) {
-            return false;
         }
         return false;
     }
@@ -276,5 +367,9 @@ public class GameView extends View {
         int width = resolveSize(800, widthMeasureSpec);
         int height = resolveSize(800, heightMeasureSpec);
         setMeasuredDimension(width, height);
+    }
+
+    public boolean isGameCompleted() {
+        return gameCompleted;
     }
 }

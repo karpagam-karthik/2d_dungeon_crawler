@@ -1,5 +1,9 @@
 package com.example.cs2340c_team8.models.levels;
 
+import android.graphics.Bitmap;
+import android.view.View;
+
+import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
@@ -8,8 +12,9 @@ import java.util.ArrayList;
 
 public class Level2 extends Level {
     private ArrayList<Enemy> enemies;
-    public Level2(int spawnX, int spawnY) {
-        super(spawnX, spawnY);
+    private ArrayList<Bitmap> enemyBitmaps;
+    public Level2(View view, int spawnX, int spawnY) {
+        super(view, R.drawable.map2, spawnX, spawnY);
         this.enemies = new ArrayList<>();
     }
 
@@ -18,9 +23,16 @@ public class Level2 extends Level {
 
     }
 
-    // TODO: Complete Implementation
-    // eg: enemies.add(new BulletBill(200, 200));
-    public ArrayList<Enemy> createEnemyEntities() {
-        return enemies;
+    public void createEnemyEntities() {
+    }
+
+    @Override
+    ArrayList<Enemy> getEnemies() {
+        return this.enemies;
+    }
+
+    @Override
+    ArrayList<Bitmap> getEnemyBitmaps() {
+        return this.enemyBitmaps;
     }
 }
