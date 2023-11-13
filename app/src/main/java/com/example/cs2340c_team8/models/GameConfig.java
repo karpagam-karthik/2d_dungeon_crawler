@@ -173,4 +173,12 @@ public class GameConfig {
     public static int getLevelIndicatorSpriteOffset() {
         return LEVEL_INDICATOR_SPRITE_OFFSET;
     }
+
+    public static int getLevelIndicatorSpriteZ() {
+        return LEVEL_INDICATOR_SPRITE_Z;
+    }
+
+    public static int getLevelIndicatorLevelOffset() {
+        return LEVEL_INDICATOR_LEVEL_OFFSET;
+    }
 }

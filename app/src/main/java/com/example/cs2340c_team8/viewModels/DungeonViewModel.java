@@ -67,7 +67,7 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     }
 
     public String getSpriteText() {
-        switch (GameConfig.character) {
+        switch (GameConfig.getCharacter()) {
         case LUIGI:
             return "Luigi";
         case PRINCESS_PEACH:
