@@ -109,9 +109,9 @@ public class GameView extends View {
         playerBitmap = BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
 
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
-        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
-        firstBulletBill = new BulletBill(bulletBill, 550, 550, 200, 1);
-        firstShell = new PiranhaPlant(650, 650, 1200, 1);
+        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 700, 60, true, 1);
+        firstBulletBill = new BulletBill(bulletBill, 550, 100, 200, 1);
+        firstShell = new PiranhaPlant(920, 60, 100, 1);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -131,9 +131,9 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap = BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
 
-        firstGoomba = new Goomba(goomba, 550, 48, true, 1);
-        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
-        firstBulletBill = new BulletBill(bulletBill, 550, 550, 200, 1);
+        firstGoomba = new Goomba(goomba, 500, 80, true, 1);
+        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
+        firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
 
         player = Player.getInstance();
@@ -156,8 +156,8 @@ public class GameView extends View {
 
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
-        firstBulletBill = new BulletBill(bulletBill, 550, 550, 200, 1);
-        firstShell = new PiranhaPlant(650, 650, 1200, 1);
+        firstBulletBill = new BulletBill(bulletBill, 550, 550, 50, 1);
+        firstShell = new PiranhaPlant(650, 650, 700, 1);
 
         player = Player.getInstance();
         player.setStartX(100);
