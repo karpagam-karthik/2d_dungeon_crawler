@@ -3,11 +3,7 @@ package com.example.cs2340c_team8.views.activities;
 import static java.lang.System.currentTimeMillis;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -23,7 +19,6 @@ import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.DungeonBinding;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.models.interfaces.PlayerMovement;
 import com.example.cs2340c_team8.viewModels.DungeonViewModel;
 import com.example.cs2340c_team8.viewModels.LeaderboardViewModel;
 import com.example.cs2340c_team8.views.LevelIndicatorView;
@@ -57,7 +52,18 @@ public class DungeonActivity extends AppCompatActivity {
                 .setContentView(this, R.layout.dungeon);
 
         GameView gameView = findViewById(R.id.gameView);
-        System.out.println("WHATS GOING ON HERE " + gameView);
+
+        Player player = Player.getInstance();
+
+        ConstraintLayout layout = findViewById(R.id.dungeonLayout);
+        Thumbstick thumbstick = new Thumbstick(this,
+                GameConfig.getThumbstickX(), GameConfig.getThumbstickY());
+        layout.addView(thumbstick);
+
+        ImageView sprite = findViewById(R.id.level_indicator_sprite);
+        LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this, sprite);
+        layout.addView(levelIndicatorView);
+
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -66,6 +72,10 @@ public class DungeonActivity extends AppCompatActivity {
                     runTimer();
                     if (gameView.isGameCompleted()) {
                         loadEndingScreen();
+                    }
+                    if (GameView.isLevelChanged()) {
+                        levelIndicatorView.update();
+                        GameView.setLevelChanged(false);
                     }
                 });
             }
@@ -76,21 +86,7 @@ public class DungeonActivity extends AppCompatActivity {
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
 
-        Player player = Player.getInstance();
         player.addObserver(dungeonViewModel);
-
-        ConstraintLayout layout = findViewById(R.id.dungeonLayout);
-        Thumbstick thumbstick = new Thumbstick(this,
-                GameConfig.thumbstickX, GameConfig.thumbstickY);
-        layout.addView(thumbstick);
-
-        ImageView sprite = findViewById(R.id.level_indicator_sprite);
-        LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this, sprite);
-        layout.addView(levelIndicatorView);
-
-        // TODO: Code to Animate Level Indicator while Updating the Level number
-        // GameConfig.incrementLevel();
-        // levelIndicatorView.update();
 
         startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);
@@ -98,7 +94,8 @@ public class DungeonActivity extends AppCompatActivity {
     }
 
     public void loadEndingScreen() {
-        LeaderboardViewModel.addNewScore(GameConfig.username, score, currentTimeMillis() - startTime);
+        LeaderboardViewModel.addNewScore(GameConfig.getUsername(),
+                score, currentTimeMillis() - startTime);
         timer.cancel();
 
         Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);

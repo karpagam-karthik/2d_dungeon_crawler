@@ -1,11 +1,7 @@
 package com.example.cs2340c_team8.viewModels;
 
-import static java.lang.System.currentTimeMillis;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.health.connect.datatypes.units.Power;
-import android.media.metrics.PlaybackErrorEvent;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -16,7 +12,6 @@ import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
-import com.example.cs2340c_team8.models.interfaces.PowerUp;
 import com.example.cs2340c_team8.views.activities.LeaderboardActivity;
 
 import androidx.databinding.library.baseAdapters.BR;
@@ -29,7 +24,7 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     private final Timer timer;
     private boolean stopUpdating;
     private int health = player.getHealth();
-    public DungeonViewModel (Activity activity, Timer timer) {
+    public DungeonViewModel(Activity activity, Timer timer) {
         this.activity = activity;
         this.timer = timer;
         this.stopUpdating = false;
@@ -52,7 +47,7 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     }
 
     public String getDifficultyText() {
-        switch (GameConfig.difficulty) {
+        switch (GameConfig.getDifficulty()) {
         case INTERMEDIATE:
             return "Intermediate";
         case EXPERT:
@@ -68,7 +63,7 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     }
 
     public String getUsername() {
-        return GameConfig.username;
+        return GameConfig.getUsername();
     }
 
     public String getSpriteText() {

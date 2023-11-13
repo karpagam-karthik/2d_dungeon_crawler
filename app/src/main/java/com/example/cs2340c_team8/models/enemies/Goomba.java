@@ -1,7 +1,6 @@
 package com.example.cs2340c_team8.models.enemies;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -18,7 +17,7 @@ public class Goomba implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 16;
     private final int spriteSizeY = 16;
-    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 0.5;
+    private final double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME * 0.5;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -48,22 +47,18 @@ public class Goomba implements Enemy {
         this.startingY = startY;
 
         int startingHealth = GameConfig.getStartingHealth();
-        switch (GameConfig.difficulty) {
-            case INTERMEDIATE:
-                damage = (int) (0.25 * startingHealth);
-                break;
-            case EXPERT:
-                damage = (int) (0.35 * startingHealth);
-                break;
-            default:
-                damage = (int) (0.15 * startingHealth);
+        switch (GameConfig.getDifficulty()) {
+        case INTERMEDIATE:
+            damage = (int) (0.25 * startingHealth);
+            break;
+        case EXPERT:
+            damage = (int) (0.35 * startingHealth);
+            break;
+        default:
+            damage = (int) (0.15 * startingHealth);
         }
-
-        // TODO: Uncomment after shifting away from BulletBillView class
-//        Player.addObserver(this);
     }
 
-    // TODO: Implement
     @Override
     public void moveEnemy() {
         if (movingDown) {
@@ -106,8 +101,6 @@ public class Goomba implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-
-        // TODO: Implement Knock-back to ensure that there isn't continues damage to player
         player.setStartY(playerStartY - 40);
     }
 

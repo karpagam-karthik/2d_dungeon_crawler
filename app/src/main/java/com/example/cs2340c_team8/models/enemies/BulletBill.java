@@ -1,7 +1,6 @@
 package com.example.cs2340c_team8.models.enemies;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -19,7 +18,7 @@ public class BulletBill implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 16;
     private final int spriteSizeY = 16;
-    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.5;
+    private final double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME * 1.5;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -33,7 +32,8 @@ public class BulletBill implements Enemy {
     private int movementSpeed;
     private int endingX;
     private int startingX;
-    public BulletBill(Bitmap bulletBill, int startX, int startY, int movementLength, int movementSpeed) {
+    public BulletBill(Bitmap bulletBill,
+                      int startX, int startY, int movementLength, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
@@ -48,19 +48,16 @@ public class BulletBill implements Enemy {
         this.startingX = startX;
 
         int startingHealth = GameConfig.getStartingHealth();
-        switch (GameConfig.difficulty) {
-            case INTERMEDIATE:
-                damage = (int) (0.7 * startingHealth);
-                break;
-            case EXPERT:
-                damage = startingHealth;
-                break;
-            default:
-                damage = (int) (0.5 * startingHealth);
+        switch (GameConfig.getDifficulty()) {
+        case INTERMEDIATE:
+            damage = (int) (0.7 * startingHealth);
+            break;
+        case EXPERT:
+            damage = startingHealth;
+            break;
+        default:
+            damage = (int) (0.5 * startingHealth);
         }
-
-        // TODO: Uncomment after shifting away from BulletBillView class
-//        Player.addObserver(this);
     }
 
     @Override

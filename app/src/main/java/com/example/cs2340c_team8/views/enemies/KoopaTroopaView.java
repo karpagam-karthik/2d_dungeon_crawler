@@ -10,11 +10,10 @@ import android.view.View;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
 
-// TODO: Remove after testing. Instead use the ImageView sprite property of KoopaTroopa
 public class KoopaTroopaView extends View {
     private Bitmap blank = null;
     private final Player player = Player.getInstance();
-    private final KoopaTroopa koopaTroopa = new KoopaTroopa(blank,200, 200, false, 1);
+    private final KoopaTroopa koopaTroopa = new KoopaTroopa(blank, 200, 200, false, 1);
     private int posX;
     private int posY;
     private Paint paint;

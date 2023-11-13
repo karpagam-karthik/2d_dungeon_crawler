@@ -29,7 +29,8 @@ public class GameSettingsActivity extends AppCompatActivity {
         GameSettingsBinding gameSettingsBinding = DataBindingUtil
                 .setContentView(this, R.layout.game_settings);
 
-        GameSettingsViewModel gameSettingsViewModel = new GameSettingsViewModel(GameSettingsActivity.this);
+        GameSettingsViewModel gameSettingsViewModel =
+                new GameSettingsViewModel(GameSettingsActivity.this);
         gameSettingsBinding.setViewModel(gameSettingsViewModel);
         gameSettingsBinding.setLifecycleOwner(this);
         gameSettingsBinding.executePendingBindings();

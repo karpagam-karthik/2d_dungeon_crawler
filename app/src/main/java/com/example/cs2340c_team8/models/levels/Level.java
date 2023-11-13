@@ -16,22 +16,22 @@ import com.example.cs2340c_team8.models.interfaces.Enemy;
 import java.util.ArrayList;
 
 public abstract class Level {
-    protected final static Player player = Player.getInstance();
+    protected static final Player PLAYER = Player.getInstance();
     protected int width;
     protected int height;
     protected float scale;
     protected View view;
     protected static Bitmap map;
-    private static final int level1TileColor = Color.rgb(87, 140, 170);
-    private static final int level2TileColor = Color.rgb(107, 68, 150);
-    private static final int level3TileColor = Color.rgb(255, 119, 0);
+    private static final int LEVEL_1_TILE_COLOR = Color.rgb(87, 140, 170);
+    private static final int LEVEL_2_TILE_COLOR = Color.rgb(107, 68, 150);
+    private static final int LEVEL_3_TILE_COLOR = Color.rgb(255, 119, 0);
 
     protected Level(View view, int mapID, int spawnX, int spawnY) {
         this.view = view;
         this.map = BitmapFactory.decodeResource(view.getResources(), mapID);
 
-        player.setStartX(spawnX);
-        player.setStartY(spawnY);
+        PLAYER.setStartX(spawnX);
+        PLAYER.setStartY(spawnY);
 
         this.width = view.getWidth();
         this.height = view.getHeight();
@@ -86,19 +86,19 @@ public abstract class Level {
 
     public static boolean isValidMoveX(double actuatorX) {
         if (actuatorX > 0) {
-            int xth = player.getStartX() + 16;
-            for (int y = player.getStartY(); y < player.getStartY() + 16; y++) {
-                if (map.getPixel(xth, y) != level1TileColor && map.getPixel(xth, y)
-                        != level2TileColor && map.getPixel(xth, y) != level3TileColor) {
+            int xth = PLAYER.getStartX() + 16;
+            for (int y = PLAYER.getStartY(); y < PLAYER.getStartY() + 16; y++) {
+                if (map.getPixel(xth, y) != LEVEL_1_TILE_COLOR && map.getPixel(xth, y)
+                        != LEVEL_2_TILE_COLOR && map.getPixel(xth, y) != LEVEL_3_TILE_COLOR) {
                     return false;
                 }
             }
             return true;
         } else if (actuatorX < 0) {
-            int xth = player.getStartX() - 1;
-            for (int y = player.getStartY(); y < player.getStartY() + 16; y++) {
-                if (map.getPixel(xth, y) != level1TileColor && map.getPixel(xth, y)
-                        != level2TileColor && map.getPixel(xth, y) != level3TileColor) {
+            int xth = PLAYER.getStartX() - 1;
+            for (int y = PLAYER.getStartY(); y < PLAYER.getStartY() + 16; y++) {
+                if (map.getPixel(xth, y) != LEVEL_1_TILE_COLOR && map.getPixel(xth, y)
+                        != LEVEL_2_TILE_COLOR && map.getPixel(xth, y) != LEVEL_3_TILE_COLOR) {
                     return false;
                 }
             }
@@ -109,19 +109,19 @@ public abstract class Level {
 
     public static boolean isValidMoveY(double actuatorY) {
         if (actuatorY > 0) {
-            int yth = player.getStartY() + 16;
-            for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
-                if (map.getPixel(x, yth) != level1TileColor && map.getPixel(x, yth)
-                        != level2TileColor && map.getPixel(x, yth) != level3TileColor) {
+            int yth = PLAYER.getStartY() + 16;
+            for (int x = PLAYER.getStartX(); x < PLAYER.getStartX() + 16; x++) {
+                if (map.getPixel(x, yth) != LEVEL_1_TILE_COLOR && map.getPixel(x, yth)
+                        != LEVEL_2_TILE_COLOR && map.getPixel(x, yth) != LEVEL_3_TILE_COLOR) {
                     return false;
                 }
             }
             return true;
         } else if (actuatorY < 0) {
-            int yth = player.getStartY() - 1;
-            for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
-                if (map.getPixel(x, yth) != level1TileColor && map.getPixel(x, yth)
-                        != level2TileColor && map.getPixel(x, yth) != level3TileColor) {
+            int yth = PLAYER.getStartY() - 1;
+            for (int x = PLAYER.getStartX(); x < PLAYER.getStartX() + 16; x++) {
+                if (map.getPixel(x, yth) != LEVEL_1_TILE_COLOR && map.getPixel(x, yth)
+                        != LEVEL_2_TILE_COLOR && map.getPixel(x, yth) != LEVEL_3_TILE_COLOR) {
                     return false;
                 }
             }

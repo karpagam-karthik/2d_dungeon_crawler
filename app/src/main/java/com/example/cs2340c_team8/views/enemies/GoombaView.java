@@ -10,7 +10,6 @@ import android.view.View;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 
-// TODO: Remove after testing. Instead use the ImageView sprite property of Goomba
 public class GoombaView extends View {
     private Bitmap blank = null;
     private final Player player = Player.getInstance();

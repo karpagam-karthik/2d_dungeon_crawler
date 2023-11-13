@@ -5,8 +5,6 @@ import android.graphics.BitmapFactory;
 import android.view.View;
 
 import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
@@ -24,7 +22,7 @@ public class Level1 extends Level {
 
         createEnemyEntities();
         for (Enemy enemy : enemies) {
-            player.addObserver(enemy);
+            PLAYER.addObserver(enemy);
         }
     }
 
@@ -32,12 +30,12 @@ public class Level1 extends Level {
 
     }
 
-    // TODO: Complete Implementation
     public void createEnemyEntities() {
         Bitmap goombaBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.goomba);
         Bitmap koopaTroopaBitmap =
                 BitmapFactory.decodeResource(view.getResources(), R.drawable.koopa_troopa);
-        Bitmap bulletBillBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.bullet_bill);
+        Bitmap bulletBillBitmap =
+                BitmapFactory.decodeResource(view.getResources(), R.drawable.bullet_bill);
 
         enemyBitmaps.add(goombaBitmap);
         enemyBitmaps.add(koopaTroopaBitmap);

@@ -20,7 +20,6 @@ public class Level3 extends Level {
 
     }
 
-    // TODO: Complete Implementation
     public void createEnemyEntities() {
     }
 

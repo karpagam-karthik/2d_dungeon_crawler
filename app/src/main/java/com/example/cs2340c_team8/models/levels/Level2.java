@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 
 import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
 
 import java.util.ArrayList;

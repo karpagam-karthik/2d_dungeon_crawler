@@ -82,18 +82,18 @@ public class Thumbstick extends View {
             actuatorX = deltaX / deltaDistance;
             actuatorY = deltaY / deltaDistance;
         }
-//        if (isValidMove(actuatorX, actuatorY)) {
-//            update();
-//        }
+
         update();
         if (GameView.isValidMoveX(getActuatorX())) {
-          double velocityX = actuatorX * player.getPixelsPerFrame();
-        player.setStartX((int) (player.getStartX() + velocityX));
+            double velocityX = actuatorX * player.getPixelsPerFrame();
+            player.setStartX((int) (player.getStartX() + velocityX));
         }
+
         if (GameView.isValidMoveY(getActuatorY())) {
-          double velocityY = actuatorY * player.getPixelsPerFrame();
-        player.setStartY((int) (player.getStartY() + velocityY));
+            double velocityY = actuatorY * player.getPixelsPerFrame();
+            player.setStartY((int) (player.getStartY() + velocityY));
         }
+
         player.updateObservers();
     }
 
@@ -111,13 +111,6 @@ public class Thumbstick extends View {
         innerCircleCenterX = (int) (centerX + actuatorX * outerRadius);
         innerCircleCenterY = (int) (centerY + actuatorY * outerRadius);
 
-//        double velocityX = actuatorX * player.getPixelsPerFrame();
-//        double velocityY = actuatorY * player.getPixelsPerFrame();
-//
-//        player.setStartX((int) (player.getStartX() + velocityX));
-//        player.setStartY((int) (player.getStartY() + velocityY));
-//        player.updateObservers();
-
         this.invalidate();
     }
 
@@ -125,22 +118,22 @@ public class Thumbstick extends View {
     public boolean onTouchEvent(MotionEvent event) {
         System.out.println(event.getAction());
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (isPressed(event.getX(), event.getY())) {
-                    setIsPressed(true);
-                }
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                if (getIsPressed()) {
-                    setActuator(event.getX(), event.getY());
-                }
-                return true;
-            case MotionEvent.ACTION_UP:
-                setIsPressed(false);
-                resetActuator();
-                return true;
-            default:
-                return true;
+        case MotionEvent.ACTION_DOWN:
+            if (isPressed(event.getX(), event.getY())) {
+                setIsPressed(true);
+            }
+            return true;
+        case MotionEvent.ACTION_MOVE:
+            if (getIsPressed()) {
+                setActuator(event.getX(), event.getY());
+            }
+            return true;
+        case MotionEvent.ACTION_UP:
+            setIsPressed(false);
+            resetActuator();
+            return true;
+        default:
+            return true;
         }
     }
 

@@ -20,8 +20,8 @@ public class LevelIndicatorView extends View {
 
     public LevelIndicatorView(Context context, ImageView sprite) {
         super(context);
-        this.startX = GameConfig.levelIndicatorX;
-        this.startY = GameConfig.levelIndicatorY;
+        this.startX = GameConfig.getLevelIndicatorX();
+        this.startY = GameConfig.getLevelIndicatorY();
 
         this.level = GameConfig.getLevel();
         this.sprite = sprite;
@@ -55,9 +55,9 @@ public class LevelIndicatorView extends View {
         int rectWidth = 14;
         int shadowRectWidth = rectWidth + 6;
 
-        int spriteX = GameConfig.levelIndicatorX - GameConfig.levelIndicatorSpriteOffset;
-        int spriteY = GameConfig.levelIndicatorY - GameConfig.levelIndicatorSpriteOffset;
-        int offset = (level - 1) * GameConfig.levelIndicatorLevelOffset;
+        int spriteX = GameConfig.getLevelIndicatorX() - GameConfig.getLevelIndicatorSpriteOffset();
+        int spriteY = GameConfig.getLevelIndicatorY() - GameConfig.getLevelIndicatorSpriteOffset();
+        int offset = (level - 1) * GameConfig.getLevelIndicatorSpriteOffset();
 
         canvas.drawCircle(startX, startY, circleRadius, outerCirclePaint);
 
