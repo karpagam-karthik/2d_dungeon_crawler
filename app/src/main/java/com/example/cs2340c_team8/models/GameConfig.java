@@ -1,7 +1,5 @@
 package com.example.cs2340c_team8.models;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 

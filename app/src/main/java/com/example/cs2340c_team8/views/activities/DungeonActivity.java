@@ -111,46 +111,11 @@ public class DungeonActivity extends AppCompatActivity {
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
 
-        printMap(1);
 
-        Button goRight = findViewById(R.id.rightButton);
-        goRight.setOnClickListener(tempView -> {
-            playerMovement = new RightPlayerMovement(bitmap2);
-            movePlayer();
-        });
 
-        Button goLeft = findViewById(R.id.leftButton);
-        goLeft.setOnClickListener(tempView -> {
-            playerMovement = new LeftPlayerMovement(bitmap2);
-            movePlayer();
-        });
-
-        Button goUp = findViewById(R.id.upButton);
-        goUp.setOnClickListener(tempView -> {
-            playerMovement = new UpPlayerMovement(bitmap2);
-            movePlayer();
-        });
-
-        Button goDown = findViewById(R.id.downButton);
-        goDown.setOnClickListener(tempView -> {
-            playerMovement = new DownPlayerMovement(bitmap2);
-            movePlayer();
-        });
     }
 
-    public void movePlayer() {
-        if (playerMovement.canPlayerMove()) {
-            currentMap.setImageBitmap(playerMovement.movePlayer());
-            int newImg = playerMovement.checkLevelCompleted(currImg);
 
-            if (newImg == -1) {
-                loadEndingScreen();
-            } else if (newImg != currImg) {
-                currImg = newImg;
-                printMap(newImg);
-            }
-        }
-    }
 
     public void loadEndingScreen() {
         LeaderboardViewModel.addNewScore(GameConfig.username, score, currentTimeMillis() - startTime);
@@ -165,70 +130,7 @@ public class DungeonActivity extends AppCompatActivity {
         finish();
     }
 
-    // Method to print specific map to DungeonActivity screen
-    public void printMap(int mapNumber) {
-        if (mapNumber == 1) {
-            mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map1);
-            bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
-                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
 
-            for (int i = 0; i < bitmap1.getWidth(); i++) {
-                for (int j = 0; j < bitmap1.getHeight(); j++) {
-                    int pixel = bitmap1.getPixel(i, j);
-                    bitmap2.setPixel(i, j, pixel);
-                }
-            }
-
-            currentMap = findViewById(R.id.mapImage);
-            currentMap.setImageBitmap(bitmap2);
-            for (int r = 25; r < 25 + playerSize; r++) {
-                for (int c = 25; c < 25 + playerSize; c++) {
-                    bitmap2.setPixel(r, c, playerColor);
-                }
-            }
-            currentMap.setImageBitmap(bitmap2);
-
-        } else if (mapNumber == 2) {
-            mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map2);
-            bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
-                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
-            for (int i = 0; i < bitmap1.getWidth(); i++) {
-                for (int j = 0; j < bitmap1.getHeight(); j++) {
-                    int pixel = bitmap1.getPixel(i, j);
-                    bitmap2.setPixel(i, j, pixel);
-                }
-            }
-            currentMap = findViewById(R.id.mapImage);
-            currentMap.setImageBitmap(bitmap2);
-            for (int r = 25; r < 25 + playerSize; r++) {
-                for (int c = 25; c < 25 + playerSize; c++) {
-                    bitmap2.setPixel(r, c, playerColor);
-                }
-            }
-            currentMap.setImageBitmap(bitmap2);
-        } else if (mapNumber == 3) {
-            mapOneBitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.map3);
-            bitmap1 = mapOneBitmapDrawable.getBitmap();
-            bitmap2 = Bitmap.createBitmap(bitmap1.getWidth(),
-                    bitmap1.getHeight(), Bitmap.Config.ARGB_8888);
-            for (int i = 0; i < bitmap1.getWidth(); i++) {
-                for (int j = 0; j < bitmap1.getHeight(); j++) {
-                    int pixel = bitmap1.getPixel(i, j);
-                    bitmap2.setPixel(i, j, pixel);
-                }
-            }
-            currentMap = findViewById(R.id.mapImage);
-            currentMap.setImageBitmap(bitmap2);
-            for (int r = 25; r < 25 + playerSize; r++) {
-                for (int c = 25; c < 25 + playerSize; c++) {
-                    bitmap2.setPixel(r, c, playerColor);
-                }
-            }
-            currentMap.setImageBitmap(bitmap2);
-        }
-    }
 
     protected void runTimer() {
         long runTime = currentTimeMillis() - startTime;
