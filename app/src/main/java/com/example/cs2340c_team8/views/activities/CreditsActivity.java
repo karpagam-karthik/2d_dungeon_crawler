@@ -1,8 +1,6 @@
 package com.example.cs2340c_team8.views.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
@@ -13,9 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.CreditsBinding;
-import com.example.cs2340c_team8.databinding.GameSettingsBinding;
 import com.example.cs2340c_team8.viewModels.CreditsViewModel;
-import com.example.cs2340c_team8.viewModels.GameSettingsViewModel;
 
 public class CreditsActivity extends AppCompatActivity {
     @Override

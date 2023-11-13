@@ -36,7 +36,8 @@ public class GameSettingsViewModel extends BaseObservable {
         }
         GameConfig.setUsername(username);
 
-        RadioButton selectedDifficulty = activity.findViewById(difficultyRG.getCheckedRadioButtonId());
+        RadioButton selectedDifficulty =
+                activity.findViewById(difficultyRG.getCheckedRadioButtonId());
         GameConfig.setDifficulty(deriveChosenDifficulty(selectedDifficulty.getText().toString()));
 
         RadioButton selectedSprite = activity.findViewById(spriteRG.getCheckedRadioButtonId());
@@ -49,23 +50,23 @@ public class GameSettingsViewModel extends BaseObservable {
 
     private Difficulty deriveChosenDifficulty(String difficultyText) {
         switch (difficultyText) {
-            case "Intermediate":
-                return Difficulty.INTERMEDIATE;
-            case "Expert":
-                return Difficulty.EXPERT;
-            default:
-                return Difficulty.BEGINNER;
+        case "Intermediate":
+            return Difficulty.INTERMEDIATE;
+        case "Expert":
+            return Difficulty.EXPERT;
+        default:
+            return Difficulty.BEGINNER;
         }
     }
 
     private Character deriveChosenCharacter(String characterText) {
         switch (characterText) {
-            case "Luigi":
-                return Character.LUIGI;
-            case "Princess Peach":
-                return Character.PRINCESS_PEACH;
-            default:
-                return Character.MARIO;
+        case "Luigi":
+            return Character.LUIGI;
+        case "Princess Peach":
+            return Character.PRINCESS_PEACH;
+        default:
+            return Character.MARIO;
         }
     }
 }

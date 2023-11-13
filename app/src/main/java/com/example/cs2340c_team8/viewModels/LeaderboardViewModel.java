@@ -14,7 +14,7 @@ import com.example.cs2340c_team8.views.activities.TitleActivity;
 import java.util.List;
 
 public class LeaderboardViewModel extends BaseObservable {
-    private static final Leaderboard leaderboard = Leaderboard.getInstance();
+    private static final Leaderboard LEADERBOARD = Leaderboard.getInstance();
     private final Activity activity;
     private final int score;
     private final String time;
@@ -30,11 +30,11 @@ public class LeaderboardViewModel extends BaseObservable {
     }
 
     public static void addNewScore(String username, int score, long time) {
-        leaderboard.addScore(new Score(username, score, time));
+        LEADERBOARD.addScore(new Score(username, score, time));
     }
 
     public Score getNthTopScore(int n) {
-        List<Score> topScores = leaderboard.getTopNScores(5);
+        List<Score> topScores = LEADERBOARD.getTopNScores(5);
         if (n >= topScores.size()) {
             return null;
         }

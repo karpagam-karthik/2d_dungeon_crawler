@@ -8,7 +8,6 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
-import android.widget.Button;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.databinding.LeaderboardBinding;
@@ -30,7 +29,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         LeaderboardBinding leaderboardBinding = DataBindingUtil
                 .setContentView(this, R.layout.leaderboard);
 
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel(LeaderboardActivity.this);
+        LeaderboardViewModel leaderboardViewModel =
+                new LeaderboardViewModel(LeaderboardActivity.this);
         leaderboardBinding.setViewModel(leaderboardViewModel);
         leaderboardBinding.setLifecycleOwner(this);
         leaderboardBinding.executePendingBindings();

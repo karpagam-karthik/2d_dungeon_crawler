@@ -6,8 +6,6 @@ import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
-import com.example.cs2340c_team8.models.powerups.FirePowerUp;
-import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +13,7 @@ import java.util.List;
 
 public class Player {
     private static volatile Player instance;
-    private static double pixelsPerFrame = GameConfig.playerPixelsPerFrame;
+    private static double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME;
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
     private int startX;
@@ -132,49 +130,5 @@ public class Player {
         //just putting '5' for now b/c '1' might cause player to phase past wall
         return distance < 5;
     }
-
-//    public void movementInteraction(Element obstacle) {
-//        Player player = getInstance();
-//        if (Objects.equals(obstacle.getEffect(), "Damage")) {
-//            player.setHealth(player.getHealth() - obstacle.getEffectMagnitude()); //deal damage
-//        } else if (Objects.equals(obstacle.getEffect(), "Knock-back")) {
-//            player.setStartX(player.getX() + obstacle.getEffectMagnitude());
-//            player.setStartY(player.getY() - obstacle.getEffectMagnitude());
-//        } else if (Objects.equals(obstacle.getEffect(), "Door")) {
-//            player.nextLevel(player.getLevelNumber());
-//        }
-//    }
-
-//    public int getLevelNumber() {
-//        // Implement level number logic
-//        return level;
-//    }
-//
-//    public int nextLevel(int level) {
-//        this.level += 1;
-//        return level + 1;
-//    }
-//
-//    @Override
-//    public String getLayout() {
-//        // Implement level layout logic
-//        if (level < 4) {
-//            return "Default Layout";
-//        } else {
-//            return "Final Level";
-//        }
-//    }
-//
-//    public int getMatchedPoints() {
-//        // Implement matched points logic
-//        return 0;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        String rtn = String.valueOf(getLevelNumber() + getHealth()
-//                + getX() + getY());
-//        return rtn;
-//    }
 }
 

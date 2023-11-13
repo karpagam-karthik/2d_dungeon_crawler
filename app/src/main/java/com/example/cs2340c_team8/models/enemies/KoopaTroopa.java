@@ -1,7 +1,6 @@
 package com.example.cs2340c_team8.models.enemies;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
@@ -18,7 +17,7 @@ public class KoopaTroopa implements Enemy {
     // Enemy Attributes
     private final int spriteSizeX = 16;
     private final int spriteSizeY = 16;
-    private final double pixelsPerFrame = GameConfig.playerPixelsPerFrame * 1.1;
+    private final double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME * 1.1;
     private ImageView sprite;
     private int startX;
     private int startY;
@@ -33,7 +32,8 @@ public class KoopaTroopa implements Enemy {
     private int endingX;
     private int startingX;
 
-    public KoopaTroopa(Bitmap koopaTroopa, int startX, int startY, boolean movingDown, int movementSpeed) {
+    public KoopaTroopa(Bitmap koopaTroopa, int startX, int startY,
+                       boolean movingDown, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
@@ -48,21 +48,18 @@ public class KoopaTroopa implements Enemy {
         this.startingX = startX;
 
         int startingHealth = GameConfig.getStartingHealth();
-        switch (GameConfig.difficulty) {
-            case INTERMEDIATE:
-                damage = (int) (0.2 * startingHealth);
-                break;
-            case EXPERT:
-                damage = (int) (0.3 * startingHealth);
-                break;
-            default:
-                damage = (int) (0.1 * startingHealth);
+        switch (GameConfig.getDifficulty()) {
+        case INTERMEDIATE:
+            damage = (int) (0.2 * startingHealth);
+            break;
+        case EXPERT:
+            damage = (int) (0.3 * startingHealth);
+            break;
+        default:
+            damage = (int) (0.1 * startingHealth);
         }
-        // TODO: Uncomment after shifting away from BulletBillView class
-//        Player.addObserver(this);
     }
 
-    // TODO: Implement
     @Override
     public void moveEnemy() {
         if (movingDown) {
@@ -108,15 +105,15 @@ public class KoopaTroopa implements Enemy {
 
         player.setStartY(playerStartY - 40);
 
-        switch (GameConfig.difficulty) {
-            case INTERMEDIATE:
-                player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.8);
-                break;
-            case EXPERT:
-                player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.6);
-                break;
-            default:
-                player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.9);
+        switch (GameConfig.getDifficulty()) {
+        case INTERMEDIATE:
+            player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.8);
+            break;
+        case EXPERT:
+            player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.6);
+            break;
+        default:
+            player.setPixelsPerFrame(player.getPixelsPerFrame() * 0.9);
         }
     }
 

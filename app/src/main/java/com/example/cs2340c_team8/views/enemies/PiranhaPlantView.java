@@ -9,10 +9,9 @@ import android.view.View;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
 
-// TODO: Remove after testing. Instead use the ImageView sprite property of PiranhaPlant
 public class PiranhaPlantView extends View {
     private final Player player = Player.getInstance();
-    private final PiranhaPlant piranhaPlant = new PiranhaPlant(200, 200,1, 1);
+    private final PiranhaPlant piranhaPlant = new PiranhaPlant(200, 200, 1, 1);
     private int posX;
     private int posY;
     private Paint paint;

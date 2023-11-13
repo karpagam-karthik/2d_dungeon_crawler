@@ -1,8 +1,5 @@
 package com.example.cs2340c_team8.views;
 
-import static com.example.cs2340c_team8.views.enemies.GameView.isValidMoveX;
-import static com.example.cs2340c_team8.views.enemies.GameView.isValidMoveY;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +9,7 @@ import android.view.View;
 
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
+//import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.views.enemies.GameView;
 
 public class Thumbstick extends View {
@@ -84,15 +82,18 @@ public class Thumbstick extends View {
             actuatorX = deltaX / deltaDistance;
             actuatorY = deltaY / deltaDistance;
         }
+
         update();
         if (GameView.isValidMoveX(getActuatorX())) {
-          double velocityX = actuatorX * player.getPixelsPerFrame();
-        player.setStartX((int) (player.getStartX() + velocityX));
+            double velocityX = actuatorX * player.getPixelsPerFrame();
+            player.setStartX((int) (player.getStartX() + velocityX));
         }
+
         if (GameView.isValidMoveY(getActuatorY())) {
-          double velocityY = actuatorY * player.getPixelsPerFrame();
-        player.setStartY((int) (player.getStartY() + velocityY));
+            double velocityY = actuatorY * player.getPixelsPerFrame();
+            player.setStartY((int) (player.getStartY() + velocityY));
         }
+
         player.updateObservers();
     }
 
@@ -110,37 +111,29 @@ public class Thumbstick extends View {
         innerCircleCenterX = (int) (centerX + actuatorX * outerRadius);
         innerCircleCenterY = (int) (centerY + actuatorY * outerRadius);
 
-//        double velocityX = actuatorX * player.getPixelsPerFrame();
-//        double velocityY = actuatorY * player.getPixelsPerFrame();
-//
-//        player.setStartX((int) (player.getStartX() + velocityX));
-//        player.setStartY((int) (player.getStartY() + velocityY));
-//        player.updateObservers();
-
         this.invalidate();
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         System.out.println(event.getAction());
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (isPressed(event.getX(), event.getY())) {
-                    setIsPressed(true);
-                }
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                if (getIsPressed()) {
-                    setActuator(event.getX(), event.getY());
-                }
-                return true;
-            case MotionEvent.ACTION_UP:
-                setIsPressed(false);
-                resetActuator();
-                return true;
-            default:
-                return true;
+        case MotionEvent.ACTION_DOWN:
+            if (isPressed(event.getX(), event.getY())) {
+                setIsPressed(true);
+            }
+            return true;
+        case MotionEvent.ACTION_MOVE:
+            if (getIsPressed()) {
+                setActuator(event.getX(), event.getY());
+            }
+            return true;
+        case MotionEvent.ACTION_UP:
+            setIsPressed(false);
+            resetActuator();
+            return true;
+        default:
+            return true;
         }
     }
 
