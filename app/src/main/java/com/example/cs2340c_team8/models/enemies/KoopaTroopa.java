@@ -84,7 +84,7 @@ public class KoopaTroopa implements Enemy {
         int overlapWidth = Math.min(endX, playerEndX) - Math.max(startX, playerStartX);
         int overlapHeight = Math.min(endY, playerEndY) - Math.max(startY, playerStartY);
 
-        return (overlapWidth > 0 && overlapHeight > 0);
+        return (overlapWidth > 5 && overlapHeight > 5);
     }
 
     @Override
