@@ -1,5 +1,7 @@
+// Package declaration
 package com.example.cs2340c_team8.views.enemies;
 
+// Android import
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,10 +9,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+// Project-specific imports
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 
+// Declaration of the 'GoombaView' class, extending 'View'
 public class GoombaView extends View {
+
+    // Private members of the class
     private Bitmap blank = null;
     private final Player player = Player.getInstance();
     private final Goomba goomba = new Goomba(blank, 200, 200, false, 1);
@@ -18,21 +24,27 @@ public class GoombaView extends View {
     private int posY;
     private Paint paint;
 
+    // Constructor for the 'GoombaView' class
     public GoombaView(Context context) {
         super(context);
 
+        // Add the Goomba as an observer to the player
         player.addObserver(goomba);
 
+        // Set initial position values
         this.posX = goomba.getStartX();
         this.posY = goomba.getStartY();
 
+        // Initialize Paint for drawing
         paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
     }
 
+    // Override method to handle drawing on the canvas
     @Override
     public void onDraw(Canvas canvas) {
+        // Draw a rectangle on the canvas representing the Goomba
         canvas.drawRect(posX, posY, posX + goomba.getSpriteSizeX(),
                 posY + goomba.getSpriteSizeY(), paint);
     }

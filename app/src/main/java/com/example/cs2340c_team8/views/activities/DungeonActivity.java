@@ -1,5 +1,7 @@
+// Package declaration
 package com.example.cs2340c_team8.views.activities;
 
+// Import statements for required Android classes and libraries
 import static java.lang.System.currentTimeMillis;
 
 import android.content.Intent;
@@ -28,6 +30,7 @@ import com.example.cs2340c_team8.views.enemies.GameView;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// Declaration of the 'DungeonActivity' class, extending AppCompatActivity
 public class DungeonActivity extends AppCompatActivity {
     private long startTime;
     private int score;
@@ -36,10 +39,12 @@ public class DungeonActivity extends AppCompatActivity {
     private TextView scoreTextView;
     private Timer timer;
 
+    // Method called when the activity is created
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Set system window decorations and hide system bars
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat windowInsetsController =
                 ViewCompat.getWindowInsetsController(getWindow().getDecorView());
@@ -48,13 +53,15 @@ public class DungeonActivity extends AppCompatActivity {
         }
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
 
+        // Use DataBindingUtil to set content view and bind ViewModel
         DungeonBinding dungeonScreenBinding = DataBindingUtil
                 .setContentView(this, R.layout.dungeon);
 
+        // Retrieve the GameView and Player instances
         GameView gameView = findViewById(R.id.gameView);
-
         Player player = Player.getInstance();
 
+        // Retrieve the ConstraintLayout and create Thumbstick and LevelIndicatorView
         ConstraintLayout layout = findViewById(R.id.dungeonLayout);
         Thumbstick thumbstick = new Thumbstick(this,
                 GameConfig.getThumbstickX(), GameConfig.getThumbstickY());
@@ -64,6 +71,7 @@ public class DungeonActivity extends AppCompatActivity {
         LevelIndicatorView levelIndicatorView = new LevelIndicatorView(this, sprite);
         layout.addView(levelIndicatorView);
 
+        // Initialize and schedule a TimerTask to update UI elements periodically
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -81,23 +89,28 @@ public class DungeonActivity extends AppCompatActivity {
             }
         }, 0, 500);
 
+        // Use DataBindingUtil to set content view and bind ViewModel
         DungeonViewModel dungeonViewModel = new DungeonViewModel(DungeonActivity.this, timer);
         dungeonScreenBinding.setViewModel(dungeonViewModel);
         dungeonScreenBinding.setLifecycleOwner(this);
         dungeonScreenBinding.executePendingBindings();
 
+        // Add an observer to the Player instance
         player.addObserver(dungeonViewModel);
 
+        // Initialize variables related to time tracking
         startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
     }
 
+    // Method to load the ending screen and handle score updates
     public void loadEndingScreen() {
         LeaderboardViewModel.addNewScore(GameConfig.getUsername(),
                 score, currentTimeMillis() - startTime);
         timer.cancel();
 
+        // Create an intent to navigate to the LeaderboardActivity
         Intent end = new Intent(DungeonActivity.this, LeaderboardActivity.class);
         end.putExtra("score", Integer.parseInt(((String) scoreTextView.getText())
                 .split(" ")[1]));
@@ -108,7 +121,7 @@ public class DungeonActivity extends AppCompatActivity {
         finish();
     }
 
-
+    // Method to run the timer, update time and score, and display on UI
     protected void runTimer() {
         long runTime = currentTimeMillis() - startTime;
         long hours = runTime / (1000 * 60 * 60);
@@ -125,6 +138,7 @@ public class DungeonActivity extends AppCompatActivity {
         scoreTextView.setText(String.format("Score: %02d", score));
     }
 
+    // Getter method for the score
     public long getScore() {
         return score;
     }

@@ -1,4 +1,4 @@
-// Package declaration
+// Package declaration for the 'models' package within the 'com.example.cs2340c_team8' namespace
 package com.example.cs2340c_team8.models;
 
 // Import statements for required Java classes
