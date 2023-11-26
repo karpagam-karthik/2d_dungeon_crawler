@@ -1,4 +1,4 @@
-// Package declaration
+// Package declaration for the 'models' package within the 'com.example.cs2340c_team8' namespace
 package com.example.cs2340c_team8.models;
 
 // Import statements for required Java classes
@@ -8,22 +8,22 @@ import java.util.NoSuchElementException;
 
 // Declaration of the 'Leaderboard' class
 public class Leaderboard {
-    // Singleton instance of the 'Leaderboard' class
+    // Singleton instance of the Leaderboard class
     private static volatile Leaderboard leaderboard;
-
-    // Root node of the leaderboard's binary search tree
+    
+    // Root node of the binary search tree representing the leaderboard
     private LeaderboardNode root;
-
+    
     // Number of scores in the leaderboard
     private int size;
 
-    // Private constructor to ensure singleton pattern
+    // Private constructor to initialize the leaderboard
     private Leaderboard() {
         root = null;
         size = 0;
     }
 
-    // Method to get the singleton instance of the leaderboard
+    // Singleton pattern: method to get an instance of the Leaderboard class
     public static Leaderboard getInstance() {
         if (leaderboard == null) {
             synchronized (Leaderboard.class) {
@@ -44,7 +44,7 @@ public class Leaderboard {
         root = addScoreH(root, score);
     }
 
-    // Helper method to recursively add a score to the leaderboard
+    // Helper method for recursively adding a score to the leaderboard
     private LeaderboardNode addScoreH(LeaderboardNode node, Score score) {
         if (node == null) {
             size++;
@@ -60,14 +60,14 @@ public class Leaderboard {
         }
     }
 
-    // Method to get the top N scores from the leaderboard
+    // Method to retrieve the top N scores from the leaderboard
     public List<Score> getTopNScores(int limit) {
         ArrayList<Score> list = new ArrayList<>(size);
         getTopNScoresH(list, root, limit);
         return list;
     }
 
-    // Helper method to recursively get the top N scores from the leaderboard
+    // Helper method for recursively retrieving the top N scores from the leaderboard
     private void getTopNScoresH(ArrayList<Score> list, LeaderboardNode node, int limit) {
         if (node != null && list.size() < limit) {
             getTopNScoresH(list, node.getRight(), limit);
@@ -76,7 +76,7 @@ public class Leaderboard {
         }
     }
 
-    // Method to get the top score from the leaderboard
+    // Method to retrieve the top score from the leaderboard
     public Score getTopScore() {
         if (size == 0) {
             throw new NoSuchElementException();
@@ -85,7 +85,7 @@ public class Leaderboard {
         return getTopNScores(1).get(0);
     }
 
-    // Static method to compare two scores for sorting
+    // Static method to compare two scores based on score value and timestamp
     public static long compareScores(Score score1, Score score2) {
         if (score1.getScore() - score2.getScore() == 0) {
             return score2.getTimeMilliseconds() - score1.getTimeMilliseconds();
@@ -93,12 +93,12 @@ public class Leaderboard {
         return score1.getScore() - score2.getScore();
     }
 
-    // Method to get the root node of the leaderboard's binary search tree
+    // Getter method to retrieve the root node of the leaderboard
     public LeaderboardNode getRoot() {
         return root;
     }
 
-    // Method to get the number of scores in the leaderboard
+    // Getter method to retrieve the size (number of scores) of the leaderboard
     public int getSize() {
         return size;
     }
