@@ -1,7 +1,7 @@
 // Package declaration for the 'viewModels' package within the 'com.example.cs2340c_team8' namespace
 package com.example.cs2340c_team8.viewModels;
 
-// Android imports
+// Import statements for required Android classes and libraries
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -27,11 +27,11 @@ public class GameSettingsViewModel extends BaseObservable {
     // Private member of the class
     private final Activity activity;
 
-    // Constructor for 'GameSettingsViewModel' class
+    // Constructor for the 'GameSettingsViewModel' class
     public GameSettingsViewModel(Activity activity) {
         this.activity = activity;
     }
-
+  
     // Method to start the game, triggered by a button click
     public void startGame(View view) {
         // Get references to UI elements
@@ -39,23 +39,23 @@ public class GameSettingsViewModel extends BaseObservable {
         RadioGroup difficultyRG = activity.findViewById(R.id.radioGroupDifficulty);
         RadioGroup spriteRG = activity.findViewById(R.id.radioGroupSprite);
 
-        // Get the entered username from the EditText
+        // Get and validate the entered username
         String username = usernameInput.getText().toString().trim();
         // Check if the username is empty and show a Toast if so
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(activity, "Enter a Username", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Set the username in the 'GameConfig' class
+        // Set the username in the GameConfig
         GameConfig.setUsername(username);
 
-        // Get the selected difficulty from the RadioGroup
+        // Get and set the chosen difficulty from the RadioGroup
         RadioButton selectedDifficulty =
                 activity.findViewById(difficultyRG.getCheckedRadioButtonId());
         // Set the difficulty in the 'GameConfig' class
         GameConfig.setDifficulty(deriveChosenDifficulty(selectedDifficulty.getText().toString()));
 
-        // Get the selected character from the RadioGroup
+        // Get and set the chosen character from the RadioGroup
         RadioButton selectedSprite = activity.findViewById(spriteRG.getCheckedRadioButtonId());
         // Set the character in the 'GameConfig' class
         GameConfig.setCharacter(deriveChosenCharacter(selectedSprite.getText().toString()));
@@ -66,7 +66,7 @@ public class GameSettingsViewModel extends BaseObservable {
         activity.startActivity(gameIntent);
         activity.finish();
     }
-
+    
     // Private method to derive the chosen difficulty based on the selected text
     private Difficulty deriveChosenDifficulty(String difficultyText) {
         switch (difficultyText) {
