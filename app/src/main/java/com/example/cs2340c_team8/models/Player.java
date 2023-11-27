@@ -1,5 +1,7 @@
 package com.example.cs2340c_team8.models;
 
+import android.media.MediaPlayer;
+
 import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class Player {
     private static volatile Player instance;
+    private static MediaPlayer playerMediaPlayer;
     private static double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME;
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
@@ -47,6 +50,14 @@ public class Player {
             }
         }
         return instance;
+    }
+
+    public static MediaPlayer getPlayerMediaPlayer() {
+        return playerMediaPlayer;
+    }
+
+    public static void setPlayerMediaPlayer(MediaPlayer playerMediaPlayer) {
+        Player.playerMediaPlayer = playerMediaPlayer;
     }
 
     public void addObserver(PlayerObserver observer) {
