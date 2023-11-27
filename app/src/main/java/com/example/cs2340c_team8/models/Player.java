@@ -2,12 +2,15 @@ package com.example.cs2340c_team8.models;
 
 import android.media.MediaPlayer;
 
+=======
+import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
+import com.example.cs2340c_team8.views.activities.DungeonActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ import java.util.List;
 public class Player {
     private static volatile Player instance;
     private static MediaPlayer playerMediaPlayer;
+  
     private static double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME;
     private final int spriteSizeX = 25;
     private final int spriteSizeY = 25;
@@ -128,6 +132,14 @@ public class Player {
         this.startY = startY;
         endY = startY + spriteSizeY;
         updateObservers();
+    }
+
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public static void setMediaPlayer(MediaPlayer mediaPlayer) {
+        Player.mediaPlayer = mediaPlayer;
     }
 
     public static boolean isColliding(Player player, Wall wall) {
