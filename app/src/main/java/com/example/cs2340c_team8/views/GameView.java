@@ -1,4 +1,4 @@
-package com.example.cs2340c_team8.views.enemies;
+package com.example.cs2340c_team8.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;

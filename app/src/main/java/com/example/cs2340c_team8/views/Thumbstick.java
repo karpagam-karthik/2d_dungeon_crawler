@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.views.enemies.GameView;
 
 // Declaration of the 'Thumbstick' class, extending the 'View' class
 public class Thumbstick extends View {

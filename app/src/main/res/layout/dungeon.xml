@@ -213,7 +213,7 @@
             app:layout_constraintTop_toBottomOf="@+id/moneySprite"
             app:srcCompat="@drawable/mario_star" />
 
-        <com.example.cs2340c_team8.views.enemies.GameView
+        <com.example.cs2340c_team8.views.GameView
             android:id="@+id/gameView"
             android:layout_width="400dp"
             android:layout_height="400dp"

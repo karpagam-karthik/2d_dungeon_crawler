@@ -25,7 +25,7 @@ import com.example.cs2340c_team8.viewModels.DungeonViewModel;
 import com.example.cs2340c_team8.viewModels.LeaderboardViewModel;
 import com.example.cs2340c_team8.views.LevelIndicatorView;
 import com.example.cs2340c_team8.views.Thumbstick;
-import com.example.cs2340c_team8.views.enemies.GameView;
+import com.example.cs2340c_team8.views.GameView;
 
 import java.util.Timer;
 import java.util.TimerTask;
