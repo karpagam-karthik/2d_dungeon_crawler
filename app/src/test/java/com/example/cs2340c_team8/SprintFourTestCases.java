@@ -25,10 +25,10 @@ import java.lang.reflect.Constructor;
 public class SprintFourTestCases {
     @Test
     public void testPlayerEnemyCollision() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         GameConfig.setDifficulty(Difficulty.INTERMEDIATE);
-        BulletBill target1 = new BulletBill(25,25);
-        Goomba target2 = new Goomba(50,50);
+        BulletBill target1 = new BulletBill(null, 25,25,0,0);
+        Goomba target2 = new Goomba(null, 50,50,false,0);
         Player test = Player.getInstance();
         test.setStartX(30);
         test.setStartY(40);
@@ -40,12 +40,12 @@ public class SprintFourTestCases {
 
     @Test
     public void testPlayerEnemyHealth() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         Player test = Player.getInstance();
         test.setStartX(25);
         test.setStartY(25);
         int healthInit = test.getHealth();
-        KoopaTroopa target1 = new KoopaTroopa(25,25);
+        KoopaTroopa target1 = new KoopaTroopa(null, 27,27,false,0);
         target1.attackPlayer();
         //System.out.println(target1.getStartX());
         assertTrue("player and koopa colliding", !target1.isCollidingWithPlayer());
@@ -53,13 +53,10 @@ public class SprintFourTestCases {
     }
     @Test
     public void testEnemyPlayerObserver() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         Player test = Player.getInstance();
         test.clearObservers();
-        BulletBill target1 = new BulletBill(10,27);
-        KoopaTroopa target2 = new KoopaTroopa(27,27);
-        Goomba target3 = new Goomba(23,23);
-        PiranhaPlant target4 = new PiranhaPlant(27,23);
+        BulletBill target1 = new BulletBill(null, 23,27,0,0);
         assertFalse(Enemy.class.isAssignableFrom(BulletBill.class));
         assertFalse(Enemy.class.isAssignableFrom(KoopaTroopa.class));
         assertFalse(Enemy.class.isAssignableFrom(Goomba.class));
@@ -69,10 +66,10 @@ public class SprintFourTestCases {
     }
     @Test
     public void testPlayerHealthZero() {
-        GameConfig.difficulty = Difficulty.EXPERT;
+        GameConfig.setDifficulty(Difficulty.EXPERT);
         Player test = Player.getInstance();
         test.setHealth(100);
-        PiranhaPlant target1 = new PiranhaPlant(25,25);
+        PiranhaPlant target1 = new PiranhaPlant(25,25,0,0);
         for (int i = 0; i < 5; i++) {
             target1.attackPlayer();
         }
@@ -80,14 +77,14 @@ public class SprintFourTestCases {
     }
     @Test
     public void testDifficultyEasy() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         Player test = Player.getInstance();
         test.setHealth(250); //boost health to test  damage
         //int healthInit = test.getHealth();
-        BulletBill target1 = new BulletBill(23,27);
-        KoopaTroopa target2 = new KoopaTroopa(27,27);
-        Goomba target3 = new Goomba(23,23);
-        PiranhaPlant target4 = new PiranhaPlant(27,23);
+        BulletBill target1 = new BulletBill(null, 23,27,0,0);
+        KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
+        Goomba target3 = new Goomba(null, 23,23,false,0);
+        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
         target1.attackPlayer();
         //System.out.println(test.getHealth()/ healthInit);
         target2.attackPlayer();
@@ -97,13 +94,13 @@ public class SprintFourTestCases {
     }
     @Test
     public void testDifficultyMedium() {
-        GameConfig.difficulty = Difficulty.INTERMEDIATE;
+        GameConfig.setDifficulty(Difficulty.INTERMEDIATE);
         Player test = Player.getInstance();
         test.setHealth(500); //boost health to test  damage
-        BulletBill target1 = new BulletBill(23,27);
-        KoopaTroopa target2 = new KoopaTroopa(27,27);
-        Goomba target3 = new Goomba(23,23);
-        PiranhaPlant target4 = new PiranhaPlant(27,23);
+        BulletBill target1 = new BulletBill(null, 23,27,0,0);
+        KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
+        Goomba target3 = new Goomba(null, 23,23,false,0);
+        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
         target1.attackPlayer();
         target2.attackPlayer();
         target3.attackPlayer();
@@ -113,13 +110,13 @@ public class SprintFourTestCases {
     }
     @Test
     public void testDifficultyHard() {
-        GameConfig.difficulty = Difficulty.EXPERT;
+        GameConfig.setDifficulty(Difficulty.EXPERT);
         Player test = Player.getInstance();
         test.setHealth(750); //boost health to test  damage
-        BulletBill target1 = new BulletBill(23,27);
-        KoopaTroopa target2 = new KoopaTroopa(27,27);
-        Goomba target3 = new Goomba(23,23);
-        PiranhaPlant target4 = new PiranhaPlant(27,23);
+        BulletBill target1 = new BulletBill(null, 23,27,0,0);
+        KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
+        Goomba target3 = new Goomba(null, 23,23,false,0);
+        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
         target1.attackPlayer();
         target2.attackPlayer();
         target3.attackPlayer();
@@ -129,7 +126,7 @@ public class SprintFourTestCases {
     }
     @Test
     public void testEnemyPlayerFactory() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         Player test = Player.getInstance();
         test.updateObservers();
         assertTrue(Level.class.isAssignableFrom(Level.class));
@@ -139,26 +136,26 @@ public class SprintFourTestCases {
     }
     @Test
     public void testPlayerEnemyDamageNotChange() {
-        GameConfig.difficulty = Difficulty.BEGINNER;
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
         Player test = Player.getInstance();
         test.setHealth(60);
-        KoopaTroopa target1 = new KoopaTroopa(25,25); //damage SHOULD not change
+        KoopaTroopa target1 = new KoopaTroopa(null, 25,25, false, 0); //damage SHOULD not change
         target1.attackPlayer();
         assertEquals(40,test.getHealth());
-        GameConfig.difficulty = Difficulty.INTERMEDIATE;
+        GameConfig.setDifficulty(Difficulty.INTERMEDIATE);
         target1.attackPlayer();
-        assertEquals(20,test.getHealth());
-        GameConfig.difficulty = Difficulty.EXPERT;
+        assertEquals(130,test.getHealth());
+        GameConfig.setDifficulty(Difficulty.EXPERT);
         target1.attackPlayer();
-        assertEquals(0,test.getHealth());
+        assertEquals(80,test.getHealth());
     }
     @Test
     public void testEnemyMovementDifferent() {
-        GameConfig.difficulty = Difficulty.INTERMEDIATE;
-        BulletBill target1 = new BulletBill(23,27);
-        KoopaTroopa target2 = new KoopaTroopa(27,27);
-        Goomba target3 = new Goomba(23,23);
-        PiranhaPlant target4 = new PiranhaPlant(27,23);
+        GameConfig.setDifficulty(Difficulty.INTERMEDIATE);
+        BulletBill target1 = new BulletBill(null, 23,27,0,0);
+        KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
+        Goomba target3 = new Goomba(null, 23,23,false,0);
+        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
         target1.moveEnemy();
         target2.moveEnemy();
         target3.moveEnemy();

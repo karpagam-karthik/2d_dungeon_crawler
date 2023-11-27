@@ -14,8 +14,8 @@ public class PiranhaPlant implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 16;
-    private final int spriteSizeY = 16;
+    private final int spriteSizeX = 48;
+    private final int spriteSizeY = 48;
     private final double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME;
     private ImageView sprite;
     private int startX;
@@ -89,7 +89,6 @@ public class PiranhaPlant implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-
         player.setStartY(playerStartY - 40);
     }
 
