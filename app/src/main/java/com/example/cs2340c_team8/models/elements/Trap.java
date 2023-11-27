@@ -1,8 +1,8 @@
 package com.example.cs2340c_team8.models.elements;
 
-import com.example.cs2340c_team8.models.interfaces.Obstacle;
+import com.example.cs2340c_team8.models.interfaces.Element;
 
-public class Trap implements Obstacle {
+public class Trap implements Element {
     private int magnitude = 0;
     public Trap(int magnitude) {
         this.magnitude = magnitude;

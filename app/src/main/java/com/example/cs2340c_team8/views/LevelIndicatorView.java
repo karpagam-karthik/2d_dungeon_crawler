@@ -1,59 +1,46 @@
 package com.example.cs2340c_team8.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
+import android.widget.ImageView;
 
-import com.example.cs2340c_team8.R;
-import com.example.cs2340c_team8.models.enums.Character;
+import com.example.cs2340c_team8.models.GameConfig;
 
 public class LevelIndicatorView extends View {
     private final int startX;
     private final int startY;
-    private final Character character;
-    private int level;
     private final Paint outerCirclePaint;
     private final Paint innerPaint;
     private final Paint shadowPaint;
-    public LevelIndicatorView(Context context, int startX, int startY,
-                              Character character, int level) {
+    private final ImageView sprite;
+    private int level;
+
+    public LevelIndicatorView(Context context, ImageView sprite) {
         super(context);
-        this.startX = startX;
-        this.startY = startY;
-        this.character = character;
-        this.level = level;
+        this.startX = GameConfig.getLevelIndicatorX();
+        this.startY = GameConfig.getLevelIndicatorY();
+
+        this.level = GameConfig.getLevel();
+        this.sprite = sprite;
+        this.sprite.setZ(GameConfig.getLevelIndicatorSpriteZ());
 
         outerCirclePaint = new Paint();
         outerCirclePaint.setColor(Color.rgb(255, 255, 255));
         outerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        innerPaint = createCharacterColorPaint();
+        innerPaint = GameConfig.createCustomPaint();
 
         shadowPaint = new Paint();
         shadowPaint.setColor(Color.rgb(220, 220, 220));
         shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
     }
 
-    private Paint createCharacterColorPaint() {
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-        switch (character) {
-        case MARIO:
-            paint.setColor(Color.rgb(229, 37, 33));
-            break;
-        case LUIGI:
-            paint.setColor(Color.rgb(67, 176, 71));
-            break;
-        default:
-            paint.setColor(Color.rgb(255, 0, 170));
-        }
-
-        return paint;
+    public void update() {
+        this.level = GameConfig.getLevel();
+        this.invalidate();
     }
 
     @Override
@@ -67,6 +54,10 @@ public class LevelIndicatorView extends View {
         int rectLength = 100;
         int rectWidth = 14;
         int shadowRectWidth = rectWidth + 6;
+
+        int spriteX = GameConfig.getLevelIndicatorX() - GameConfig.getLevelIndicatorSpriteOffset();
+        int spriteY = GameConfig.getLevelIndicatorY() - GameConfig.getLevelIndicatorSpriteOffset();
+        int offset = (level - 1) * GameConfig.getLevelIndicatorLevelOffset();
 
         canvas.drawCircle(startX, startY, circleRadius, outerCirclePaint);
 
@@ -95,6 +86,15 @@ public class LevelIndicatorView extends View {
             canvas.drawRect(startX + (rectLength * (i - 1)), startY - rectWidth,
                     startX + (rectLength * i), startY + rectWidth, outerCirclePaint);
         }
+
         canvas.drawCircle(startX + (rectLength * 3), startY, circleRadius, outerCirclePaint);
+
+        if (offset == 0) {
+            sprite.setX(spriteX);
+            sprite.setY(spriteY);
+        }
+
+        sprite.animate().x(spriteX + offset).setDuration(3000);
+        sprite.animate().y(spriteY).setDuration(3000);
     }
 }

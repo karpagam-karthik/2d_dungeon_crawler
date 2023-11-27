@@ -4,6 +4,4 @@ public interface Consumable {
     int getQuantity();
     String getEffect();
     int getDuration();
-    // Add other methods or attributes related to consumables
 }
-

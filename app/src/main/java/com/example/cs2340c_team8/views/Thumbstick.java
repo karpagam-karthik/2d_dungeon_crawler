@@ -1,5 +1,7 @@
+// Package declaration
 package com.example.cs2340c_team8.views;
 
+// Import statements for required Android and Java classes
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,122 +10,145 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.cs2340c_team8.models.Player;
-import com.example.cs2340c_team8.models.enums.Character;
+import com.example.cs2340c_team8.models.GameConfig;
+import com.example.cs2340c_team8.views.enemies.GameView;
 
+// Declaration of the 'Thumbstick' class, extending the 'View' class
 public class Thumbstick extends View {
-    private final int X_CENTER = 300;   // TODO: Remove Hard-coded value
-    private final int Y_CENTER = 300;   // TODO: Remove Hard-coded value
-    private final int OUTER_RADIUS = 90;
-    private final int INNER_RADIUS = 80;
+    // Instance of the Player class
     private final Player player = Player.getInstance();
-    private Character character;
+    
+    // Coordinates for the center of the thumbstick
+    private int centerX;
+    private int centerY;
+    
+    // Radii for the thumbstick's outer and inner circles
+    private final int outerRadius = 90;
+    private final int innerRadius = 80;
+    
+    // Paint objects for drawing the thumbstick's circles
     private Paint outerCirclePaint;
     private Paint innerCirclePaint;
-    private Paint highlightCirclePaint;
-    private int innerCircleCenterX = X_CENTER;
-    private int innerCircleCenterY = Y_CENTER;
+    private Paint highlightPaint;
+    
+    // Coordinates for the center of the inner circle of the thumbstick
+    private int innerCircleCenterX;
+    private int innerCircleCenterY;
+    
+    // Flag to indicate whether the thumbstick is pressed
     private boolean isPressed;
+    
+    // Actuator values for X and Y axes
     private double actuatorX;
     private double actuatorY;
 
-    public Thumbstick(Context context, Character character) {
+    // Constructor for the Thumbstick class
+    public Thumbstick(Context context, int centerX, int centerY) {
         super(context);
-        this.character = character;
 
+        // Initialize thumbstick coordinates
+        this.centerX = centerX;
+        this.centerY = centerY;
+        innerCircleCenterX = centerX;
+        innerCircleCenterY = centerY;
+
+        // Initialize Paint objects for drawing
         outerCirclePaint = new Paint();
         outerCirclePaint.setColor(Color.argb(210, 255, 255, 255));
         outerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        innerCirclePaint = createCharacterColorPaint();
+        innerCirclePaint = GameConfig.createCustomPaint();
 
-        highlightCirclePaint = new Paint();
-        highlightCirclePaint.setColor(Color.argb(255, 255, 255, 255));
-        highlightCirclePaint.setStyle(Paint.Style.STROKE);
-        highlightCirclePaint.setStrokeWidth(4);
+        highlightPaint = new Paint();
+        highlightPaint.setColor(Color.argb(255, 255, 255, 255));
+        highlightPaint.setStyle(Paint.Style.STROKE);
+        highlightPaint.setStrokeWidth(4);
     }
 
-    private Paint createCharacterColorPaint() {
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-
-        switch (character) {
-            case MARIO:
-                paint.setColor(Color.rgb(229, 37, 33));
-                break;
-            case LUIGI:
-                paint.setColor(Color.rgb(67, 176, 71));
-                break;
-            default:
-                paint.setColor(Color.rgb(255, 0, 170));
-        }
-
-        return paint;
-    }
-
+    // Override the 'draw' method to customize the drawing of the thumbstick
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         // Draw Thumb-stick base
-        canvas.drawCircle(X_CENTER, Y_CENTER, OUTER_RADIUS + 35, outerCirclePaint);
+        canvas.drawCircle(centerX, centerY, outerRadius + 35, outerCirclePaint);
 
         // Draw Thumb-stick
-        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, OUTER_RADIUS, outerCirclePaint);
-        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, INNER_RADIUS, innerCirclePaint);
-        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, INNER_RADIUS - 8, highlightCirclePaint);
+        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, outerRadius, outerCirclePaint);
+        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, innerRadius, innerCirclePaint);
+        canvas.drawCircle(innerCircleCenterX, innerCircleCenterY, innerRadius - 8, highlightPaint);
     }
 
+    // Method to check if the thumbstick is pressed based on touch coordinates
     public boolean isPressed(double touchX, double touchY) {
-        return distanceBetweenCenterAndTouch(touchX, touchY) < OUTER_RADIUS;
+        return distanceBetweenCenterAndTouch(touchX, touchY) < outerRadius;
     }
 
+    // Setter method for the 'isPressed' flag
     public void setIsPressed(boolean isPressed) {
         this.isPressed = isPressed;
     }
 
+    // Getter method for the 'isPressed' flag
     public boolean getIsPressed() {
         return isPressed;
     }
 
+    // Method to set the actuator values based on touch coordinates
     public void setActuator(double touchX, double touchY) {
-        double deltaX = touchX - X_CENTER;
-        double deltaY = touchY - Y_CENTER;
+        // Calculate deltas and distance between center and touch
+        double deltaX = touchX - centerX;
+        double deltaY = touchY - centerY;
         double deltaDistance = distanceBetweenCenterAndTouch(touchX, touchY);
-        if (deltaDistance < OUTER_RADIUS) {
-            actuatorX = deltaX / OUTER_RADIUS;
-            actuatorY = deltaY / OUTER_RADIUS;
+        
+        // Normalize actuator values
+        if (deltaDistance < outerRadius) {
+            actuatorX = deltaX / outerRadius;
+            actuatorY = deltaY / outerRadius;
         } else {
             actuatorX = deltaX / deltaDistance;
             actuatorY = deltaY / deltaDistance;
         }
+
+        // Update player's position and notify observers
         update();
+        if (GameView.isValidMoveX(getActuatorX())) {
+            double velocityX = actuatorX * player.getPixelsPerFrame();
+            player.setStartX((int) (player.getStartX() + velocityX));
+        }
+
+        if (GameView.isValidMoveY(getActuatorY())) {
+            double velocityY = actuatorY * player.getPixelsPerFrame();
+            player.setStartY((int) (player.getStartY() + velocityY));
+        }
+
+        player.updateObservers();
     }
 
+    // Method to reset actuator values
     public void resetActuator() {
         actuatorX = 0;
         actuatorY = 0;
         update();
     }
 
+    // Helper method to calculate the distance between thumbstick center and touch
     private double distanceBetweenCenterAndTouch(double touchX, double touchY) {
-        return Math.sqrt((Math.pow(touchX - X_CENTER, 2) + Math.pow(touchY - Y_CENTER, 2)));
+        return Math.sqrt((Math.pow(touchX - centerX, 2) + Math.pow(touchY - centerY, 2)));
     }
 
+    // Method to update the position of the thumbstick
     public void update() {
-        innerCircleCenterX = (int) (X_CENTER + actuatorX * OUTER_RADIUS);
-        innerCircleCenterY = (int) (Y_CENTER + actuatorY * OUTER_RADIUS);
+        innerCircleCenterX = (int) (centerX + actuatorX * outerRadius);
+        innerCircleCenterY = (int) (centerY + actuatorY * outerRadius);
 
-        double velocityX = actuatorX * 10;
-        double velocityY = actuatorY * 10;
-
-        player.setPosX((int) (player.getX() + velocityX));
-        player.setPosY((int) (player.getY() + velocityY));
-        player.updateObservers();
-
+        // Request a redraw
         this.invalidate();
     }
 
+    // Override the 'onTouchEvent' method to handle touch events
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        System.out.println(event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (isPressed(event.getX(), event.getY())) {
@@ -139,8 +164,18 @@ public class Thumbstick extends View {
                 setIsPressed(false);
                 resetActuator();
                 return true;
+            default:
+                return true;
         }
+    }
 
-        return true;
+    // Getter method for the Y-axis actuator value
+    public double getActuatorY() {
+        return this.actuatorY;
+    }
+
+    // Getter method for the X-axis actuator value
+    public double getActuatorX() {
+        return this.actuatorX;
     }
 }
