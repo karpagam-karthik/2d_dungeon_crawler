@@ -17,7 +17,7 @@ import com.example.cs2340c_team8.models.elements.Wall;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-@RunWith(AndroidJUnit4.class)
+
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
@@ -37,5 +37,4 @@ public class ExampleInstrumentedTest {
         Wall test = new Wall(1, 3, 5, 4, null);
         assertEquals(3, test.getY(), 1);
     }
-
 }

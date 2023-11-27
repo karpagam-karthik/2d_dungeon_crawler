@@ -2,7 +2,6 @@ package com.example.cs2340c_team8.models;
 
 import android.media.MediaPlayer;
 
-=======
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
@@ -135,11 +134,11 @@ public class Player {
     }
 
     public static MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
+        return playerMediaPlayer;
     }
 
     public static void setMediaPlayer(MediaPlayer mediaPlayer) {
-        Player.mediaPlayer = mediaPlayer;
+        Player.playerMediaPlayer = mediaPlayer;
     }
 
     public static boolean isColliding(Player player, Wall wall) {
