@@ -3,6 +3,7 @@ package com.example.cs2340c_team8.viewModels;
 // Android imports
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.widget.TextView;
 
 // Data Binding imports
@@ -36,6 +37,9 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
         this.activity = activity;
         this.timer = timer;
         this.stopUpdating = false;
+
+        GameConfig.setLevelPlayer(MediaPlayer.create(activity, R.raw.level));
+        GameConfig.getMainThemePlayer().setVolume((float) 0.33, (float) 0.33);
     }
 
     // Methods to check if specific power-ups are active
@@ -101,21 +105,28 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
             this.stopUpdating = true;
             player.clearObservers();
 
-            // Get references to UI elements
-            TextView timeElapsedTextView = activity.findViewById(R.id.time_elapsed);
-            TextView scoreTextView = activity.findViewById(R.id.score_indicator);
-            int score = Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]);
+            GameConfig.setLevelPlayer(MediaPlayer.create(activity, R.raw.dead));
+            GameConfig.getLevelPlayer().start();
+            GameConfig.getLevelPlayer().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // Get references to UI elements  
+                    TextView timeElapsedTextView = activity.findViewById(R.id.time_elapsed);
+                    TextView scoreTextView = activity.findViewById(R.id.score_indicator);
+                    int score = Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]);
 
-            // Create an intent to navigate to the LeaderboardActivity
-            Intent end = new Intent(activity, LeaderboardActivity.class);
-            end.putExtra("score", score);
-            end.putExtra("time", timeElapsedTextView.getText());
-            end.putExtra("keys", "0 of 3");
-            end.putExtra("success", false);
-
-            // Start the LeaderboardActivity and finish the current activity
-            activity.startActivity(end);
-            activity.finish();
+                    // Create an intent to navigate to the LeaderboardActivity
+                    Intent end = new Intent(activity, LeaderboardActivity.class);
+                    end.putExtra("score", score);
+                    end.putExtra("time", timeElapsedTextView.getText());
+                    end.putExtra("keys", "0 of 3");
+                    end.putExtra("success", false);
+                    
+                    // Start the LeaderboardActivity and finish the current activity
+                    activity.startActivity(end);
+                    activity.finish();
+                }
+            });
 
             return;
         }
