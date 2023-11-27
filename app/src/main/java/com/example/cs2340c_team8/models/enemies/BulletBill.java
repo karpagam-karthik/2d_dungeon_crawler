@@ -1,5 +1,7 @@
 package com.example.cs2340c_team8.models.enemies;
 
+import static com.example.cs2340c_team8.views.enemies.GameView.bulletBillKB;
+
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
@@ -16,8 +18,8 @@ public class BulletBill implements Enemy {
     private int playerEndY;
 
     // Enemy Attributes
-    private final int spriteSizeX = 16;
-    private final int spriteSizeY = 16;
+    private final int spriteSizeX = 48;
+    private final int spriteSizeY = 48;
     private final double pixelsPerFrame = GameConfig.PLAYER_PIXELS_PER_FRAME * 1.5;
     private ImageView sprite;
     private int startX;
@@ -95,7 +97,7 @@ public class BulletBill implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-        player.setStartY(playerStartY - 40);
+                player.setStartY(playerStartY - 40);
     }
 
     public ImageView getSprite() {

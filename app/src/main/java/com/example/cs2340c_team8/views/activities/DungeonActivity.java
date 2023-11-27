@@ -2,10 +2,13 @@
 package com.example.cs2340c_team8.views.activities;
 
 // Import statements for required Android classes and libraries
+import static com.example.cs2340c_team8.views.enemies.GameView.throwFireball;
 import static java.lang.System.currentTimeMillis;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -105,6 +108,14 @@ public class DungeonActivity extends AppCompatActivity {
         startTime = currentTimeMillis();
         timeElapsedTextView = findViewById(R.id.time_elapsed);
         scoreTextView = findViewById(R.id.score_indicator);
+
+        Button attackEnemy = findViewById(R.id.attackEnemy);
+        attackEnemy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                throwFireball();
+            }
+        });
     }
 
     // Method to load the ending screen and handle score updates
