@@ -2,12 +2,14 @@ package com.example.cs2340c_team8.viewModels;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
 
+import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.enums.MarioColor;
 import com.example.cs2340c_team8.views.activities.GameSettingsActivity;
@@ -18,8 +20,12 @@ public class TitleViewModel extends BaseObservable {
     public TitleViewModel(Activity activity) {
         this.activity = activity;
 
+        GameConfig.setMainThemePlayer(MediaPlayer.create(activity, R.raw.main));
         GameConfig.setScreenWidth(activity.getResources().getDisplayMetrics().widthPixels);
         GameConfig.setScreenHeight(activity.getResources().getDisplayMetrics().heightPixels);
+
+        GameConfig.getMainThemePlayer().setLooping(true);
+        GameConfig.getMainThemePlayer().start();
     }
 
     public SpannableString createGameTitle() {
@@ -35,6 +41,7 @@ public class TitleViewModel extends BaseObservable {
     }
 
     public void exitGame(View view) {
+        GameConfig.getMainThemePlayer().stop();
         Intent exit = new Intent(Intent.ACTION_MAIN);
         exit.addCategory(Intent.CATEGORY_HOME);
         exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

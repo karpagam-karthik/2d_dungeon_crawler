@@ -2,6 +2,7 @@ package com.example.cs2340c_team8.models;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.enums.Character;
@@ -12,6 +13,8 @@ public class GameConfig {
     // Frequently accessed objects and settings
     public static final Player PLAYER = Player.getInstance();
     public static final int PLAYER_PIXELS_PER_FRAME = 5;
+    private static MediaPlayer mainThemePlayer;
+    private static MediaPlayer levelPlayer;
     private static String username;
     private static Difficulty difficulty;
     private static Character character;
@@ -142,6 +145,10 @@ public class GameConfig {
         level += 1;
     }
 
+    public static void setLevel(int level) {
+        GameConfig.level = level;
+    }
+
     public static int getThumbstickX() {
         return thumbstickX;
     }
@@ -180,5 +187,21 @@ public class GameConfig {
 
     public static int getLevelIndicatorLevelOffset() {
         return LEVEL_INDICATOR_LEVEL_OFFSET;
+    }
+
+    public static MediaPlayer getMainThemePlayer() {
+        return mainThemePlayer;
+    }
+
+    public static void setMainThemePlayer(MediaPlayer mainThemePlayer) {
+        GameConfig.mainThemePlayer = mainThemePlayer;
+    }
+
+    public static MediaPlayer getLevelPlayer() {
+        return levelPlayer;
+    }
+
+    public static void setLevelPlayer(MediaPlayer levelPlayer) {
+        GameConfig.levelPlayer = levelPlayer;
     }
 }

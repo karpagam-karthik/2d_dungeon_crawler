@@ -76,6 +76,9 @@ public class DungeonActivity extends AppCompatActivity {
                     if (GameView.isLevelChanged()) {
                         levelIndicatorView.update();
                         GameView.setLevelChanged(false);
+                        if (!gameView.isGameCompleted() && GameConfig.getLevel() != 1) {
+                            GameConfig.getLevelPlayer().start();
+                        }
                     }
                 });
             }
@@ -94,6 +97,10 @@ public class DungeonActivity extends AppCompatActivity {
     }
 
     public void loadEndingScreen() {
+        if (GameConfig.getMainThemePlayer().isPlaying()) {
+            GameConfig.getMainThemePlayer().pause();
+        }
+
         LeaderboardViewModel.addNewScore(GameConfig.getUsername(),
                 score, currentTimeMillis() - startTime);
         timer.cancel();

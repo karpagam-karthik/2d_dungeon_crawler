@@ -2,6 +2,7 @@ package com.example.cs2340c_team8.viewModels;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -28,6 +29,9 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
         this.activity = activity;
         this.timer = timer;
         this.stopUpdating = false;
+
+        GameConfig.setLevelPlayer(MediaPlayer.create(activity, R.raw.level));
+        GameConfig.getMainThemePlayer().setVolume((float) 0.33, (float) 0.33);
     }
 
     public boolean isFirePowerUpActive() {
@@ -85,18 +89,25 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
             this.stopUpdating = true;
             player.clearObservers();
 
-            TextView timeElapsedTextView = activity.findViewById(R.id.time_elapsed);
-            TextView scoreTextView = activity.findViewById(R.id.score_indicator);
-            int score = Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]);
+            GameConfig.setLevelPlayer(MediaPlayer.create(activity, R.raw.dead));
+            GameConfig.getLevelPlayer().start();
+            GameConfig.getLevelPlayer().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    TextView timeElapsedTextView = activity.findViewById(R.id.time_elapsed);
+                    TextView scoreTextView = activity.findViewById(R.id.score_indicator);
+                    int score = Integer.parseInt(((String) scoreTextView.getText()).split(" ")[1]);
 
-            Intent end = new Intent(activity, LeaderboardActivity.class);
-            end.putExtra("score", score);
-            end.putExtra("time", timeElapsedTextView.getText());
-            end.putExtra("keys", "0 of 3");
-            end.putExtra("success", false);
+                    Intent end = new Intent(activity, LeaderboardActivity.class);
+                    end.putExtra("score", score);
+                    end.putExtra("time", timeElapsedTextView.getText());
+                    end.putExtra("keys", "0 of 3");
+                    end.putExtra("success", false);
 
-            activity.startActivity(end);
-            activity.finish();
+                    activity.startActivity(end);
+                    activity.finish();
+                }
+            });
 
             return;
         }
