@@ -21,7 +21,7 @@ import com.example.cs2340c_team8.models.levels.Level;
 public class GameView extends View {
     private Level level;
     private int currentMap = 1;
-    private static Bitmap map1;
+    private static Bitmap map;
     private Bitmap goomba;
     private Bitmap koopaTroopa;
     private Bitmap bulletBill;
@@ -32,13 +32,20 @@ public class GameView extends View {
     private BulletBill firstBulletBill;
     private PiranhaPlant firstShell;
     private static Player player;
-    private float scale;
+    private static float scale;
     private static int tileColor1 = Color.rgb(87, 140, 170);
     private static int tileColor2 = Color.rgb(107, 68, 150);
     private static int tileColor3 = Color.rgb(255, 119, 0);
     private int calls = 0;
     private boolean gameCompleted;
     private static boolean levelChanged;
+    private int scalar = 11111111;
+    private int keyOneX = 176 * (scalar);
+    private int keyOneY = 464 * (scalar);
+    private int keyTwoX = 320 * (scalar);
+    private int keyTwoY = 32 * (scalar);
+    private int keyThreeX = 400 * (scalar);
+    private int keyThreeY = 384 * (scalar);
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -61,7 +68,7 @@ public class GameView extends View {
         }
 
         if (currentMap == 1) {
-            canvas.drawBitmap(map1, scaleMap(), null);
+            canvas.drawBitmap(map, scaleMap(), null);
             canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
@@ -72,7 +79,7 @@ public class GameView extends View {
             firstBulletBill.moveEnemy();
             firstShell.moveEnemy();
         } else if (currentMap == 2) {
-            canvas.drawBitmap(map1, scaleMap(), null);
+            canvas.drawBitmap(map, scaleMap(), null);
             canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
@@ -83,7 +90,7 @@ public class GameView extends View {
             firstBulletBill.moveEnemy();
             firstShell.moveEnemy();
         } else if (currentMap == 3) {
-            canvas.drawBitmap(map1, scaleMap(), null);
+            canvas.drawBitmap(map, scaleMap(), null);
             canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
@@ -109,7 +116,7 @@ public class GameView extends View {
     }
 
     public void createMapThree() {
-        map1 = BitmapFactory.decodeResource(getResources(), R.drawable.map3);
+        map = BitmapFactory.decodeResource(getResources(), R.drawable.map3);
         goomba = BitmapFactory.decodeResource(getResources(), R.drawable.goomba);
         koopaTroopa = BitmapFactory.decodeResource(getResources(), R.drawable.koopa_troopa);
         bulletBill = BitmapFactory.decodeResource(getResources(), R.drawable.bullet_bill);
@@ -135,7 +142,7 @@ public class GameView extends View {
     }
 
     public void createMapTwo() {
-        map1 = BitmapFactory.decodeResource(getResources(), R.drawable.map2);
+        map = BitmapFactory.decodeResource(getResources(), R.drawable.map2);
         goomba = BitmapFactory.decodeResource(getResources(), R.drawable.goomba);
         koopaTroopa = BitmapFactory.decodeResource(getResources(), R.drawable.koopa_troopa);
         bulletBill = BitmapFactory.decodeResource(getResources(), R.drawable.bullet_bill);
@@ -159,7 +166,7 @@ public class GameView extends View {
     }
 
     public void createMapOne() {
-        map1 = BitmapFactory.decodeResource(getResources(), R.drawable.map1);
+        map = BitmapFactory.decodeResource(getResources(), R.drawable.map1);
         goomba = BitmapFactory.decodeResource(getResources(), R.drawable.goomba);
         koopaTroopa = BitmapFactory.decodeResource(getResources(), R.drawable.koopa_troopa);
         bulletBill = BitmapFactory.decodeResource(getResources(), R.drawable.bullet_bill);
@@ -198,10 +205,10 @@ public class GameView extends View {
 
     public static boolean isValidMoveX(double actuatorX) {
         if (actuatorX > 0) {
-            int xth = player.getStartX() + 16;
+            int xth = player.getStartX() + 48;
             for (int y = player.getStartY(); y < player.getStartY() + 16; y++) {
-                if (map1.getPixel(xth, y) != tileColor1 && map1.getPixel(xth, y)
-                        != tileColor2 && map1.getPixel(xth, y) != tileColor3) {
+                if (map.getPixel(xth, y) != tileColor1 && map.getPixel(xth, y)
+                        != tileColor2 && map.getPixel(xth, y) != tileColor3) {
                     return false;
                 }
             }
@@ -209,8 +216,8 @@ public class GameView extends View {
         } else if (actuatorX < 0) {
             int xth = player.getStartX() - 1;
             for (int y = player.getStartY(); y < player.getStartY() + 16; y++) {
-                if (map1.getPixel(xth, y) != tileColor1 && map1.getPixel(xth, y)
-                        != tileColor2 && map1.getPixel(xth, y) != tileColor3) {
+                if (map.getPixel(xth, y) != tileColor1 && map.getPixel(xth, y)
+                        != tileColor2 && map.getPixel(xth, y) != tileColor3) {
                     return false;
                 }
             }
@@ -221,10 +228,10 @@ public class GameView extends View {
 
     public static boolean isValidMoveY(double actuatorY) {
         if (actuatorY > 0) {
-            int yth = player.getStartY() + 16;
+            int yth = player.getStartY() + 48;
             for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
-                if (map1.getPixel(x, yth) != tileColor1 && map1.getPixel(x, yth)
-                        != tileColor2 && map1.getPixel(x, yth) != tileColor3) {
+                if (map.getPixel(x, yth) != tileColor1 && map.getPixel(x, yth)
+                        != tileColor2 && map.getPixel(x, yth) != tileColor3) {
                     return false;
                 }
             }
@@ -232,8 +239,8 @@ public class GameView extends View {
         } else if (actuatorY < 0) {
             int yth = player.getStartY() - 1;
             for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
-                if (map1.getPixel(x, yth) != tileColor1 && map1.getPixel(x, yth)
-                        != tileColor2 && map1.getPixel(x, yth) != tileColor3) {
+                if (map.getPixel(x, yth) != tileColor1 && map.getPixel(x, yth)
+                        != tileColor2 && map.getPixel(x, yth) != tileColor3) {
                     return false;
                 }
             }
@@ -243,8 +250,8 @@ public class GameView extends View {
     }
 
     public Matrix scaleMap() {
-        this.scale = Math.min((float) getWidth() / map1.getWidth(),
-                (float) getHeight() / map1.getHeight());
+        this.scale = Math.min((float) getWidth() / map.getWidth(),
+                (float) getHeight() / map.getHeight());
         Matrix mapMatrix = new Matrix();
         mapMatrix.setScale(scale, scale);
         return mapMatrix;
@@ -290,6 +297,22 @@ public class GameView extends View {
         int width = resolveSize(800, widthMeasureSpec);
         int height = resolveSize(800, heightMeasureSpec);
         setMeasuredDimension(width, height);
+    }
+
+    public static boolean bulletBillKB() {
+        int yth = player.getStartY() - 1;
+        for (int x = player.getStartX(); x < player.getStartX() + 16; x++) {
+            if (map.getPixel(x, yth) != tileColor1 && map.getPixel(x, yth)
+                    != tileColor2 && map.getPixel(x, yth) != tileColor3) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void throwFireball() {
+        int fireballX = player.getStartX() + 60;
+        int fireballY = player.getStartY();
     }
 
     public boolean isGameCompleted() {
