@@ -123,6 +123,13 @@ public class Goomba implements Enemy {
     public double getPixelsPerFrame() {
         return pixelsPerFrame;
     }
+    public void slowMovespeed() {
+        this.movementSpeed = movementSpeed / 2;
+    }
+
+    public void fastMovespeed() {
+        this.movementSpeed = movementSpeed * 2;
+    }
 
     public int getStartX() {
         return startX;

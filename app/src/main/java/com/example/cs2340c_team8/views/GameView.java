@@ -20,6 +20,7 @@ import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.powerups.BasePowerUp;
 import com.example.cs2340c_team8.models.powerups.FirePowerUp;
+import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 
 public class GameView extends View {
     private Level level;
@@ -219,7 +220,7 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap =
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
-        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire_power);
+        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ice_power);
 
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
         firstKoopaTroopa =
@@ -227,7 +228,7 @@ public class GameView extends View {
         firstBulletBill =
                 new BulletBill(bulletBill, 550, 100, 200, 1);
         firstShell = new PiranhaPlant(920, 60, 100, 1);
-        powerUp = new BasePowerUp(this.getContext(),300, 60);
+        powerUp = new IcePowerUp(this.getContext(),300, 60);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -252,13 +253,13 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap =
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
-        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ice_power);
+        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire_power);
 
         firstGoomba = new Goomba(goomba, 500, 80, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
-        powerUp = new BasePowerUp(this.getContext(),200, 90);
+        powerUp = new FirePowerUp(this.getContext(),200, 90);
 
         player = Player.getInstance();
         player.setStartX(100);

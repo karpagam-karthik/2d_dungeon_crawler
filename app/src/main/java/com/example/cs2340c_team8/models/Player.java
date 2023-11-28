@@ -141,6 +141,9 @@ public class Player {
         Player.playerMediaPlayer = mediaPlayer;
     }
 
+    public List<PlayerObserver> getObservers() {
+        return observers;
+    }
     public static boolean isColliding(Player player, Wall wall) {
         double distanceX = wall.getX() - player.getStartX();
         double distanceY = wall.getY() - player.getStartY();

@@ -152,6 +152,13 @@ public class KoopaTroopa implements Enemy {
     public int getSpriteSizeY() {
         return spriteSizeY;
     }
+    public void slowMovespeed() {
+        this.movementSpeed = movementSpeed / 2;
+    }
+
+    public void fastMovespeed() {
+        this.movementSpeed = movementSpeed * 2;
+    }
 
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
