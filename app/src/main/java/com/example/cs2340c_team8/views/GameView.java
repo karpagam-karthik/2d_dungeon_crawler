@@ -21,6 +21,7 @@ import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.powerups.BasePowerUp;
 import com.example.cs2340c_team8.models.powerups.FirePowerUp;
 import com.example.cs2340c_team8.models.powerups.IcePowerUp;
+import com.example.cs2340c_team8.models.powerups.StarPowerUp;
 
 public class GameView extends View {
     private Level level;
@@ -56,6 +57,7 @@ public class GameView extends View {
     public static boolean isFireballThrown = false;
     private static int fireballX;
     private static int fireballY;
+    private static int fireballRange = 160;
     public static boolean firstGoombaExists;
     public static boolean firstShellExists;
     public static boolean firstBulletBillExists;
@@ -187,7 +189,7 @@ public class GameView extends View {
         }
 
         if (isFireballThrown) {
-            if (fireballX < player.getStartX() + 160) {
+            if (fireballX < player.getStartX() + fireballRange) {
                 canvas.drawBitmap(fireball, scaleFireball(fireballX, fireballY), null);
                 fireballX++;
             } else {
@@ -290,7 +292,7 @@ public class GameView extends View {
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 550, 50, 1);
         firstShell = new PiranhaPlant(650, 650, 700, 1);
-        powerUp = new FirePowerUp(this.getContext(),650, 550);
+        powerUp = new StarPowerUp(this.getContext(),650, 550);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -442,6 +444,10 @@ public class GameView extends View {
 
     public static int getFireballY() {
         return fireballY;
+    }
+
+    public static void setFireballRange(int effect) {
+        fireballRange = effect;
     }
     public boolean isGameCompleted() {
         return gameCompleted;
