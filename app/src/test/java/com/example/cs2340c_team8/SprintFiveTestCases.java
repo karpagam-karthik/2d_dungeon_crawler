@@ -11,6 +11,7 @@ import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
+import com.example.cs2340c_team8.models.Score;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
@@ -28,6 +29,7 @@ import com.example.cs2340c_team8.views.GameView;
 import org.junit.Assert;
 import org.junit.Test;
 import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SprintFiveTestCases {
@@ -152,5 +154,25 @@ public class SprintFiveTestCases {
         }
         assertTrue("The players fire attack did not return crease", test.getHealth() <= 400);
     }
+
+    @Test
+    public void testMovementMods() {
+        GameConfig.setDifficulty(Difficulty.EXPERT);
+        Player test = Player.getInstance();
+        test.setHealth(750); //boost health to test  damage
+        BulletBill target1 = new BulletBill(null, 23,27,0,10);
+        KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,10);
+        Goomba target3 = new Goomba(null, 23,23,false,10);
+        PiranhaPlant target4 = new PiranhaPlant(27,23,0,10);
+        target1.fastMovespeed();
+        target2.slowMovespeed();
+        target3.getMovementSpeed();
+        target4.slowMovespeed();
+        target4.fastMovespeed();
+        assertTrue("Movement modifications work as they should", target1.getMovementSpeed() == 20 && target3.getMovementSpeed() == 10);
+
+    }
+
+
 
 }
