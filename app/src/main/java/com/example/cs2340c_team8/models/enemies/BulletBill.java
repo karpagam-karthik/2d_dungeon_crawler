@@ -1,6 +1,9 @@
 package com.example.cs2340c_team8.models.enemies;
 
-import static com.example.cs2340c_team8.views.enemies.GameView.bulletBillKB;
+import static com.example.cs2340c_team8.views.GameView.bulletBillKB;
+import static com.example.cs2340c_team8.views.GameView.firstBulletBillExists;
+import static com.example.cs2340c_team8.views.GameView.getFireballX;
+import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -26,7 +29,8 @@ public class BulletBill implements Enemy {
     private int startY;
     private int endX;
     private int endY;
-    private final int damage;
+    private int damage;
+    private int knockback;
 
     // New
     private Bitmap bulletBill;
@@ -68,7 +72,10 @@ public class BulletBill implements Enemy {
         if (startX <= endingX) {
             startX = startingX;
         }
-
+        if (isCollidingWithFireball()) {
+            firstBulletBillExists = false;
+            damage = 0;
+        }
         if (isCollidingWithPlayer()) {
             attackPlayer();
         }
@@ -80,6 +87,13 @@ public class BulletBill implements Enemy {
         int overlapHeight = Math.min(endY, playerEndY) - Math.max(startY, playerStartY);
 
         return (overlapWidth > 8 && overlapHeight > 8);
+    }
+
+    public boolean isCollidingWithFireball() {
+        int overlapWidth = Math.min(endX, getFireballX() + 48) - Math.max(startX, getFireballX());
+        int overlapHeight = Math.min(endY, getFireballY() + 48) - Math.max(startY, getFireballY());
+
+        return (overlapWidth > 3 && overlapHeight > 3);
     }
 
     @Override
@@ -97,7 +111,7 @@ public class BulletBill implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-                player.setStartY(playerStartY - 40);
+        player.setStartY(playerStartY - knockback);
     }
 
     public ImageView getSprite() {

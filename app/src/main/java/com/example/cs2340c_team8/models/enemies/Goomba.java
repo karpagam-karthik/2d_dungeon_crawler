@@ -1,4 +1,8 @@
 package com.example.cs2340c_team8.models.enemies;
+import static com.example.cs2340c_team8.views.GameView.firstBulletBillExists;
+import static com.example.cs2340c_team8.views.GameView.firstGoombaExists;
+import static com.example.cs2340c_team8.views.GameView.getFireballX;
+import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -72,10 +76,18 @@ public class Goomba implements Enemy {
                 movingDown = true;
             }
         }
-
+        if (isCollidingWithFireball()) {
+            firstGoombaExists = false;
+        }
         if (isCollidingWithPlayer()) {
             attackPlayer();
         }
+    }
+    public boolean isCollidingWithFireball() {
+        int overlapWidth = Math.min(endX, getFireballX() + 48) - Math.max(startX, getFireballX());
+        int overlapHeight = Math.min(endY, getFireballY() + 48) - Math.max(startY, getFireballY());
+
+        return (overlapWidth > 3 && overlapHeight > 3);
     }
 
     @Override
