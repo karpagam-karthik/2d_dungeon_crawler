@@ -19,6 +19,7 @@ import com.example.cs2340c_team8.models.levels.Level2;
 import com.example.cs2340c_team8.models.levels.Level3;
 import com.example.cs2340c_team8.models.powerups.FirePowerUp;
 import com.example.cs2340c_team8.models.powerups.IcePowerUp;
+import com.example.cs2340c_team8.models.powerups.StarPowerUp;
 import com.example.cs2340c_team8.views.GameView;
 
 import org.junit.Assert;
@@ -71,6 +72,23 @@ public class SprintFiveTestCases {
         boolean rtn1 = target1.getMovementSpeed() == prev1 / 2;
         boolean rtn2 = target2.getMovementSpeed() == prev2 / 2;
         assertTrue("The enemies did not get frozen", rtn1 && rtn2);
+    }
+
+    @Test
+    public void TestStarPower() {
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
+        BulletBill target1 = new BulletBill(null, 25, 25, 0, 20);
+        Goomba target2 = new Goomba(null, 50, 50, false, 10);
+        Player test = Player.getInstance();
+        StarPowerUp target3 = new StarPowerUp(null, 100,100);
+        test.setStartX(30);
+        test.setStartY(40);
+        int healthPrev = test.getHealth();
+        target3.attackPlayer();
+        target1.attackPlayer();
+        target2.attackPlayer();
+        boolean rtn1 = test.getHealth() >= healthPrev;
+        assertTrue("The player did not get shielded", rtn1);
     }
 
 
