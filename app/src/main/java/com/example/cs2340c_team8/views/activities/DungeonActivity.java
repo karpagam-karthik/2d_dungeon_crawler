@@ -89,7 +89,7 @@ public class DungeonActivity extends AppCompatActivity {
                     if (GameView.isLevelChanged()) {
                         levelIndicatorView.update();
                         GameView.setLevelChanged(false);
-                        if (!gameView.isGameCompleted() && GameConfig.getLevel() != 1) {
+                        if (!gameView.isGameCompleted() && GameConfig.getLevel() != 1 && GameConfig.getLevelPlayer() != null) {
                             GameConfig.getLevelPlayer().start();
                         }
                     }
