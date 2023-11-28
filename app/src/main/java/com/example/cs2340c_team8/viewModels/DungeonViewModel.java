@@ -52,7 +52,7 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     }
 
     public String getDifficultyText() {
-        switch (GameConfig.difficulty) {
+        switch (GameConfig.getDifficulty()) {
         case INTERMEDIATE:
             return "Intermediate";
         case EXPERT:
@@ -68,11 +68,11 @@ public class DungeonViewModel extends BaseObservable implements PlayerObserver {
     }
 
     public String getUsername() {
-        return GameConfig.username;
+        return GameConfig.getUsername();
     }
 
     public String getSpriteText() {
-        switch (GameConfig.character) {
+        switch (GameConfig.getCharacter()) {
         case LUIGI:
             return "Luigi";
         case PRINCESS_PEACH:
