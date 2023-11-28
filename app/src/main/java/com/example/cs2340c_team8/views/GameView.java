@@ -72,6 +72,10 @@ public class GameView extends View {
         powerUpBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.empty);
     }
 
+    public static int getFireballRange() {
+        return fireballRange;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

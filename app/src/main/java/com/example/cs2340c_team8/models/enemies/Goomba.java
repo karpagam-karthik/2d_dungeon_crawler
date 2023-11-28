@@ -160,4 +160,8 @@ public class Goomba implements Enemy {
         this.startY = startY;
         this.endY = startY + spriteSizeY;
     }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
 }
