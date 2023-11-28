@@ -38,7 +38,7 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
     public void attackPlayer() {
         Thread timeThread = new Thread(() -> {
             try {
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(7);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 for (PlayerObserver enemy : this.player.getObservers()) {

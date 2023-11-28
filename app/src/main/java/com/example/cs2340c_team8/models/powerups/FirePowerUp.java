@@ -21,7 +21,7 @@ public class FirePowerUp extends BasePowerUp implements PowerUp  {
 
     @Override
     public int getEffect() {
-        return 400;
+        return 500;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class FirePowerUp extends BasePowerUp implements PowerUp  {
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                this.player.setHealth(this.getEffect());
+                com.example.cs2340c_team8.views.GameView.setFireballRange(160);
             }
-            this.player.setHealth(this.getEffect());
+            com.example.cs2340c_team8.views.GameView.setFireballRange(160);
         });
-        this.player.setHealth(999);
+        com.example.cs2340c_team8.views.GameView.setFireballRange(this.getEffect());
         com.example.cs2340c_team8.views.GameView.removePowerUp(this.context);
         timeThread.start();
     }
