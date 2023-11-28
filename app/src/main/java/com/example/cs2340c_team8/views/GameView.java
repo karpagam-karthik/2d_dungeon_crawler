@@ -29,10 +29,12 @@ public class GameView extends View {
     private Bitmap bulletBill;
     private Bitmap shell;
     private Bitmap playerBitmap;
+    private static Bitmap powerUpBitmap;
     private Goomba firstGoomba;
     private KoopaTroopa firstKoopaTroopa;
     private BulletBill firstBulletBill;
     private PiranhaPlant firstShell;
+    private BasePowerUp powerUp;
     private static Player player;
     private static float scale;
     private static int tileColor1 = Color.rgb(87, 140, 170);
@@ -63,6 +65,7 @@ public class GameView extends View {
     }
 
     public static void removePowerUp(Context context) {
+        powerUpBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.empty);
     }
 
     @Override
@@ -107,10 +110,12 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
             firstShell.moveEnemy();
+            powerUp.moveEnemy();
         } else if (currentMap == 2) {
             canvas.drawBitmap(map, scaleMap(), null);
             if (firstGoombaExists) {
@@ -138,10 +143,12 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
             firstShell.moveEnemy();
+            powerUp.moveEnemy();
         } else if (currentMap == 3) {
             canvas.drawBitmap(map, scaleMap(), null);
             if (firstGoombaExists) {
@@ -169,10 +176,12 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
             firstShell.moveEnemy();
+            powerUp.moveEnemy();
         }
 
         if (isFireballThrown) {
@@ -209,6 +218,7 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap =
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
+        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire_power);
 
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
         firstKoopaTroopa =
@@ -216,6 +226,7 @@ public class GameView extends View {
         firstBulletBill =
                 new BulletBill(bulletBill, 550, 100, 200, 1);
         firstShell = new PiranhaPlant(920, 60, 100, 1);
+        powerUp = new BasePowerUp(this.getContext(),300, 60);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -225,6 +236,7 @@ public class GameView extends View {
         player.addObserver(firstKoopaTroopa);
         player.addObserver(firstBulletBill);
         player.addObserver(firstShell);
+        player.addObserver(powerUp);
     }
 
     public void createMapTwo() {
@@ -239,11 +251,13 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap =
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
+        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ice_power);
 
         firstGoomba = new Goomba(goomba, 500, 80, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
+        powerUp = new BasePowerUp(this.getContext(),200, 90);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -253,6 +267,7 @@ public class GameView extends View {
         player.addObserver(firstKoopaTroopa);
         player.addObserver(firstBulletBill);
         player.addObserver(firstShell);
+        player.addObserver(powerUp);
     }
 
     public void createMapOne() {
@@ -267,11 +282,13 @@ public class GameView extends View {
         shell = BitmapFactory.decodeResource(getResources(), R.drawable.shell);
         playerBitmap =
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
+        powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.star_powerup);
 
         firstGoomba = new Goomba(goomba, 550, 48, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 550, 50, 1);
         firstShell = new PiranhaPlant(650, 650, 700, 1);
+        powerUp = new BasePowerUp(this.getContext(),650, 550);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -281,6 +298,7 @@ public class GameView extends View {
         player.addObserver(firstKoopaTroopa);
         player.addObserver(firstBulletBill);
         player.addObserver(firstShell);
+        player.addObserver(powerUp);
     }
 
     public static boolean isLevelOver(int playerX, int playerY) {
