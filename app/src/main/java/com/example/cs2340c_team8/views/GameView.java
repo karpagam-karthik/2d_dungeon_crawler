@@ -411,13 +411,6 @@ public class GameView extends View {
         return enemyMatrix;
     }
 
-    public Matrix scalePowerup(BasePowerUp test) {
-        Matrix powerMatrix = new Matrix();
-        powerMatrix.setScale(scale, scale);
-        powerMatrix.postTranslate(test.getStartX() * scale, test.getStartY() * scale);
-        return powerMatrix;
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = resolveSize(800, widthMeasureSpec);
