@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 // This method sets View object to 800x800 pixels, do not change it!
 import com.example.cs2340c_team8.models.GameConfig;
@@ -24,7 +25,7 @@ import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 
 public class GameView extends View {
     private Level level;
-    private int currentMap = 1;
+    private static int currentMap = 1;
     private static Bitmap map;
     private Bitmap goomba;
     private Bitmap koopaTroopa;
@@ -60,6 +61,7 @@ public class GameView extends View {
     public static boolean firstShellExists;
     public static boolean firstBulletBillExists;
     public static boolean firstKoopaTroopaExists;
+    private static boolean hasKey;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -209,6 +211,7 @@ public class GameView extends View {
     }
 
     public void createMapThree() {
+        hasKey = false;
         firstBulletBillExists = true;
         firstKoopaTroopaExists = true;
         firstShellExists = true;
@@ -242,6 +245,7 @@ public class GameView extends View {
     }
 
     public void createMapTwo() {
+        hasKey = false;
         firstBulletBillExists = true;
         firstKoopaTroopaExists = true;
         firstShellExists = true;
@@ -273,6 +277,7 @@ public class GameView extends View {
     }
 
     public void createMapOne() {
+        hasKey = false;
         firstBulletBillExists = true;
         firstKoopaTroopaExists = true;
         firstShellExists = true;
@@ -304,17 +309,41 @@ public class GameView extends View {
     }
 
     public static boolean isLevelOver(int playerX, int playerY) {
-        int mapLeftX = 0;
-        int mapLeftY = 0;
-        int mapLength = 85;
-        int mapHeight = 85;
-        int playerWidth = 16;
-        int playerHeight = 16;
-
-        return (playerX + playerWidth > mapLeftX)
-                && (playerY + playerHeight > mapLeftY)
-                && (playerX < mapLeftX + mapLength)
-                && (playerY < mapLeftY + mapHeight);
+        if (currentMap == 1) {
+            if (!hasKey) {
+                boolean overlaps = player.getStartX() < 440 + 88 && player.getStartX() + 44 > 440 && player.getStartY() < 1232 + 88 && player.getStartY() + 44 > 1232;
+                if (overlaps) {
+                    hasKey = true;
+                    player.setStartX(1950);
+                    player.setStartY(1950);
+                }
+            }
+            boolean isFinished = player.getStartX() + 44 >= 2032 && player.getStartY() + 44 >= 2032;
+            return isFinished;
+        } else if (currentMap == 2) {
+            if (!hasKey) {
+                boolean overlaps = player.getStartX() < 880 + 88 && player.getStartX() + 44 > 880 && player.getStartY() < 88 + 88 && player.getStartY() + 44 > 88;
+                if (overlaps) {
+                    hasKey = true;
+                    player.setStartX(2000);
+                    player.setStartY(1900);
+                }
+            }
+            boolean isFinished = player.getStartX() + 44 >= 2032 && player.getStartY() + 44 >= 2032;
+            return isFinished;
+        } else if (currentMap == 3) {
+            if (!hasKey) {
+                boolean overlaps = player.getStartX() < 1100 + 88 && player.getStartX() + 44 > 1100 && player.getStartY() < 1012 + 88 && player.getStartY() + 44 > 1012;
+                if (overlaps) {
+                    hasKey = true;
+                    player.setStartX(145);
+                    player.setStartY(2000);
+                }
+            }
+            boolean isFinished = (player.getStartX() + 44) <= 132 && player.getStartY() <= 2200 && player.getStartY() + 44 >= 2024;
+            return isFinished;
+        }
+        return false;
     }
 
     public static boolean isValidMoveX(double actuatorX) {
