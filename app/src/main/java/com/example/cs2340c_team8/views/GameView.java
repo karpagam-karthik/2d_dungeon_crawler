@@ -18,6 +18,8 @@ import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
 import com.example.cs2340c_team8.models.levels.Level;
 
 import com.example.cs2340c_team8.R;
+import com.example.cs2340c_team8.models.powerups.BasePowerUp;
+
 public class GameView extends View {
     private Level level;
     private int currentMap = 1;
@@ -431,5 +433,12 @@ public class GameView extends View {
 
     public static void setLevelChanged(boolean levelChanged1) {
         levelChanged = levelChanged1;
+    }
+
+    public Matrix scalePowerup(BasePowerUp test) {
+        Matrix powerMatrix = new Matrix();
+        powerMatrix.setScale(scale, scale);
+        powerMatrix.postTranslate(test.getStartX() * scale, test.getStartY() * scale);
+        return powerMatrix;
     }
 }
