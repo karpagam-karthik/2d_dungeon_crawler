@@ -459,4 +459,11 @@ public class GameView extends View {
     public static void setLevelChanged(boolean levelChanged1) {
         levelChanged = levelChanged1;
     }
+
+    public Matrix scalePowerup(BasePowerUp test) {
+        Matrix powerMatrix = new Matrix();
+        powerMatrix.setScale(scale, scale);
+        powerMatrix.postTranslate(test.getStartX() * scale, test.getStartY() * scale);
+        return powerMatrix;
+    }
 }
