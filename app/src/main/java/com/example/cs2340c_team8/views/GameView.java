@@ -80,22 +80,26 @@ public class GameView extends View {
             if (firstGoombaExists) {
                 canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             } else {
-                firstGoomba = new Goomba(goomba, 0, 500, true, 0);
+                firstGoomba.setStartX(0);
+                firstGoomba.setStartY(500);
             }
             if (firstKoopaTroopaExists) {
                 canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             } else {
-                firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 700, 0, true, 0);
+                firstKoopaTroopa.setStartX(700);
+                firstKoopaTroopa.setStartY(0);
             }
             if (firstBulletBillExists) {
                 canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
             } else {
-                firstBulletBill = new BulletBill(bulletBill, 800, 0, 10, 0);
+                firstBulletBill.setStartX(800);
+                firstBulletBill.setStartY(0);
             }
             if (firstShellExists) {
                 canvas.drawBitmap(shell, scaleShell(firstShell), null);
             } else {
-                firstShell = new PiranhaPlant(0, 400, 410, 0);
+                firstShell.setStartX(0);
+                firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
             firstGoomba.moveEnemy();
@@ -104,26 +108,29 @@ public class GameView extends View {
             firstShell.moveEnemy();
         } else if (currentMap == 2) {
             canvas.drawBitmap(map, scaleMap(), null);
-            canvas.drawBitmap(map, scaleMap(), null);
             if (firstGoombaExists) {
                 canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             } else {
-                firstGoomba = new Goomba(goomba, 0, 500, true, 0);
+                firstGoomba.setStartX(0);
+                firstGoomba.setStartY(500);
             }
             if (firstKoopaTroopaExists) {
                 canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             } else {
-                firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 700, 0, true, 0);
+                firstKoopaTroopa.setStartX(700);
+                firstKoopaTroopa.setStartY(0);
             }
             if (firstBulletBillExists) {
                 canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
             } else {
-                firstBulletBill = new BulletBill(bulletBill, 800, 0, 10, 0);
+                firstBulletBill.setStartX(800);
+                firstBulletBill.setStartY(0);
             }
             if (firstShellExists) {
                 canvas.drawBitmap(shell, scaleShell(firstShell), null);
             } else {
-                firstShell = new PiranhaPlant(0, 400, 410, 0);
+                firstShell.setStartX(0);
+                firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
             firstGoomba.moveEnemy();
@@ -135,22 +142,26 @@ public class GameView extends View {
             if (firstGoombaExists) {
                 canvas.drawBitmap(goomba, scaleGoomba(firstGoomba), null);
             } else {
-                firstGoomba = new Goomba(goomba, 0, 500, true, 0);
+                firstGoomba.setStartX(0);
+                firstGoomba.setStartY(500);
             }
             if (firstKoopaTroopaExists) {
                 canvas.drawBitmap(koopaTroopa, scaleKoopa(firstKoopaTroopa), null);
             } else {
-                firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 700, 0, true, 0);
+                firstKoopaTroopa.setStartX(700);
+                firstKoopaTroopa.setStartY(0);
             }
             if (firstBulletBillExists) {
                 canvas.drawBitmap(bulletBill, scaleBullet(firstBulletBill), null);
             } else {
-                firstBulletBill = new BulletBill(bulletBill, 800, 0, 10, 0);
+                firstBulletBill.setStartX(800);
+                firstBulletBill.setStartY(0);
             }
             if (firstShellExists) {
                 canvas.drawBitmap(shell, scaleShell(firstShell), null);
             } else {
-                firstShell = new PiranhaPlant(0, 400, 410, 0);
+                firstShell.setStartX(0);
+                firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
             firstGoomba.moveEnemy();
