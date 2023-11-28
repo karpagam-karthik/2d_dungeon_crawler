@@ -60,6 +60,9 @@ public class GameView extends View {
         gameCompleted = false;
     }
 
+    public static void removePowerUp(Context context) {
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
