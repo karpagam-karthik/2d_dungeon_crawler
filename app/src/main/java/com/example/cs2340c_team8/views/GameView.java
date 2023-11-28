@@ -20,6 +20,7 @@ import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.powerups.BasePowerUp;
 import com.example.cs2340c_team8.models.powerups.FirePowerUp;
+import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 
 public class GameView extends View {
     private Level level;
@@ -258,7 +259,7 @@ public class GameView extends View {
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
-        powerUp = new BasePowerUp(this.getContext(),200, 90);
+        powerUp = new IcePowerUp(this.getContext(),200, 90);
 
         player = Player.getInstance();
         player.setStartX(100);

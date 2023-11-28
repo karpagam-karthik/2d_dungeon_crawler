@@ -142,6 +142,14 @@ public class BulletBill implements Enemy {
         this.sprite = sprite;
     }
 
+    public void slowMovespeed() {
+        this.movementSpeed = movementSpeed / 2;
+    }
+
+    public void fastMovespeed() {
+        this.movementSpeed = movementSpeed * 2;
+    }
+
     public void setStartX(int startX) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
