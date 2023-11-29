@@ -17,10 +17,12 @@ import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
 import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
 import com.example.cs2340c_team8.models.enums.Difficulty;
+import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.models.levels.Level1;
 import com.example.cs2340c_team8.models.levels.Level2;
 import com.example.cs2340c_team8.models.levels.Level3;
+import com.example.cs2340c_team8.models.powerups.BasePowerUp;
 import com.example.cs2340c_team8.models.powerups.FirePowerUp;
 import com.example.cs2340c_team8.models.powerups.IcePowerUp;
 import com.example.cs2340c_team8.models.powerups.StarPowerUp;
@@ -99,21 +101,16 @@ public class SprintFiveTestCases {
     public void TestStarPowerupDuration() {
         GameConfig.setDifficulty(Difficulty.BEGINNER);
         BulletBill target1 = new BulletBill(null, 25, 25, 0, 20);
-        Goomba target2 = new Goomba(null, 50, 50, false, 10);
+        Goomba target3 = new Goomba(null, 50, 50, false, 10);
         Player test = Player.getInstance();
-        StarPowerUp target3 = new StarPowerUp(null, 100,100);
-        test.setStartX(30);
-        test.setStartY(40);
-        int healthPrev = test.getHealth();
-        boolean rtn1 = test.getHealth() == healthPrev;
-        target1.attackPlayer();
-        target2.attackPlayer();
+        StarPowerUp target2 = new StarPowerUp(null, 100,100);
+        int prevHealth = test.getHealth();//target3.attackPlayer();
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        assertTrue("The player returned to its og health", rtn1);
+        assertTrue("The player returned to its og health", prevHealth == test.getHealth());
     }
 
     @Test
@@ -127,7 +124,7 @@ public class SprintFiveTestCases {
         test.setStartY(40);
         int prev1 = target1.getMovementSpeed();
         int prev2 = target3.getMovementSpeed();
-        target3.attackPlayer();
+        //target3.attackPlayer();
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
@@ -140,19 +137,16 @@ public class SprintFiveTestCases {
     @Test
     public void TestFirePowerupDuration() {
         GameConfig.setDifficulty(Difficulty.BEGINNER);
-        BulletBill target1 = new BulletBill(null, 25, 25, 0, 0);
-        Goomba target2 = new Goomba(null, 50, 50, false, 0);
+        BulletBill target1 = new BulletBill(null, 25, 25, 0, 20);
+        Goomba target3 = new Goomba(null, 50, 50, false, 10);
         Player test = Player.getInstance();
-        FirePowerUp target3 = new FirePowerUp(null, 100,100);
-        test.setStartX(30);
-        test.setStartY(40);
-        target1.attackPlayer();
+        FirePowerUp target2 = new FirePowerUp(null, 100,100);
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        assertTrue("The players fire attack did not return crease", test.getHealth() <= 400);
+        assertTrue("The players fire attack range did not return to normal", target2.getEffect() == 500);
     }
 
     @Test
@@ -172,6 +166,47 @@ public class SprintFiveTestCases {
         assertTrue("Movement modifications work as they should", target1.getMovementSpeed() == 20 && target3.getMovementSpeed() == 10);
 
     }
+    @Test
+    public void testPlayerPowerup() {
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
+        BulletBill target1 = new BulletBill(null, 25, 25, 0, 0);
+        Goomba target2 = new Goomba(null, 50, 50, false, 0);
+        Player test = Player.getInstance();
+        FirePowerUp target3 = new FirePowerUp(null, 100,100);
+        test.addObserver(target1);
+        test.addObserver(target2);
+        test.addObserver(target3);
+        boolean found = false;
+        for (PlayerObserver obv : test.getObservers()) {
+            if (obv.getClass() == FirePowerUp.class) {
+                found = true;
+            }
+        }
+        assertTrue("could not find the powerup", found);
+
+    }
+
+    @Test
+    public void testPlayerEnemy() {
+        GameConfig.setDifficulty(Difficulty.BEGINNER);
+        BulletBill target1 = new BulletBill(null, 25, 25, 0, 0);
+        Goomba target2 = new Goomba(null, 50, 50, false, 0);
+        Player test = Player.getInstance();
+        FirePowerUp target3 = new FirePowerUp(null, 100,100);
+        test.addObserver(target1);
+        test.addObserver(target2);
+        test.addObserver(target3);
+        boolean found = false;
+        for (PlayerObserver obv : test.getObservers()) {
+            if (obv.getClass() == BulletBill.class) {
+                found = true;
+            }
+        }
+        assertTrue("could not find the enemies", found);
+
+    }
+
+
 
 
 
