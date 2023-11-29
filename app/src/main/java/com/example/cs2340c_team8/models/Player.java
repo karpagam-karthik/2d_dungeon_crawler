@@ -27,12 +27,15 @@ public class Player {
     private int endX;
     private int endY;
     private int health;
+    private int score;
+    private int bonus;
     private List<PlayerObserver> observers;
     private HashMap<PowerUpType, PowerUp> powerUps;
     private List<Consumable> consumables;
     private List<Key> keys;
 
     private Player() {
+        score = 999;
         startX = 25;
         startY = 25;
         endX = startX + spriteSizeX;
@@ -83,10 +86,6 @@ public class Player {
 
     public void addPowerUp(PowerUp powerUp) {
         powerUps.put(powerUp.getType(), powerUp);
-    }
-
-    public void removePowerUp(PowerUp powerUp) {
-        powerUps.remove(powerUp.getType());
     }
 
     public int getHealth() {
@@ -154,6 +153,32 @@ public class Player {
 
         //just putting '5' for now b/c '1' might cause player to phase past wall
         return distance < 5;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getBonus() {
+        int bonus = 0;
+        for (PowerUp powerUp: powerUps.values()) {
+            switch (powerUp.getType()) {
+                case STAR:
+                    bonus += 50;
+                    break;
+                case FIRE:
+                case ICE:
+                    bonus += 25;
+                    break;
+                default:
+                    bonus += 0;
+            }
+        }
+        return bonus;
     }
 }
 

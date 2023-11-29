@@ -31,6 +31,7 @@ public class StarPowerUp extends BasePowerUp implements PowerUp  {
 
     @Override
     public void attackPlayer() {
+        player.addPowerUp(this);
         Thread timeThread = new Thread(() -> {
             try {
                 TimeUnit.SECONDS.sleep(5);
