@@ -83,7 +83,9 @@ public class GameView extends View {
         super.onDraw(canvas);
 
         if (currentMap == 1 && calls == 0) {
-            createMapOne();
+//            createMapOne();
+            // TODO Change back
+            createMapTwo();
             calls++;
         } else if (currentMap == 2 && calls == 0) {
             createMapTwo();
@@ -265,11 +267,11 @@ public class GameView extends View {
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
         powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire_power);
 
-        firstGoomba = new Goomba(goomba, 500, 80, true, 1);
+        firstGoomba = new Goomba(goomba, 430, 350, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
         firstShell = new PiranhaPlant(650, 650, 1200, 1);
-        powerUp = new FirePowerUp(this.getContext(),200, 90);
+        powerUp = new FirePowerUp(this.getContext(),200, 200);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -297,11 +299,11 @@ public class GameView extends View {
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
         powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.star_powerup);
 
-        firstGoomba = new Goomba(goomba, 550, 48, true, 1);
-        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 800, 48, true, 1);
-        firstBulletBill = new BulletBill(bulletBill, 550, 550, 50, 1);
-        firstShell = new PiranhaPlant(650, 650, 700, 1);
-        powerUp = new StarPowerUp(this.getContext(),650, 550);
+        firstGoomba = new Goomba(goomba, 500, 100, true, 1);
+        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 70, 1320, true, 1);
+        firstBulletBill = new BulletBill(bulletBill, 630, 550, 160, 2);
+        firstShell = new PiranhaPlant(750, 660, 1220, 3);
+        powerUp = new StarPowerUp(this.getContext(),540, 400);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -324,7 +326,7 @@ public class GameView extends View {
                     player.setStartY(1950);
                 }
             }
-            boolean isFinished = player.getStartX() + 44 >= 2032 && player.getStartY() + 44 >= 2032;
+            boolean isFinished = player.getStartX() + 44 >= 1960 && player.getStartY() + 44 >= 1960;
             return isFinished;
         } else if (currentMap == 2) {
             if (!hasKey) {
@@ -335,7 +337,7 @@ public class GameView extends View {
                     player.setStartY(1900);
                 }
             }
-            boolean isFinished = player.getStartX() + 44 >= 2032 && player.getStartY() + 44 >= 2032;
+            boolean isFinished = player.getStartX() + 44 >= 1960 && player.getStartY() + 44 >= 1960;
             return isFinished;
         } else if (currentMap == 3) {
             if (!hasKey) {
@@ -346,7 +348,7 @@ public class GameView extends View {
                     player.setStartY(2000);
                 }
             }
-            boolean isFinished = (player.getStartX() + 44) <= 132 && player.getStartY() <= 2200 && player.getStartY() + 44 >= 2024;
+            boolean isFinished = (player.getStartX() + 44) <= 240 && player.getStartY() <= 2200 && player.getStartY() + 44 >= 1960;
             return isFinished;
         }
         return false;
