@@ -6,21 +6,18 @@ import static org.junit.Assert.assertTrue;
 
 import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
-import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
+import com.example.cs2340c_team8.models.enemies.BlueShell;
 import com.example.cs2340c_team8.models.enums.Difficulty;
 import com.example.cs2340c_team8.models.levels.Level;
 import com.example.cs2340c_team8.models.levels.Level1;
 import com.example.cs2340c_team8.models.levels.Level2;
 import com.example.cs2340c_team8.models.levels.Level3;
 
-import org.junit.Assert;
 import org.junit.Test;
-import java.lang.reflect.Constructor;
 
 public class SprintFourTestCases {
     @Test
@@ -60,7 +57,7 @@ public class SprintFourTestCases {
         assertFalse(Enemy.class.isAssignableFrom(BulletBill.class));
         assertFalse(Enemy.class.isAssignableFrom(KoopaTroopa.class));
         assertFalse(Enemy.class.isAssignableFrom(Goomba.class));
-        assertFalse(Enemy.class.isAssignableFrom(PiranhaPlant.class));
+        assertFalse(Enemy.class.isAssignableFrom(BlueShell.class));
         test.updateObservers();
         assertEquals(false,target1.isCollidingWithPlayer());
     }
@@ -69,7 +66,7 @@ public class SprintFourTestCases {
         GameConfig.setDifficulty(Difficulty.EXPERT);
         Player test = Player.getInstance();
         test.setHealth(100);
-        PiranhaPlant target1 = new PiranhaPlant(25,25,0,0);
+        BlueShell target1 = new BlueShell(25,25,0,0);
         for (int i = 0; i < 5; i++) {
             target1.attackPlayer();
         }
@@ -84,7 +81,7 @@ public class SprintFourTestCases {
         BulletBill target1 = new BulletBill(null, 23,27,0,0);
         KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
         Goomba target3 = new Goomba(null, 23,23,false,0);
-        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
+        BlueShell target4 = new BlueShell(27,23,0,0);
         target1.attackPlayer();
         //System.out.println(test.getHealth()/ healthInit);
         target2.attackPlayer();
@@ -100,7 +97,7 @@ public class SprintFourTestCases {
         BulletBill target1 = new BulletBill(null, 23,27,0,0);
         KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
         Goomba target3 = new Goomba(null, 23,23,false,0);
-        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
+        BlueShell target4 = new BlueShell(27,23,0,0);
         target1.attackPlayer();
         target2.attackPlayer();
         target3.attackPlayer();
@@ -116,7 +113,7 @@ public class SprintFourTestCases {
         BulletBill target1 = new BulletBill(null, 23,27,0,0);
         KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
         Goomba target3 = new Goomba(null, 23,23,false,0);
-        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
+        BlueShell target4 = new BlueShell(27,23,0,0);
         target1.attackPlayer();
         target2.attackPlayer();
         target3.attackPlayer();
@@ -155,7 +152,7 @@ public class SprintFourTestCases {
         BulletBill target1 = new BulletBill(null, 23,27,0,0);
         KoopaTroopa target2 = new KoopaTroopa(null, 27,27,false,0);
         Goomba target3 = new Goomba(null, 23,23,false,0);
-        PiranhaPlant target4 = new PiranhaPlant(27,23,0,0);
+        BlueShell target4 = new BlueShell(27,23,0,0);
         target1.moveEnemy();
         target2.moveEnemy();
         target3.moveEnemy();

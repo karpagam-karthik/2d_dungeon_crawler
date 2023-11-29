@@ -13,7 +13,7 @@ import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
-import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
+import com.example.cs2340c_team8.models.enemies.BlueShell;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
 
 // Java util import
@@ -91,7 +91,7 @@ public abstract class Level {
         return enemyMatrix;
     }
 
-    protected Matrix scaleShell(PiranhaPlant test) {
+    protected Matrix scaleShell(BlueShell test) {
         Matrix enemyMatrix = new Matrix();
         enemyMatrix.setScale(scale, scale);
         enemyMatrix.postTranslate(test.getStartX() * scale, test.getStartY() * scale);

@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 // This method sets View object to 800x800 pixels, do not change it!
 import com.example.cs2340c_team8.models.GameConfig;
@@ -15,7 +14,7 @@ import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
-import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
+import com.example.cs2340c_team8.models.enemies.BlueShell;
 import com.example.cs2340c_team8.models.levels.Level;
 
 import com.example.cs2340c_team8.R;
@@ -37,7 +36,7 @@ public class GameView extends View {
     private Goomba firstGoomba;
     private KoopaTroopa firstKoopaTroopa;
     private BulletBill firstBulletBill;
-    private PiranhaPlant firstShell;
+    private BlueShell firstShell;
     private BasePowerUp powerUp;
     private static Player player;
     private static float scale;
@@ -83,9 +82,7 @@ public class GameView extends View {
         super.onDraw(canvas);
 
         if (currentMap == 1 && calls == 0) {
-//            createMapOne();
-            // TODO Change back
-            createMapTwo();
+            createMapOne();
             calls++;
         } else if (currentMap == 2 && calls == 0) {
             createMapTwo();
@@ -233,12 +230,12 @@ public class GameView extends View {
                 BitmapFactory.decodeResource(getResources(), GameConfig.fetchCharacterSprite());
         powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ice_power);
 
-        firstGoomba = new Goomba(goomba, 550, 48, true, 1);
+        firstGoomba = new Goomba(goomba, 680, 310, true, 1);
         firstKoopaTroopa =
-                new KoopaTroopa(koopaTroopa, 700, 60, true, 1);
+                new KoopaTroopa(koopaTroopa, 1150, 750, true, 1);
         firstBulletBill =
-                new BulletBill(bulletBill, 550, 100, 200, 1);
-        firstShell = new PiranhaPlant(920, 60, 100, 1);
+                new BulletBill(bulletBill, 750, 1200, 320, 2);
+        firstShell = new BlueShell(1340, 1310, 1380, 1);
         powerUp = new IcePowerUp(this.getContext(),300, 60);
 
         player = Player.getInstance();
@@ -268,9 +265,9 @@ public class GameView extends View {
         powerUpBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fire_power);
 
         firstGoomba = new Goomba(goomba, 430, 350, true, 1);
-        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 400, 90, true, 1);
-        firstBulletBill = new BulletBill(bulletBill, 550, 610, 200, 1);
-        firstShell = new PiranhaPlant(650, 650, 1200, 1);
+        firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 875, 900, true, 1);
+        firstBulletBill = new BulletBill(bulletBill, 725, 770, 150, 1);
+        firstShell = new BlueShell(550, 1050, 1220, 2);
         powerUp = new FirePowerUp(this.getContext(),200, 200);
 
         player = Player.getInstance();
@@ -302,7 +299,7 @@ public class GameView extends View {
         firstGoomba = new Goomba(goomba, 500, 100, true, 1);
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 70, 1320, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 630, 550, 160, 2);
-        firstShell = new PiranhaPlant(750, 660, 1220, 3);
+        firstShell = new BlueShell(750, 660, 1220, 3);
         powerUp = new StarPowerUp(this.getContext(),540, 400);
 
         player = Player.getInstance();
@@ -436,7 +433,7 @@ public class GameView extends View {
         return enemyMatrix;
     }
 
-    public Matrix scaleShell(PiranhaPlant test) {
+    public Matrix scaleShell(BlueShell test) {
         Matrix enemyMatrix = new Matrix();
         enemyMatrix.setScale(scale, scale);
         enemyMatrix.postTranslate(test.getStartX() * scale, test.getStartY() * scale);

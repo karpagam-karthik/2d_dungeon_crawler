@@ -10,7 +10,7 @@ import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
 
-public class PiranhaPlant implements Enemy {
+public class BlueShell implements Enemy {
     private Player player = Player.getInstance();
     private int playerStartX;
     private int playerStartY;
@@ -33,7 +33,7 @@ public class PiranhaPlant implements Enemy {
     private int endingY;
     private int movementSpeed;
 
-    public PiranhaPlant(int startX, int startY, int endingY, int movementSpeed) {
+    public BlueShell(int startX, int startY, int endingY, int movementSpeed) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 
@@ -101,7 +101,7 @@ public class PiranhaPlant implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-        player.setStartY(playerStartY - 40);
+        player.setStartX(playerStartX - 40);
     }
 
     public ImageView getSprite() {

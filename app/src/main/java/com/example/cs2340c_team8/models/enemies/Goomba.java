@@ -113,7 +113,7 @@ public class Goomba implements Enemy {
     @Override
     public void attackPlayer() {
         player.setHealth(player.getHealth() - damage);
-        player.setStartY(playerStartY - 40);
+        player.setStartX(playerStartX - 20);
     }
 
     public ImageView getSprite() {

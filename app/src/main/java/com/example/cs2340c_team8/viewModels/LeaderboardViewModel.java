@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.databinding.BaseObservable;
 
+import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Leaderboard;
 import com.example.cs2340c_team8.models.Score;
 import com.example.cs2340c_team8.views.activities.CreditsActivity;
@@ -58,6 +59,7 @@ public class LeaderboardViewModel extends BaseObservable {
     }
 
     public void playAgain(View view) {
+//        GameConfig.setLevel(1);
         Intent settings = new Intent(activity, TitleActivity.class);
         activity.startActivity(settings);
         activity.finish();

@@ -2,11 +2,10 @@ package com.example.cs2340c_team8.models.powerups;
 
 import android.content.Context;
 
-import com.example.cs2340c_team8.models.Enemy;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
-import com.example.cs2340c_team8.models.enemies.PiranhaPlant;
+import com.example.cs2340c_team8.models.enemies.BlueShell;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
@@ -49,8 +48,8 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
                         ((Goomba) enemy).fastMovespeed();
                     } else if (enemy.getClass() == KoopaTroopa.class) {
                         ((KoopaTroopa) enemy).fastMovespeed();
-                    } else if (enemy.getClass() == PiranhaPlant.class) {
-                        ((PiranhaPlant) enemy).fastMovespeed();
+                    } else if (enemy.getClass() == BlueShell.class) {
+                        ((BlueShell) enemy).fastMovespeed();
                     }
                 }
             }
@@ -61,8 +60,8 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
                     ((Goomba) enemy).fastMovespeed();
                 } else if (enemy.getClass() == KoopaTroopa.class) {
                     ((KoopaTroopa) enemy).fastMovespeed();
-                } else if (enemy.getClass() == PiranhaPlant.class) {
-                    ((PiranhaPlant) enemy).fastMovespeed();
+                } else if (enemy.getClass() == BlueShell.class) {
+                    ((BlueShell) enemy).fastMovespeed();
                 }
             }
         });
@@ -73,8 +72,8 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
                 ((Goomba) enemy).slowMovespeed();
             } else if (enemy.getClass() == KoopaTroopa.class) {
                 ((KoopaTroopa) enemy).slowMovespeed();
-            } else if (enemy.getClass() == PiranhaPlant.class) {
-                ((PiranhaPlant) enemy).slowMovespeed();
+            } else if (enemy.getClass() == BlueShell.class) {
+                ((BlueShell) enemy).slowMovespeed();
             }
         }
         com.example.cs2340c_team8.views.GameView.removePowerUp(this.context);
