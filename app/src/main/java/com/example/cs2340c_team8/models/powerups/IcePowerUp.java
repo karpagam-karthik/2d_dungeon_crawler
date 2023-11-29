@@ -2,6 +2,7 @@ package com.example.cs2340c_team8.models.powerups;
 
 import android.content.Context;
 
+import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enemies.BulletBill;
 import com.example.cs2340c_team8.models.enemies.Goomba;
 import com.example.cs2340c_team8.models.enemies.KoopaTroopa;
@@ -13,10 +14,13 @@ import com.example.cs2340c_team8.models.interfaces.PowerUp;
 import java.util.concurrent.TimeUnit;
 
 public class IcePowerUp extends BasePowerUp implements PowerUp {
+    private Context context;
+    private Player player = Player.getInstance();
     private final PowerUpType powerUpType = PowerUpType.ICE;
 
     public IcePowerUp(Context context, int startX, int startY) {
         super(context, startX, startY);
+        this.context = context;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 for (PlayerObserver enemy : this.player.getObservers()) {
-                    if(enemy.getClass() == BulletBill.class ) {
+                    if (enemy.getClass() == BulletBill.class) {
                         ((BulletBill) enemy).fastMovespeed();
                     } else if (enemy.getClass() == Goomba.class) {
                         ((Goomba) enemy).fastMovespeed();
@@ -54,7 +58,7 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
                 }
             }
             for (PlayerObserver enemy : this.player.getObservers()) {
-                if(enemy.getClass() == BulletBill.class ) {
+                if (enemy.getClass() == BulletBill.class) {
                     ((BulletBill) enemy).fastMovespeed();
                 } else if (enemy.getClass() == Goomba.class) {
                     ((Goomba) enemy).fastMovespeed();
@@ -66,7 +70,7 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
             }
         });
         for (PlayerObserver enemy : this.player.getObservers()) {
-            if(enemy.getClass() == BulletBill.class ) {
+            if (enemy.getClass() == BulletBill.class) {
                 ((BulletBill) enemy).slowMovespeed();
             } else if (enemy.getClass() == Goomba.class) {
                 ((Goomba) enemy).slowMovespeed();
@@ -76,7 +80,7 @@ public class IcePowerUp extends BasePowerUp implements PowerUp {
                 ((BlueShell) enemy).slowMovespeed();
             }
         }
-        com.example.cs2340c_team8.views.GameView.removePowerUp(this.context);
+        com.example.cs2340c_team8.views.GameView.removePowerUp(context);
         timeThread.start();
     }
 }

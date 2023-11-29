@@ -54,15 +54,35 @@ public class GameView extends View {
     private int keyThreeX = (int) (400 * (scalar));
     private int keyThreeY = (int) (384 * (scalar));
     private Bitmap fireball = BitmapFactory.decodeResource(getResources(), R.drawable.fireball);
-    public static boolean isFireballThrown = false;
+    private static boolean isFireballThrown = false;
     private static int fireballX;
     private static int fireballY;
     private static int fireballRange = 160;
-    public static boolean firstGoombaExists;
-    public static boolean firstShellExists;
-    public static boolean firstBulletBillExists;
-    public static boolean firstKoopaTroopaExists;
+    private static boolean firstGoombaExists;
+    private static boolean firstShellExists;
+    private static boolean firstBulletBillExists;
+    private static boolean firstKoopaTroopaExists;
     private static boolean hasKey;
+
+    public static void setFirstGoombaExists(boolean value) {
+        firstGoombaExists = value;
+    }
+
+    public static void setFirstShellExists(boolean firstShellExists) {
+        GameView.firstShellExists = firstShellExists;
+    }
+
+    public static void setFirstBulletBillExists(boolean firstBulletBillExists) {
+        GameView.firstBulletBillExists = firstBulletBillExists;
+    }
+
+    public static void setFirstKoopaTroopaExists(boolean firstKoopaTroopaExists) {
+        GameView.firstKoopaTroopaExists = firstKoopaTroopaExists;
+    }
+
+    public static void setIsFireballThrown(boolean isFireballThrown) {
+        GameView.isFireballThrown = isFireballThrown;
+    }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -70,7 +90,7 @@ public class GameView extends View {
     }
 
     public static void removePowerUp(Context context) {
-        powerUpBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.empty);
+        powerUpBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.empty);
     }
 
     public static int getFireballRange() {
@@ -119,7 +139,7 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
-            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp), null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
@@ -152,7 +172,7 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
-            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp), null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
@@ -185,7 +205,7 @@ public class GameView extends View {
                 firstShell.setStartY(400);
             }
             canvas.drawBitmap(playerBitmap, scalePlayer(player), null);
-            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp),null);
+            canvas.drawBitmap(powerUpBitmap, scalePowerup(powerUp), null);
             firstGoomba.moveEnemy();
             firstKoopaTroopa.moveEnemy();
             firstBulletBill.moveEnemy();
@@ -236,7 +256,7 @@ public class GameView extends View {
         firstBulletBill =
                 new BulletBill(bulletBill, 750, 1200, 320, 2);
         firstShell = new BlueShell(1340, 1310, 1380, 1);
-        powerUp = new IcePowerUp(this.getContext(),300, 60);
+        powerUp = new IcePowerUp(this.getContext(), 300, 60);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -268,7 +288,7 @@ public class GameView extends View {
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 875, 900, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 725, 770, 150, 1);
         firstShell = new BlueShell(550, 1050, 1220, 2);
-        powerUp = new FirePowerUp(this.getContext(),200, 200);
+        powerUp = new FirePowerUp(this.getContext(), 200, 200);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -300,7 +320,7 @@ public class GameView extends View {
         firstKoopaTroopa = new KoopaTroopa(koopaTroopa, 70, 1320, true, 1);
         firstBulletBill = new BulletBill(bulletBill, 630, 550, 160, 2);
         firstShell = new BlueShell(750, 660, 1220, 3);
-        powerUp = new StarPowerUp(this.getContext(),540, 400);
+        powerUp = new StarPowerUp(this.getContext(), 540, 400);
 
         player = Player.getInstance();
         player.setStartX(100);
@@ -316,7 +336,8 @@ public class GameView extends View {
     public static boolean isLevelOver(int playerX, int playerY) {
         if (currentMap == 1) {
             if (!hasKey) {
-                boolean overlaps = player.getStartX() < 440 + 88 && player.getStartX() + 44 > 440 && player.getStartY() < 1232 + 88 && player.getStartY() + 44 > 1232;
+                boolean overlaps = player.getStartX() < 440 + 88 && player.getStartX() + 44 > 440
+                        && player.getStartY() < 1232 + 88 && player.getStartY() + 44 > 1232;
                 if (overlaps) {
                     hasKey = true;
                     player.setStartX(1950);
@@ -327,7 +348,9 @@ public class GameView extends View {
             return isFinished;
         } else if (currentMap == 2) {
             if (!hasKey) {
-                boolean overlaps = player.getStartX() < 880 + 88 && player.getStartX() + 44 > 880 && player.getStartY() < 88 + 88 && player.getStartY() + 44 > 88;
+                boolean overlaps = player.getStartX() < 880 + 88
+                        && player.getStartX() + 44 > 880 && player.getStartY() < 88 + 88
+                        && player.getStartY() + 44 > 88;
                 if (overlaps) {
                     hasKey = true;
                     player.setStartX(2000);
@@ -338,14 +361,17 @@ public class GameView extends View {
             return isFinished;
         } else if (currentMap == 3) {
             if (!hasKey) {
-                boolean overlaps = player.getStartX() < 1100 + 88 && player.getStartX() + 44 > 1100 && player.getStartY() < 1012 + 88 && player.getStartY() + 44 > 1012;
+                boolean overlaps = player.getStartX() < 1100 + 88
+                        && player.getStartX() + 44 > 1100 && player.getStartY() < 1012 + 88
+                        && player.getStartY() + 44 > 1012;
                 if (overlaps) {
                     hasKey = true;
                     player.setStartX(145);
                     player.setStartY(2000);
                 }
             }
-            boolean isFinished = (player.getStartX() + 44) <= 240 && player.getStartY() <= 2200 && player.getStartY() + 44 >= 1960;
+            boolean isFinished = (player.getStartX() + 44) <= 240
+                    && player.getStartY() <= 2200 && player.getStartY() + 44 >= 1960;
             return isFinished;
         }
         return false;
@@ -465,6 +491,7 @@ public class GameView extends View {
         }
         return true;
     }
+
     public static void setFireballPosition() {
         fireballX = player.getStartX() + 60;
         fireballY = player.getStartY();
@@ -481,6 +508,7 @@ public class GameView extends View {
     public static void setFireballRange(int effect) {
         fireballRange = effect;
     }
+
     public boolean isGameCompleted() {
         return gameCompleted;
     }

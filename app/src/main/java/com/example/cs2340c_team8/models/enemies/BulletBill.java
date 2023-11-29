@@ -1,7 +1,5 @@
 package com.example.cs2340c_team8.models.enemies;
 
-import static com.example.cs2340c_team8.views.GameView.bulletBillKB;
-import static com.example.cs2340c_team8.views.GameView.firstBulletBillExists;
 import static com.example.cs2340c_team8.views.GameView.getFireballX;
 import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
@@ -11,6 +9,7 @@ import android.widget.ImageView;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
+import com.example.cs2340c_team8.views.GameView;
 
 public class BulletBill implements Enemy {
     // Player Observer Attributes
@@ -73,7 +72,7 @@ public class BulletBill implements Enemy {
             startX = startingX;
         }
         if (isCollidingWithFireball()) {
-            firstBulletBillExists = false;
+            GameView.setFirstBulletBillExists(false);
             damage = 0;
         }
         if (isCollidingWithPlayer()) {

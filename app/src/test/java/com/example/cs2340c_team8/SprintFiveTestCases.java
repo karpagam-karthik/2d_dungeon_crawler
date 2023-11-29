@@ -169,7 +169,6 @@ public class SprintFiveTestCases {
             }
         }
         assertTrue("could not find the powerup", found);
-
     }
 
     @Test
@@ -191,9 +190,4 @@ public class SprintFiveTestCases {
         assertTrue("could not find the enemies", found);
 
     }
-
-
-
-
-
 }

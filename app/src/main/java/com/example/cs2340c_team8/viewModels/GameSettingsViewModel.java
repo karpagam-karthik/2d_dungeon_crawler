@@ -70,24 +70,24 @@ public class GameSettingsViewModel extends BaseObservable {
     // Private method to derive the chosen difficulty based on the selected text
     private Difficulty deriveChosenDifficulty(String difficultyText) {
         switch (difficultyText) {
-            case "Intermediate":
-                return Difficulty.INTERMEDIATE;
-            case "Expert":
-                return Difficulty.EXPERT;
-            default:
-                return Difficulty.BEGINNER;
+        case "Intermediate":
+            return Difficulty.INTERMEDIATE;
+        case "Expert":
+            return Difficulty.EXPERT;
+        default:
+            return Difficulty.BEGINNER;
         }
     }
 
     // Private method to derive the chosen character based on the selected text
     private Character deriveChosenCharacter(String characterText) {
         switch (characterText) {
-            case "Luigi":
-                return Character.LUIGI;
-            case "Princess Peach":
-                return Character.PRINCESS_PEACH;
-            default:
-                return Character.MARIO;
+        case "Luigi":
+            return Character.LUIGI;
+        case "Princess Peach":
+            return Character.PRINCESS_PEACH;
+        default:
+            return Character.MARIO;
         }
     }
 }

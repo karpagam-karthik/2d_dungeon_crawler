@@ -1,7 +1,5 @@
 package com.example.cs2340c_team8.models.enemies;
 
-import static com.example.cs2340c_team8.views.GameView.firstBulletBillExists;
-import static com.example.cs2340c_team8.views.GameView.firstKoopaTroopaExists;
 import static com.example.cs2340c_team8.views.GameView.getFireballX;
 import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
@@ -11,6 +9,7 @@ import android.widget.ImageView;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
+import com.example.cs2340c_team8.views.GameView;
 
 public class KoopaTroopa implements Enemy {
     private Player player = Player.getInstance();
@@ -79,7 +78,7 @@ public class KoopaTroopa implements Enemy {
             }
         }
         if (isCollidingWithFireball()) {
-            firstKoopaTroopaExists = false;
+            GameView.setFirstKoopaTroopaExists(false);
         }
         if (isCollidingWithPlayer()) {
             attackPlayer();

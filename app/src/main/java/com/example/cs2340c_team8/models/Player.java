@@ -2,14 +2,12 @@ package com.example.cs2340c_team8.models;
 
 import android.media.MediaPlayer;
 
-import com.example.cs2340c_team8.R;
 import com.example.cs2340c_team8.models.elements.Wall;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.Consumable;
 import com.example.cs2340c_team8.models.interfaces.Key;
 import com.example.cs2340c_team8.models.interfaces.PlayerObserver;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
-import com.example.cs2340c_team8.views.activities.DungeonActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,15 +165,15 @@ public class Player {
         int bonus = 0;
         for (PowerUp powerUp: powerUps.values()) {
             switch (powerUp.getType()) {
-                case STAR:
-                    bonus += 50;
-                    break;
-                case FIRE:
-                case ICE:
-                    bonus += 25;
-                    break;
-                default:
-                    bonus += 0;
+            case STAR:
+                bonus += 50;
+                break;
+            case FIRE:
+            case ICE:
+                bonus += 25;
+                break;
+            default:
+                bonus += 0;
             }
         }
         return bonus;

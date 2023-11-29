@@ -2,16 +2,20 @@ package com.example.cs2340c_team8.models.powerups;
 
 import android.content.Context;
 
+import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.enums.PowerUpType;
 import com.example.cs2340c_team8.models.interfaces.PowerUp;
 
 import java.util.concurrent.TimeUnit;
 
 public class StarPowerUp extends BasePowerUp implements PowerUp  {
+    private Context context;
+    private Player player = Player.getInstance();
     private final PowerUpType powerUpType = PowerUpType.STAR;
 
     public StarPowerUp(Context context, int startX, int startY) {
         super(context, startX, startY);
+        this.context = context;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class StarPowerUp extends BasePowerUp implements PowerUp  {
             this.player.setHealth(this.getEffect());
         });
         this.player.setHealth(999);
-        com.example.cs2340c_team8.views.GameView.removePowerUp(this.context);
+        com.example.cs2340c_team8.views.GameView.removePowerUp(context);
         timeThread.start();
     }
 }

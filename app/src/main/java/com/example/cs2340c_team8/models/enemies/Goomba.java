@@ -1,6 +1,4 @@
 package com.example.cs2340c_team8.models.enemies;
-import static com.example.cs2340c_team8.views.GameView.firstBulletBillExists;
-import static com.example.cs2340c_team8.views.GameView.firstGoombaExists;
 import static com.example.cs2340c_team8.views.GameView.getFireballX;
 import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
@@ -10,6 +8,7 @@ import android.widget.ImageView;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
+import com.example.cs2340c_team8.views.GameView;
 
 public class Goomba implements Enemy {
     private Player player = Player.getInstance();
@@ -77,7 +76,7 @@ public class Goomba implements Enemy {
             }
         }
         if (isCollidingWithFireball()) {
-            firstGoombaExists = false;
+            GameView.setFirstGoombaExists(false);
         }
         if (isCollidingWithPlayer()) {
             attackPlayer();

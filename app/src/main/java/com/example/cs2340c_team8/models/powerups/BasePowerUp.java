@@ -1,16 +1,12 @@
 package com.example.cs2340c_team8.models.powerups;
 
 import android.content.Context;
-import android.media.Image;
 import android.widget.ImageView;
 
 import com.example.cs2340c_team8.models.GameConfig;
-import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
-import com.example.cs2340c_team8.views.GameView;
-
 public class BasePowerUp implements Enemy {
-    Player player = Player.getInstance();
+    private Context context;
     private int playerStartX;
     private int playerStartY;
     private int playerEndX;
@@ -26,9 +22,7 @@ public class BasePowerUp implements Enemy {
     private int endX;
     private int endY;
 
-    Context context;
-
-    public BasePowerUp(Context context,int startX, int startY) {
+    public BasePowerUp(Context context, int startX, int startY) {
         this.startX = startX;
         this.endX = startX + spriteSizeX;
 

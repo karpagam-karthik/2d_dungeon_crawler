@@ -1,6 +1,5 @@
 package com.example.cs2340c_team8.models.enemies;
 
-import static com.example.cs2340c_team8.views.GameView.firstShellExists;
 import static com.example.cs2340c_team8.views.GameView.getFireballX;
 import static com.example.cs2340c_team8.views.GameView.getFireballY;
 
@@ -9,6 +8,7 @@ import android.widget.ImageView;
 import com.example.cs2340c_team8.models.GameConfig;
 import com.example.cs2340c_team8.models.Player;
 import com.example.cs2340c_team8.models.interfaces.Enemy;
+import com.example.cs2340c_team8.views.GameView;
 
 public class BlueShell implements Enemy {
     private Player player = Player.getInstance();
@@ -65,7 +65,7 @@ public class BlueShell implements Enemy {
             startY = startingY;
         }
         if (isCollidingWithFireball()) {
-            firstShellExists = false;
+            GameView.setFirstShellExists(false);
         }
         if (isCollidingWithPlayer()) {
             attackPlayer();

@@ -28,7 +28,8 @@ public class CreditsViewModel extends BaseObservable {
         GameConfig.getMainThemePlayer().start();
     }
 
-    // Method to handle the "Exit Game" button click, starting the home screen activity and closing the current activity
+    // Method to handle the "Exit Game" button click,
+    // starting the home screen activity and closing the current activity
     public void exitGame(View view) {
         GameConfig.getMainThemePlayer().stop();
         // Create an intent to navigate to the home screen

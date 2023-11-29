@@ -1,7 +1,6 @@
 // Package declaration
 package com.example.cs2340c_team8.views.activities;
 
-import static com.example.cs2340c_team8.views.GameView.isFireballThrown;
 import static com.example.cs2340c_team8.views.GameView.setFireballPosition;
 
 // Import statements for required Android classes and libraries
@@ -90,7 +89,8 @@ public class DungeonActivity extends AppCompatActivity {
                     if (GameView.isLevelChanged()) {
                         levelIndicatorView.update();
                         GameView.setLevelChanged(false);
-                        if (!gameView.isGameCompleted() && GameConfig.getLevel() != 1 && GameConfig.getLevelPlayer() != null) {
+                        if (!gameView.isGameCompleted() && GameConfig.getLevel()
+                                != 1 && GameConfig.getLevelPlayer() != null) {
                             GameConfig.getLevelPlayer().start();
                         }
                     }
@@ -117,7 +117,7 @@ public class DungeonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setFireballPosition();
-                isFireballThrown = true;
+                GameView.setIsFireballThrown(true);
             }
         });
     }
@@ -128,8 +128,8 @@ public class DungeonActivity extends AppCompatActivity {
             GameConfig.getMainThemePlayer().pause();
         }
 
-        LeaderboardViewModel.addNewScore(GameConfig.getUsername(), player.getScore()
-                , currentTimeMillis() - startTime);
+        LeaderboardViewModel.addNewScore(GameConfig.getUsername(), player.getScore(),
+                currentTimeMillis() - startTime);
         timer.cancel();
 
         // Create an intent to navigate to the LeaderboardActivity
