@@ -37,8 +37,9 @@ import java.util.TimerTask;
 
 // Declaration of the 'DungeonActivity' class, extending AppCompatActivity
 public class DungeonActivity extends AppCompatActivity {
+    private Player player = Player.getInstance();
     private long startTime;
-    private int score;
+    //    private int score;
     private long scoreSeconds;
     private TextView timeElapsedTextView;
     private TextView scoreTextView;
@@ -127,8 +128,8 @@ public class DungeonActivity extends AppCompatActivity {
             GameConfig.getMainThemePlayer().pause();
         }
 
-        LeaderboardViewModel.addNewScore(GameConfig.getUsername(),
-                score, currentTimeMillis() - startTime);
+        LeaderboardViewModel.addNewScore(GameConfig.getUsername(), player.getScore()
+                , currentTimeMillis() - startTime);
         timer.cancel();
 
         // Create an intent to navigate to the LeaderboardActivity
@@ -150,17 +151,17 @@ public class DungeonActivity extends AppCompatActivity {
         long seconds = (runTime / 1000) % 60;
         scoreSeconds = (runTime / 1000);
 
-        score = 999 - (int) scoreSeconds;
-        if (score < 0) {
-            score = 0;
+        player.setScore(999 - (int) scoreSeconds + player.getBonus());
+        if (player.getScore() < 0) {
+            player.setScore(0);
         }
 
         timeElapsedTextView.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-        scoreTextView.setText(String.format("Score: %02d", score));
+        scoreTextView.setText(String.format("Score: %02d", player.getScore()));
     }
 
     // Getter method for the score
     public long getScore() {
-        return score;
+        return player.getScore();
     }
 }
